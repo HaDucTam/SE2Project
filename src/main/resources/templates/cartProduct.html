@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" type = "text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <div class="container">
+        <h2>Products</h2>
+        <table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cartProduct : ${cartProducts}">
+
+        <td th:text="${cartProducts.indexOf(cartProduct) + 1}"></td>
+        <td th:text="${cartProduct.name}"></td>
+        <td>
+            <input type="number" th:value="${cartProduct.quantity}" name="quantity" onblur="this.form.submit()"/>
+        </td>
+        <td>
+            <img th:src="@{${cartProduct.image}}" width="100", height="100">
+        </td>
+        <td th:text="${cartProduct.price}"></td>
+    </tr>
+    </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

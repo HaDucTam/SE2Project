@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <title>Register</title>
+</head>
+
+<body>
+<section>
+    <div class="register-container">
+        <div class="register-title">
+            <p>Register</p>
+        </div>
+
+        <form class="register-form" id="register-form" th:action="@{/register}" th:object="${registerRequestDto}" method="POST">
+
+            <input type="text" name="email" id="email" placeholder="E-mail" th:field="*{email}">
+            <div class="err-msg">
+                <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+            <input type="password" name="password" id="password" placeholder="Password">
+            <div class="err-msg">
+                <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <input type="password" name="rePassword" id="rePassword" placeholder="Re password" required>
+            <div class="err-msg">
+                <span class="re-password-msg"></span>
+            </div>
+
+            <input type="text" name="firstName" id="firstName" placeholder="First name" th:field="*{firstName}">
+            <div class="err-msg">
+                <span class="firstName-msg" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+            </div>
+
+            <input type="text" name="lastName" id="lastName" placeholder="Last name" th:field="*{lastName}">
+            <div class="err-msg">
+                <span class="lastName-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+            </div>
+
+            <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone number" th:field="*{phoneNumber}">
+            <div class="err-msg">
+                <span class="phoneNumber-msg" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+            </div>
+
+            <input type="text" name="address" id="address" placeholder="Address" th:field="*{address}">
+            <div class="err-msg">
+                <span class="address-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            </div>
+
+            <div class="err-msg" th:if="${#fields.hasGlobalErrors()}">
+                <span class="error" th:text="${#fields.globalErrors().get(0)}"></span>
+            </div>
+            <button type="submit">Register</button>
+            <a class="loginHref" th:href="@{/login}">Click here to <b>login</b></a>
+        </form>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script th:src="@{/js/register.js}"></script>
+</body>
+</html>

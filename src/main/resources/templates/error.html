@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Unexpected Error</title>
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:100,200,300,400" rel="stylesheet">
+    <link th:href="@{/css/error.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<div class="face">
+    <div class="band">
+        <div class="red"></div>
+        <div class="white"></div>
+        <div class="blue"></div>
+    </div>
+    <div class="eyes"></div>
+    <div class="dimples"></div>
+    <div class="mouth"></div>
+</div>
+
+<h1>Oops! Something went wrong!</h1>
+<a th:href="@{/}" class="btn">
+    Back to Home
+</a>
+
+</body>
+</html>
