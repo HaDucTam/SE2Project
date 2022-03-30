@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.List;
 
@@ -46,5 +47,14 @@ class Se2ProjectApplicationTests {
         List<CartProduct> cartProducts = cartProductRepository.findByUser_UserId(1L);
         Assertions.assertEquals(2, cartProducts.size());
     }
+    @Test
+    public void add() {
+        String contextPath = "[[@{/}]]";
+        int quantity = 1;
+        int productId = 1;
+        String url = "@{/" + "cart/addToCart/" + productId + "/" + quantity + "}";
+        System.out.println(url);
+    }
+
 
 }

@@ -18,6 +18,6 @@ public class HomeController {
     @GetMapping("/{id}")
     public String gg(){
         System.out.println("vao gg() method");
-        return "home";
+        return "showProduct";
     }
 }

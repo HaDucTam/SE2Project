@@ -50,6 +50,6 @@ public class LoginController {
 
         LOGGER.info("Logged successfully!");
 
-        return "home";
+        return "view-productDetail";
     }
 }

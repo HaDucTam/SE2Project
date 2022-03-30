@@ -3,6 +3,7 @@ package com.example.se2project.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -34,6 +35,15 @@ public class CartProduct {
 
 
     private int quantity;
+
+    public CartProduct(Product product, User user, int quantity) {
+        this.product = product;
+        this.user = user;
+        this.quantity = quantity;
+    }
+
+//    public CartProduct(Product product, User user, int i) {
+//    }
 
 //    @Column(nullable = true)
 //    private double price;

@@ -1,31 +1,41 @@
 package com.example.se2project.controller;
+import com.example.se2project.entity.CartProduct;
 import com.example.se2project.entity.Category;
 import com.example.se2project.entity.Product;
+import com.example.se2project.entity.User;
 import com.example.se2project.entity.dto.ProductDto;
 import com.example.se2project.service.CategoryService;
 import com.example.se2project.service.ProductService;
+import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@SessionAttributes("userId")
 public class ProductController {
     @Autowired
     ProductService productService;
     @Autowired
     CategoryService categoryService;
-
+    @Autowired
+    UserService userService;
     @GetMapping("/product/addProduct")
     public String addProductForm(Model model) {
         model.addAttribute("products",new ProductDto());
@@ -81,6 +91,32 @@ public class ProductController {
         }
         return "redirect:/";
     }
+    @GetMapping("/product/addToCart/{id}")
+    public String addToCart(@PathVariable("id") Long id,
+                             HttpServletRequest servletRequest, HttpSession session) {
+
+//        User u = (User) model.getAttribute("userId");
+        Long ids = (Long) servletRequest.getSession().getAttribute("userId");
+        System.out.println(getUser(ids));
+        if(session.getAttribute("cart") == null) {
+            List<CartProduct> cartProductList = new ArrayList<CartProduct>();
+            cartProductList.add(new CartProduct(productService.findById(id).get(), getUser(ids), 1));
+            System.out.println(cartProductList);
+            session.setAttribute("cart", cartProductList);
+//
+        }else {
+            List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
+            int index = isExisted(id, cartProducts);
+            if(index == -1) {
+                cartProducts.add(new CartProduct(productService.findById(id).get(), getUser(ids),1));
+            }else{
+                int quantity = cartProducts.get(index).getQuantity() + 1;
+                cartProducts.get(index).setQuantity(quantity);
+            }
+            session.setAttribute("cart", cartProducts);
+        }
+        return "redirect:/cartProductList";
+    }
     @GetMapping("/product/productList")
     public String viewProduct(Model model) {
         List<Product> products = productService.findAll();
@@ -95,6 +131,17 @@ public class ProductController {
 //        Employee employee = employeeRepository.getById(id);
 //        model.addAttribute("employee", employee);
         return "employeeDetail";
+    }
+    public User getUser(@SessionAttribute("userId") Long userId) {
+        return userService.findById(userId).get();
+    }
+    public int isExisted(Long id, List<CartProduct> cartProducts) {
+        for(int i = 0; i < cartProducts.size();i++) {
+            if(cartProducts.get(i).getProduct().getProductId() == id) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

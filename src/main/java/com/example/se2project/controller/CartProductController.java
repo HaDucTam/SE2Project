@@ -10,8 +10,12 @@ import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,45 +33,70 @@ public class CartProductController {
     UserService userService;
 
     @GetMapping("/cartProductList")
-    public String cartProductList(Model model) {
-        List<CartProduct> cartProducts = cartProductService.getCartProduct(1L);
+    public String cartProductList(Model model, HttpServletRequest servletRequest) {
+        Long ids = (Long) servletRequest.getSession().getAttribute("userId");
+        List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
         model.addAttribute("cartProducts", cartProducts);
 
         return "cart";
     }
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String updateCart(HttpServletRequest request,
+                             HttpSession session) {
+        String[] quantities = request.getParameterValues("quantity");
+        List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
+        for(int i = 0; i < cartProducts.size();i++) {
+            cartProducts.get(i).setQuantity(Integer.parseInt(quantities[i]));
+        }
+        session.setAttribute("cartProducts", cartProducts);
+        return "redirect:/cartProductList";
+    }
 
+    private double toTal(HttpSession session) {
+        List<CartProduct> cartProductList = (List<CartProduct>) session.getAttribute("cartProducts");
+        double total = 0;
+        for(CartProduct cartProduct: cartProductList) {
+            total += cartProduct.getQuantity() * cartProduct.getProduct().getPrice();
+        }
+        return total;
+    }
+    @GetMapping()
+    public String cart(ModelMap modelMap, HttpSession session) {
+        modelMap.put("total", toTal(session));
+        return "cart";
+    }
     //    @GetMapping
 //    public String showCartProduct() {
 //
 //    }
 
-    @GetMapping("/product/cartProduct/add/{productId}")
-//    @SessionAttributes("userId")
-    public String addCartProduct(@PathVariable("productId") Long productId,
-                                 @SessionAttribute("userId") Long userId
-
-    ) {
-        Optional<Product> product = productService.findById(productId);
-        User u = userService.findById(userId).get();
-
-        if (product.isPresent()) {
-            CartProduct cartProduct = CartProduct.builder()
-//                    .name(product.get().getName())
-//                    .detail(product.get().getDetail())
-//                    .image(product.get().getImagePath())
-//                    .price(product.get().getPrice())
-//                    .user(u)
-                    
-                    .build();
-
-
-
-            cartProduct.setQuantity(1);
-            cartProductRepository.save(cartProduct);
-
-        }
-        return "redirect:/cartProductList";
-    }
+//    @GetMapping("/product/cartProduct/add/{productId}")
+////    @SessionAttributes("userId")
+//    public String addCartProduct(@PathVariable("productId") Long productId,
+//                                 @SessionAttribute("userId") Long userId
+//
+//    ) {
+//        Optional<Product> product = productService.findById(productId);
+//        User u = userService.findById(userId).get();
+//
+//        if (product.isPresent()) {
+//            CartProduct cartProduct = CartProduct.builder()
+////                    .name(product.get().getName())
+////                    .detail(product.get().getDetail())
+////                    .image(product.get().getImagePath())
+////                    .price(product.get().getPrice())
+////                    .user(u)
+//
+//                    .build();
+//
+//
+//
+//            cartProduct.setQuantity(1);
+//            cartProductRepository.save(cartProduct);
+//
+//        }
+//        return "redirect:/cartProductList";
+//    }
 
 
 
