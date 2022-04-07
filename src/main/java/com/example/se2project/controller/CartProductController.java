@@ -1,8 +1,6 @@
 package com.example.se2project.controller;
 
 import com.example.se2project.entity.CartProduct;
-import com.example.se2project.entity.Product;
-import com.example.se2project.entity.User;
 import com.example.se2project.repository.CartProductRepository;
 import com.example.se2project.service.CartProductService;
 import com.example.se2project.service.ProductService;
@@ -12,12 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @SessionAttributes("userId")
