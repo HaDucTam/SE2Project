@@ -124,12 +124,14 @@ public class ProductController {
 //        }
 //        return "homePage";
 //    }
-//    @GetMapping(value = "/product/{id}")
-//    public String getProductById(@PathVariable(value = "id") Long id, Model model) {
-////        Employee employee = employeeRepository.getById(id);
-////        model.addAttribute("employee", employee);
-//        return "employeeDetail";
-//    }
+    @GetMapping(value = "/product/{id}")
+    public String getProductById(@PathVariable(value = "id") Long id, Model model) {
+//        Employee employee = employeeRepository.getById(id);
+//        model.addAttribute("employee", employee);
+        Product product = productService.findById(id).get();
+        model.addAttribute("productById", product);
+        return "productDetail";
+    }
     public User getUser(@SessionAttribute("userId") Long userId) {
         return userService.findById(userId).get();
     }

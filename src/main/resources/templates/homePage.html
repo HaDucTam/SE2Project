@@ -112,6 +112,7 @@
     <div style="overflow-x: auto !important;">
         <div class="box-container">
             <div class="box" th:each="product : ${products}">
+                <a th:href="@{/product/{id}(id=${product.productId})}">
                 <div class="image">
                     <img th:src="@{${product.getImagePath()}}" class="" th:alt="${product.name}">
                     <div class="content">
@@ -126,6 +127,8 @@
                         </div>
                     </div>
                 </div>
+                </a>
+
             </div>
         </div>
     </div>
