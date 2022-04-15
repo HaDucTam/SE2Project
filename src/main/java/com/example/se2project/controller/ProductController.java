@@ -10,11 +10,9 @@ import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,14 +38,14 @@ public class ProductController {
     public String addProductForm(Model model) {
         model.addAttribute("products",new ProductDto());
         model.addAttribute("categories",categoryService.findAll());
-        return "productAdd";
+        return "adminPages/products/productAdd";
     }
     @GetMapping("/product/category/{id}")
     public String productByCategory(@PathVariable Long id, Model model) {
         model.addAttribute("allCategory", categoryService.findAll());
 //        model.addAttribute("cartCount")?
         model.addAttribute("products", productService.getProductByCategoryId(id));
-        return "showProduct";
+        return "homePage";
     }
     @GetMapping("/product/addCategory")
     public String addCategoryForm(Model model) {
@@ -117,21 +115,21 @@ public class ProductController {
         }
         return "redirect:/cartProductList";
     }
-    @GetMapping("/product/productList")
-    public String viewProduct(Model model) {
-        List<Product> products = productService.findAll();
-        if(!products.isEmpty()){
-            model.addAttribute("products", products);
-            model.addAttribute("allCategory", categoryService.findAll());
-        }
-        return "showProduct";
-    }
-    @GetMapping(value = "/product/{id}")
-    public String getProductById(@PathVariable(value = "id") Long id, Model model) {
-//        Employee employee = employeeRepository.getById(id);
-//        model.addAttribute("employee", employee);
-        return "employeeDetail";
-    }
+//    @GetMapping("/")
+//    public String viewProduct(Model model) {
+//        List<Product> products = productService.findAll();
+//        if(!products.isEmpty()){
+//            model.addAttribute("products", products);
+//            model.addAttribute("allCategory", categoryService.findAll());
+//        }
+//        return "homePage";
+//    }
+//    @GetMapping(value = "/product/{id}")
+//    public String getProductById(@PathVariable(value = "id") Long id, Model model) {
+////        Employee employee = employeeRepository.getById(id);
+////        model.addAttribute("employee", employee);
+//        return "employeeDetail";
+//    }
     public User getUser(@SessionAttribute("userId") Long userId) {
         return userService.findById(userId).get();
     }
