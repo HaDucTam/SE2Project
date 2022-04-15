@@ -27,14 +27,15 @@ public class CartProductController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/cartProductList")
+    @GetMapping("/cart")
     public String cartProductList(Model model, HttpServletRequest servletRequest) {
         Long ids = (Long) servletRequest.getSession().getAttribute("userId");
         List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
         model.addAttribute("cartProducts", cartProducts);
 
-        return "cart";
+        return "cartPage";
     }
+
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public String updateCart(HttpServletRequest request,
                              HttpSession session) {
@@ -44,7 +45,7 @@ public class CartProductController {
             cartProducts.get(i).setQuantity(Integer.parseInt(quantities[i]));
         }
         session.setAttribute("cartProducts", cartProducts);
-        return "redirect:/cartProductList";
+        return "redirect:/cart";
     }
 
     private double toTal(HttpSession session) {
@@ -58,12 +59,8 @@ public class CartProductController {
     @GetMapping()
     public String cart(ModelMap modelMap, HttpSession session) {
         modelMap.put("total", toTal(session));
-        return "cart";
+        return "cartPage";
     }
-    //    @GetMapping
-//    public String showCartProduct() {
-//
-//    }
 
 //    @GetMapping("/product/cartProduct/add/{productId}")
 ////    @SessionAttributes("userId")
