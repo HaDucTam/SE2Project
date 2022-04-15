@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<!-- header section starts-->
+<!-- header section starts  -->
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
@@ -109,22 +109,117 @@
 <!-- arrivals section starts  -->
 <section class="arrivals">
     <h1 class="heading"> New <span>arrivals</span> </h1>
-    <div style="overflow-x: auto !important;">
-        <div class="box-container">
-            <div class="box" th:each="product : ${products}">
-                <div class="image">
-                    <img th:src="@{${product.getImagePath()}}" class="" th:alt="${product.name}">
-                    <div class="content">
-                        <h3 th:text="${product.name}"></h3>
-                        <div><span th:text="${product.price}"></span> </div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
+    <div class="box-container">
+        <div class="box">
+            <div class="image">
+                <img th:src="@{/images/arrival/arrival-1.jpg}" class="main-img" alt="">
+                <img th:src="@{/images/arrival/arrival-1-hover.jpg}" class="hover-img" alt="">
+            </div>
+
+            <div class="content">
+                <h3>HD television</h3>
+                <div class="price"> $249.99 <span>$399.99</span> </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img th:src="@{/images/arrival/arrival-2.jpg}" class="main-img" alt="">
+                <img th:src="@{/images/arrival/arrival-2-hover.jpg}" class="hover-img" alt="">
+            </div>
+
+            <div class="content">
+                <h3>lenovo laptop</h3>
+                <div class="price"> $249.99 <span>$399.99</span> </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img th:src="@{/images/arrival/arrival-3.jpg}" class="main-img" alt="">
+                <img th:src="@{/images/arrival/arrival-3-hover.jpg}" class="hover-img" alt="">
+            </div>
+
+            <div class="content">
+                <h3><a th:href="@{/product/smartphone}">new smartphone</a></h3>
+                <div class="price"> $249.99 <span>$399.99</span> </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img th:src="@{/images/arrival/arrival-4.jpg}" class="main-img" alt="">
+                <img th:src="@{/images/arrival/arrival-4-hover.jpg}" class="hover-img" alt="">
+            </div>
+
+            <div class="content">
+                <h3>new printer</h3>
+                <div class="price"> $249.99 <span>$399.99</span> </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img th:src="@{/images/arrival/arrival-5.jpg}" class="main-img" alt="">
+                <img th:src="@{/images/arrival/arrival-5-hover.jpg}" class="hover-img" alt="">
+            </div>
+
+            <div class="content">
+                <h3>new headphones</h3>
+                <div class="price"> $249.99 <span>$399.99</span> </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img th:src="@{/images/arrival/arrival-6.jpg}" class="main-img" alt="">
+                <img th:src="@{/images/arrival/arrival-6-hover.jpg}" class="hover-img" alt="">
+            </div>
+
+            <div class="content">
+                <h3>new speakers</h3>
+                <div class="price"> $249.99 <span>$399.99</span> </div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
                 </div>
             </div>
         </div>
@@ -256,10 +351,10 @@
     </div>
 
     <div class="share">
-        <a href="#" class="fab fa-facebook-f"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-instagram"></a>
-        <a href="#" class="fab fa-linkedin"></a>
+        <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+        <a href="https://twitter.com/" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+        <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
     </div>
 </section>
 

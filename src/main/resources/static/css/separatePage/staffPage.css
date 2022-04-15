@@ -40,7 +40,7 @@
     font-size: 3rem;
 }
 
-.staff .slide {
+.review .slide {
     width: 35rem;
     padding: 3rem;
     text-align: center;
@@ -51,28 +51,36 @@
     background: #fff;
 }
 
-.staff .slide img {
+.review .slide img {
     height: 10rem;
     width: 10rem;
     border-radius: 50%;
     margin-bottom: .5rem;
 }
 
-.staff .slide h3 {
+.review .slide h3 {
     font-size: 2rem;
     color: #333;
 }
 
-.staff .slide span {
+.review .slide span {
     color: #0984e3;
     font-size: 1.7rem;
 }
 
-.staff .slide p {
+.review .slide p {
     font-size: 1.5rem;
     line-height: 2;
     color: #666;
     padding-top: 1rem;
+}
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
 }
 
 @media (max-width: 768px) {

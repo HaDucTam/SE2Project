@@ -101,9 +101,9 @@
 
 .arrivals .box-container {
     display: -ms-grid;
-    display: inline-flex;
-    /*-ms-grid-columns: minmax(33rem, 1fr);[auto-fit];*/
-    /*grid-template-columns: repeat(auto-fit, minmax(33rem, 1fr));*/
+    display: grid;
+    -ms-grid-columns: minmax(33rem, 1fr);[auto-fit];
+    grid-template-columns: repeat(auto-fit, minmax(33rem, 1fr));
     gap: 2rem;
 }
 
@@ -115,7 +115,7 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     display: -webkit-box;
     display: -ms-flexbox;
-    /*display: flex;*/
+    display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -132,11 +132,7 @@
 }
 
 .arrivals .box-container .box .image img {
-    max-height: 15rem;
-    max-width: 15rem;
-    height: 150px;
-    width: 150px;
-    object-fit: cover;
+    height: 15rem;
     -webkit-animation: fadeIn .2s linear;
     animation: fadeIn .2s linear;
 }
@@ -152,13 +148,13 @@
 
 .arrivals .box-container .box .content .price {
     padding-top: .5rem;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #0984e3;
     padding-bottom: .7rem;
 }
 
 .arrivals .box-container .box .content .price span {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #666;
     text-decoration: line-through;
 }
