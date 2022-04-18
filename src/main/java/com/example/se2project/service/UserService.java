@@ -5,5 +5,6 @@ import com.example.se2project.entity.User;
 
 public interface UserService extends BaseService<User, Long> {
     boolean isExistedEmail(String email);
+    User findUserByEmail(String email);
 
 }

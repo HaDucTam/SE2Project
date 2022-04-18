@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,6 +40,10 @@
         <div class="content">
             <h3 th:text="${product.name}"></h3>
             <div><span th:text="${product.price}"></span> </div>
+            <li sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')"
+                class="nav-item"><a class="nav-link" href="#"
+                                    th:href="@{/manager/index}">Management</a></li>
+            <a th:href="@{/product/addtoCart/{id}(id=${product.productId})}">Add to cart</a>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>

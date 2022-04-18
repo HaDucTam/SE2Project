@@ -3,6 +3,7 @@ package com.example.se2project.controller;
 import com.example.se2project.entity.User;
 import com.example.se2project.entity.dto.LoginRequestDto;
 import com.example.se2project.service.AuthService;
+import com.example.se2project.service.UserService;
 import com.example.se2project.util.LogFactory;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class LoginController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    UserService userService;
     private final Logger LOGGER = LogFactory.getLogger();
 
     @GetMapping
