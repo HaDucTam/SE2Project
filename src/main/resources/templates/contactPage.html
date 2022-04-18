@@ -44,14 +44,14 @@
         <div class="box">
             <i class="fas fa-envelope"></i>
             <h3>Email</h3>
-            <p>contact@cloud.store</p>
+            <p><a href="mailto:contact@cloud.store">contact@cloud.store</a></p>
         </div>
 
         <div class="box">
             <i class="fas fa-phone"></i>
             <h3>Hotline</h3>
-            <p>+84-123-456-789</p>
-            <p>+84-383-398-867</p>
+            <p><a href="tel:0123456789">+84-123-456-789</a></p>
+            <p><a href="tel:0383398867">+84-383-398-867</a></p>
         </div>
     </div>
 </section>
@@ -59,8 +59,8 @@
 <!-- contact section starts  -->
 <section class="contact">
     <form action="">
-        <h3>Contact us!</h3>
-        <p>What do you need help with? Contact us now to get help!</p>
+        <h3> Contact us! </h3>
+        <p> What do you need help with? Contact us now to get help! </p>
         <div class="inputBox">
             <input type="text" placeholder="Your name">
             <input type="email" placeholder="Your email">
@@ -72,7 +72,7 @@
         </div>
 
         <textarea name="" placeholder="Your message..." id="" cols="30" rows="10"></textarea>
-        <input type="submit" value="send message" class="btn">
+        <input type="submit" onclick="submitContact()" value="send message" class="btn">
     </form>
 
     <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6042.646081989146!2d105.79268851219686!3d20.990225028474914!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135adb29ed54487%3A0xbe22035eae87b5d7!2sHanoi%20University!5e0!3m2!1sen!2s!4v1649648379397!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -106,5 +106,6 @@
 <!-- js link -->
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
+<script th:src="@{/js/base/submitContact.js}"></script>
 </body>
 </html>
