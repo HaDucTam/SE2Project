@@ -14,13 +14,14 @@ import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.List;
 
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
 class Se2ProjectApplicationTests {
 
@@ -54,6 +55,13 @@ class Se2ProjectApplicationTests {
         int productId = 1;
         String url = "@{/" + "cart/addToCart/" + productId + "/" + quantity + "}";
         System.out.println(url);
+    }
+    @Test
+    public void test() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String rawPassword = "codejava";
+        String encode = encoder.encode(rawPassword);
+        System.out.println(encode);
     }
 
 
