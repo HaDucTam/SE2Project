@@ -5,19 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping({"/products","/"})
+@RequestMapping({"/"})
 public class HomeController {
 
     @GetMapping
-    public String viewProducts(){
+    public String listProducts(){
         System.out.println("vao viewProduct() method");
-        return "view-productDetail";
-    }
-
-
-    @GetMapping("/{id}")
-    public String gg(){
-        System.out.println("vao gg() method");
-        return "showProduct";
+        return "homePage";
     }
 }

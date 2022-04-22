@@ -27,7 +27,7 @@ public class RegisterController {
     @GetMapping
     public String registerView(Model model) {
         model.addAttribute("registerRequestDto", new RegisterRequestDto());
-        return "register";
+        return "registerPage";
     }
 
     @PostMapping
@@ -35,12 +35,12 @@ public class RegisterController {
                                   BindingResult bindingResult,
                                   Model model) throws CustomException {
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "registerPage";
         }
 
         if (userService.isExistedEmail(registerRequestDto.getEmail())) {
             bindingResult.rejectValue("email", "error.registerRequestDto", "This email is existed!");
-            return "register";
+            return "registerPage";
         }
 
         User newUser = ConvertUtils.convertDtoToEntity(registerRequestDto, User.class);
@@ -51,6 +51,6 @@ public class RegisterController {
                 .password(newUser.getPassword())
                 .build();
         model.addAttribute("loginRequestDto", loginRequestDto);
-        return "login";
+        return "adminPages/users/loginPage";
     }
 }

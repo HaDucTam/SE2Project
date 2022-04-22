@@ -1,7 +1,6 @@
 package com.example.se2project.service.impl;
 
 
-import com.example.se2project.repository.BaseRepository;
 import com.example.se2project.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public class BaseServiceImpl<E, ID extends Serializable, R extends BaseRepository<E, ID>> implements BaseService<E, ID> {
+public class BaseServiceImpl<E, ID extends Serializable, R extends org.springframework.data.jpa.repository.JpaRepository<E, ID>> implements BaseService<E, ID> {
 
     @Autowired
     private R repository;

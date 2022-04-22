@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Page | Cloud Store</title>
+
+    <!-- css link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/footer.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/category.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/product.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/separatePage/shopPage.css}">
+</head>
+<body>
+
+<!-- header section starts  -->
+<header class="header">
+    <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
+
+    <form action="" class="search-form">
+        <input type="search" id="search-box" placeholder="What are you looking for...">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+    <div class="icons">
+        <div id="search-btn" class="fas fa-search"></div>
+        <a th:href="@{/cart}" class="fas fa-shopping-cart"></a>
+        <a th:href="@{/login}" class="fas fa-user"></a>
+    </div>
+</header>
+
+<!-- category section starts  -->
+<section class="category">
+    <h1 class="heading"> Shop by <span>category</span> </h1>
+    <div class="box-container">
+        <a class="box" th:each="category :${allCategory}"
+           th:href="@{/shop/category/{id}(id=${category.categoriesId})}">
+            <img th:src="@{${category.getImagePath()}}" >
+            <h3 th:text="${category.name}"></h3>
+        </a>
+
+<!--        <a href="#" class="box">-->
+<!--            <img th:src="@{/images/category/cat_img3.png}" alt="">-->
+<!--            <h3>headphones</h3>-->
+<!--        </a>-->
+    </div>
+</section>
+
+<!-- products section starts  -->
+<section class="products">
+    <h1 class="heading"> Featured <span>products</span> </h1>
+    <div class="box-container">
+        <div class="box"  th:each="product: ${products}">
+            <div class="image">
+                <img th:src="@{${product.getImagePath()}}" class="main-img">
+
+                <div class="icons">
+                    <a th:href="@{/product/{id}(id=${product.productId})}" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-search-plus"></a>
+                </div>
+            </div>
+
+            <div class="content">
+                <h3 th:text="${product.name}"></h3>
+                <div><span th:text="${product.price}"></span></div>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<!-- product banner section starts  -->
+<section class="product-banner">
+    <h1 class="heading"> <span>Deal</span> of the day </h1>
+    <div class="box-container">
+        <div class="box">
+            <img th:src="@{/images/banners/product-banner-1.jpg}" class="main-img" alt="">
+            <div class="content">
+                <span>special offer</span>
+                <h3>upto 50% off</h3>
+                <a href="#" class="btn">shop now</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img th:src="@{/images/banners/product-banner-2.jpg}" class="main-img" alt="">
+            <div class="content">
+                <span>special offer</span>
+                <h3>upto 50% off</h3>
+                <a href="#" class="btn">shop now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- footer section starts  -->
+<section class="quick-links">
+    <a th:href="@{/}" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
+
+    <div class="links">
+        <a th:href="@{/}"> <i class="fas fa-angle-right"></i> Home </a>
+        <a th:href="@{/shop}"> <i class="fas fa-angle-right"></i> Shop </a>
+        <a th:href="@{/staff}"> <i class="fas fa-angle-right"></i> Staff </a>
+        <a th:href="@{/contact}"> <i class="fas fa-angle-right"></i> Contact </a>
+    </div>
+
+    <div class="share">
+        <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+        <a href="https://twitter.com/" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+        <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+    </div>
+</section>
+
+<section class="credit">
+    <p>Copyright @ 2021 by <span>Cloud Store</span> | All Rights reserved.</p>
+    <img th:src="@{/images/card_img.png}" alt="Cart image">
+</section>
+
+<!-- js link -->
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script th:src="@{/js/base/search.js}"></script>
+</body>
+</html>

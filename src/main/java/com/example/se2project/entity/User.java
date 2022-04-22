@@ -3,6 +3,9 @@ package com.example.se2project.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,5 +38,23 @@ public class User {
     @Column(length = 50, nullable = false)
     private String address;
 
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+    public boolean hasRole(String roleName) {
+        Iterator<Role> iterator = this.roles.iterator();
+        while (iterator.hasNext()) {
+            Role role = iterator.next();
+            if (role.getName().equals(roleName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
