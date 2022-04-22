@@ -51,6 +51,6 @@ public class RegisterController {
                 .password(newUser.getPassword())
                 .build();
         model.addAttribute("loginRequestDto", loginRequestDto);
-        return "loginPage";
+        return "adminPages/users/loginPage";
     }
 }
