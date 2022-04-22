@@ -13,7 +13,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/footer.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/form.css}">
+<<<<<<< HEAD
+    <link rel="stylesheet" th:href="@{/css/prototype/loginPage.css}">
+=======
 <!--    <link rel="stylesheet" tyoe="text/css" th:href="@{/css/prototype/loginPage.css}">-->
+>>>>>>> update_authen
 </head>
 <body>
 
@@ -37,6 +41,18 @@
     <form class="login-form" id="login-form" th:action="@{/login}" th:object="${loginRequestDto}" method="POST" >
         <h3>Login now</h3>
         <input type="email" name="email" placeholder="Enter your email" id="email" class="box">
+<<<<<<< HEAD
+            <div class="err-msg">
+                <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+        <input type="password" name="password" placeholder="Enter your password" id="password" class="box">
+            <div class="err-msg">
+                <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <div class="err-msg" th:if="${#fields.hasGlobalErrors()}">
+                <span class="error" th:text="${#fields.globalErrors().get(0)}"></span>
+            </div>
+=======
         <div class="err-msg">
             <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </div>
@@ -47,6 +63,7 @@
         <div class="err-msg" th:if="${#fields.hasGlobalErrors()}">
             <span class="error" th:text="${#fields.globalErrors().get(0)}"></span>
         </div>
+>>>>>>> update_authen
         <div class="remember">
             <input type="checkbox" name="remember" id="remember">
             <label for="remember"> Remember me </label>

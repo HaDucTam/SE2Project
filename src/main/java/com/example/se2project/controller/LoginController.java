@@ -30,7 +30,7 @@ public class LoginController {
     @GetMapping
     public String login(Model model){
         model.addAttribute("loginRequestDto", new LoginRequestDto());
-        return "adminPages/users/loginPage";
+        return "loginPage";
     }
 
     @PostMapping
@@ -38,14 +38,14 @@ public class LoginController {
                              BindingResult bindingResult,
                              Model model){
         if(bindingResult.hasErrors()){
-            return "adminPages/users/loginPage";
+            return "loginPage";
         }
 
         User user = authService.existedUser(loginRequestDto.getEmail(), loginRequestDto.getPassword());
         if(Objects.isNull(user)){
             ObjectError objectError = new ObjectError("error", "Invalid email or password!");
             bindingResult.addError(objectError);
-            return "adminPages/users/loginPage";
+            return "loginPage";
         }
 
         model.addAttribute("userId", user.getUserId());
