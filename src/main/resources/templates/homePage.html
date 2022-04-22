@@ -1,5 +1,10 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+=======
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>>>>>>> update_authen
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +21,11 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 <!-- header section starts  -->
+=======
+<!-- header section starts-->
+>>>>>>> update_authen
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
@@ -109,6 +118,7 @@
 <!-- arrivals section starts  -->
 <section class="arrivals">
     <h1 class="heading"> New <span>arrivals</span> </h1>
+<<<<<<< HEAD
     <div class="box-container">
         <div class="box">
             <div class="image">
@@ -221,6 +231,28 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
+=======
+    <div style="overflow-x: auto !important;">
+        <div class="box-container">
+            <div class="box" th:each="product : ${products}">
+                <a th:href="@{/product/{id}(id=${product.productId})}">
+                    <div class="image">
+                        <img th:src="@{${product.getImagePath()}}" class="" th:alt="${product.name}">
+                        <div class="content">
+                            <h3 th:text="${product.name}"></h3>
+                            <div><span th:text="${product.price}"></span> </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+>>>>>>> update_authen
             </div>
         </div>
     </div>
@@ -351,10 +383,17 @@
     </div>
 
     <div class="share">
+<<<<<<< HEAD
         <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
         <a href="https://twitter.com/" class="fab fa-twitter"></a>
         <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
         <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+=======
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+>>>>>>> update_authen
     </div>
 </section>
 

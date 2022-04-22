@@ -1,5 +1,10 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+=======
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>>>>>>> update_authen
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,6 +39,7 @@
 
 <!-- product detail section starts  -->
 <section class="product-detail grid">
+<<<<<<< HEAD
     <div class="image">
         <img th:src="@{/images/products/product-1.jpg}" class="main-img" alt="">
         <img th:src="@{/images/products/product-1-hover.jpg}" class="hover-img" alt="">
@@ -48,6 +54,21 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
             <i class="fas fa-star-half-alt"></i>
+=======
+    <div class="image" th:each="product : ${productById}">
+        <img th:src="@{${product.getImagePath()}}" class="" th:alt="${product.name}">
+        <div class="content">
+            <h3 th:text="${product.name}"></h3>
+            <div><span th:text="${product.price}"></span> </div>
+            <a th:href="@{/product/addToCart/{id}(id=${product.productId})}">Add to cart</a>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+>>>>>>> update_authen
         </div>
     </div>
 </section>
@@ -64,10 +85,17 @@
     </div>
 
     <div class="share">
+<<<<<<< HEAD
         <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
         <a href="https://twitter.com/" class="fab fa-twitter"></a>
         <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
         <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+=======
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+>>>>>>> update_authen
     </div>
 </section>
 

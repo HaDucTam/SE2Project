@@ -20,4 +20,7 @@ public class Role {
 
     @Length(min = 2, max = 20)
     private String name;
+
+    @Column(length = 100, nullable = false)
+    private String description;
 }

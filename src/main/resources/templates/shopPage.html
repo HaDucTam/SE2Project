@@ -38,6 +38,7 @@
 <section class="category">
     <h1 class="heading"> Shop by <span>category</span> </h1>
     <div class="box-container">
+<<<<<<< HEAD
         <a href="#" class="box">
             <img th:src="@{/images/category/cat_img1.png}" alt="">
             <h3>televisions</h3>
@@ -72,6 +73,18 @@
             <img th:src="@{/images/category/cat_img7.png}" alt="">
             <h3>speakers</h3>
         </a>
+=======
+        <a class="box" th:each="category :${allCategory}"
+           th:href="@{/shop/category/{id}(id=${category.categoriesId})}">
+            <img th:src="@{${category.getImagePath()}}" >
+            <h3 th:text="${category.name}"></h3>
+        </a>
+
+<!--        <a href="#" class="box">-->
+<!--            <img th:src="@{/images/category/cat_img3.png}" alt="">-->
+<!--            <h3>headphones</h3>-->
+<!--        </a>-->
+>>>>>>> update_authen
     </div>
 </section>
 
@@ -79,6 +92,7 @@
 <section class="products">
     <h1 class="heading"> Featured <span>products</span> </h1>
     <div class="box-container">
+<<<<<<< HEAD
         <div class="box">
             <div class="image">
                 <img th:src="@{/images/products/product-1.jpg}" class="main-img" alt="">
@@ -159,13 +173,26 @@
 
                 <div class="icons">
                     <a href="#" class="fas fa-shopping-cart"></a>
+=======
+        <div class="box"  th:each="product: ${products}">
+            <div class="image">
+                <img th:src="@{${product.getImagePath()}}" class="main-img">
+
+                <div class="icons">
+                    <a th:href="@{/product/{id}(id=${product.productId})}" class="fas fa-shopping-cart"></a>
+>>>>>>> update_authen
                     <a href="#" class="fas fa-search-plus"></a>
                 </div>
             </div>
 
             <div class="content">
+<<<<<<< HEAD
                 <h3>speaker</h3>
                 <div class="price">$249.99 <span>$399.99</span></div>
+=======
+                <h3 th:text="${product.name}"></h3>
+                <div><span th:text="${product.price}"></span></div>
+>>>>>>> update_authen
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -176,6 +203,7 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <div class="box">
             <div class="image">
                 <img th:src="@{/images/products/product-5.jpg}" class="main-img" alt="">
@@ -223,6 +251,9 @@
                 </div>
             </div>
         </div>
+=======
+
+>>>>>>> update_authen
     </div>
 </section>
 

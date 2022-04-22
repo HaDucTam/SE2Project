@@ -22,10 +22,17 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long, ProductRe
     }
 
     @Override
+    public List<Product> getProductsByProductIdBetween(Long i, Long j) {
+        List<Product> productList = productRepository.findProductsByProductIdBetween(i,j);
+        return productList;
+    }
+
+    @Override
     public List<Product> getProductByCategoryId(Long id) {
         List<Product> productList = productRepository.findAllByCategoryCategoriesId(id);
         return productList;
     }
+
 
     @Override
     public void update(Product product) {

@@ -6,7 +6,7 @@ import com.example.se2project.entity.User;
 import java.util.List;
 
 public interface CartProductService extends BaseService<CartProduct, Long>{
-//    void insert(CartProduct cartProduct);
+    //    void insert(CartProduct cartProduct);
 //
 //    void update(Long productId, int quantity);
 //

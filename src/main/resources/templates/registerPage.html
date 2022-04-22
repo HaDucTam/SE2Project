@@ -34,6 +34,7 @@
 
 <!-- register form section starts  -->
 <section class="register">
+<<<<<<< HEAD
     <form action="">
         <h3> Register now </h3>
         <input type="text" name="" placeholder="Enter your name" id="name-info" class="box">
@@ -43,6 +44,49 @@
         <input type="submit" value="register now" class="btn">
         <p> Already have an account? </p>
         <a th:href="@{/login}" class="btn link"> Login now </a>
+=======
+    <form class="register-form" id="register-form" th:action="@{/register}" th:object="${registerRequestDto}" method="POST">
+        <input type="text" name="firstName" placeholder="Enter your first name" id="firstName" th:field = "*{firstName}" class="box">
+        <div class="err-msg">
+            <span class="firstName-msg" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        </div>
+
+        <input type="text" name="lastName" placeholder="Enter your last name" id="lastName" th:field = "*{lastName}" class="box">
+        <div class="err-msg">
+            <span class="firstName-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+        </div>
+
+        <input type="text" name="phoneNumber" placeholder="Enter your phone number" id="phoneNumber" th:field = "*{phoneNumber}" class="box">
+        <div class="err-msg">
+            <span class="firstName-msg" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+        </div>
+
+        <input type="text" name="address" placeholder="Enter your address" id="address" th:field = "*{address}" class="box">
+        <div class="err-msg">
+            <span class="firstName-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+        </div>
+
+        <input type="email" name="email" placeholder="Enter your email" id="email" class="box">
+        <div class="err-msg">
+            <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        </div>
+
+        <input type="password" name="password" placeholder="Re-Enter your password" id="password" class="box">
+        <div class="err-msg">
+            <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+        <input type="hidden" class="form-control" id="role" name="role"
+               th:value="User">
+
+        <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">
+        <div class="err-msg">
+            <span class="re-password-msg"></span>
+        </div>
+
+        <input type="submit" value="register now" class="btn">
+        <p>Already have an account?</p>
+        <a th:href="@{/login}" class="btn link">Login now</a>
+>>>>>>> update_authen
     </form>
 </section>
 
