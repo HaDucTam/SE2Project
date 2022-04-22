@@ -3,9 +3,7 @@ package com.example.se2project.entity;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -15,12 +13,13 @@ import javax.persistence.Id;
 @Entity
 public class Role {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "role_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Length(min = 2, max = 20)
     private String name;
 
-    @Column(length = 100, nullable = false)
-    private String description;
+//    @Column(length = 100, nullable = false)
+//    private String description;
 }

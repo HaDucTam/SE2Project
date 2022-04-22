@@ -16,14 +16,14 @@ import java.util.Set;
 @Entity
 public class User {
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @Column(length = 30, nullable = false, name = "first_name")
@@ -37,6 +37,7 @@ public class User {
 
     @Column(length = 50, nullable = false)
     private String address;
+    private boolean enabled;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(

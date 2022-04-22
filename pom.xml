@@ -132,6 +132,10 @@ Latest commit 6ebe6d0 6 hours ago
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
 
     </dependencies>
 
