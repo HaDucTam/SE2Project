@@ -14,21 +14,22 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+        http.authorizeRequests()
 //                .antMatchers("/product/**", "/addProduct/**", "/addCategory/**").hasAnyAuthority("Admin")
 //                .antMatchers("/users/**").hasAnyAuthority("User")
                 .antMatchers("/product/addToCart/**").hasAnyAuthority("User")
                 .antMatchers("/admin/**").hasAnyAuthority("Admin")
-//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-//                .usernameParameter("email")
+                .failureUrl("/login?error=true")
+                .defaultSuccessUrl("/")
+                .usernameParameter("email")
 //                .successHandler(logInterceptor)
                 .permitAll()
                 .and().logout().permitAll()
         ;
-        http.headers().frameOptions().disable();
     }
 //    @Override
 //    public void configure(WebSecurity webSecurity) throws Exception {
