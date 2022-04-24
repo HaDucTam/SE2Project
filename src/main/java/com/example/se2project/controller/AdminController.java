@@ -59,7 +59,7 @@ public class AdminController {
         category.setDescription(description);
         category.setImage(fileName);
         Category savedCategory = categoryService.add(category);
-        String uploadDir1 = "product-image/" + savedCategory.getCategoriesId();
+        String uploadDir1 = "category-image/" + savedCategory.getCategoriesId();
         Path uploadPath1 = Paths.get(uploadDir1);
         if(!Files.exists(uploadPath1)) {
             Files.createDirectories(uploadPath1);

@@ -63,6 +63,14 @@ class Se2ProjectApplicationTests {
         String encode = encoder.encode(rawPassword);
         System.out.println(encode);
     }
+    @Test
+    public void te() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String rawPassword = "codejava";
+        String encode = encoder.encode(rawPassword);
+        User u = userRepository.findUserByEmailAndPassword("hatam@gmail.com", encode);
+        System.out.println(u);
+    }
 
 
 }

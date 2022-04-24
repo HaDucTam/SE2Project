@@ -138,7 +138,6 @@ Latest commit 6ebe6d0 6 hours ago
         </dependency>
 
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

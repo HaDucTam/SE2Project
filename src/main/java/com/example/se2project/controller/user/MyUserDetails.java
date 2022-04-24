@@ -56,6 +56,12 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.isEnabled();
+        return true;
     }
+    public boolean hasRole(String rolename) {
+        return user.hasRole(rolename);
+    }
+//    public String getFullname() {
+//        return user.getFullName();
+//    }
 }

@@ -19,4 +19,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
         return userRepository.existsByEmail(email.toLowerCase());
     }
 
+    @Override
+    public User findUserByEmailAndPassword(String email, String password) {
+        return userRepository.findUserByEmailAndPassword(email, password);
+    }
+
 }

@@ -37,7 +37,6 @@ public class User {
 
     @Column(length = 50, nullable = false)
     private String address;
-    private boolean enabled;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
@@ -57,5 +56,10 @@ public class User {
 
         return false;
     }
-
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }
