@@ -1,24 +1,30 @@
 package com.example.se2project.configuration;
 
 
+import com.example.se2project.interceptor.LogInterceptor;
 import com.example.se2project.service.impl.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.dao.*;
 import org.springframework.security.config.annotation.authentication.builders.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebConfiguration extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private LogInterceptor logInterceptor;
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
     }
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -46,7 +52,8 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+//                .defaultSuccessUrl("/")
+                .successHandler(logInterceptor)
                 .usernameParameter("email")
 //                .successHandler(logInterceptor)
                 .permitAll()
@@ -55,7 +62,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     }
 //    @Override
 //    public void configure(WebSecurity webSecurity) throws Exception {
-//        we
+//        webSecurity.ignoring().antMatchers("/images/**","/js/**","/category-image/**","/product-image/**");
 //    }
 
 }

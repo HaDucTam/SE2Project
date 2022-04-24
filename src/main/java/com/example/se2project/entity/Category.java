@@ -40,6 +40,6 @@ public class Category {
         if(image == null || categoriesId == 0) {
             return null;
         }
-        return "/product-image/" + categoriesId + "/" + image;
+        return "/category-image/" + categoriesId + "/" + image;
     }
 }

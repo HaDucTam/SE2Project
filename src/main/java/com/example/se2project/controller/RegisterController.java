@@ -1,12 +1,15 @@
 package com.example.se2project.controller;
 
+import com.example.se2project.entity.Role;
 import com.example.se2project.entity.User;
 import com.example.se2project.entity.dto.LoginRequestDto;
 import com.example.se2project.entity.dto.RegisterRequestDto;
 import com.example.se2project.exception.CustomException;
+import com.example.se2project.service.RoleService;
 import com.example.se2project.service.UserService;
 import com.example.se2project.util.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +23,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping({"/register"})
 public class RegisterController {
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping
     public String registerView(Model model) {
@@ -44,6 +50,11 @@ public class RegisterController {
         }
 
         User newUser = ConvertUtils.convertDtoToEntity(registerRequestDto, User.class);
+        String password = registerRequestDto.getPassword();
+        newUser.setPassword(passwordEncoder.encode(password));
+        newUser.setEmail(registerRequestDto.getEmail());
+        Role role = roleService.findRoleByName("User");
+        newUser.addRole(role);
         userService.insert(newUser);
 
         LoginRequestDto loginRequestDto = LoginRequestDto.builder()

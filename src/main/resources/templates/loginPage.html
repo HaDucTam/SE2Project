@@ -34,19 +34,20 @@
 </header>
 
 <section class="login">
-    <form class="login-form" id="login-form" th:action="@{/login}" th:object="${loginRequestDto}" method="POST" >
+    <form class="login-form" id="login-form" th:action="@{/login}" method="POST" >
         <h3>Login now</h3>
         <input type="email" name="email" placeholder="Enter your email" id="email" class="box">
-        <div class="err-msg">
-            <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-        </div>
+<!--        <div class="err-msg">-->
+<!--            <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+<!--        </div>-->
         <input type="password" name="password" placeholder="Enter your password" id="password" class="box">
-        <div class="err-msg">
-            <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        </div>
-        <div class="err-msg" th:if="${#fields.hasGlobalErrors()}">
-            <span class="error" th:text="${#fields.globalErrors().get(0)}"></span>
-        </div>
+<!--        <div class="err-msg">-->
+<!--            <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+<!--        </div>-->
+<!--        <div class="err-msg" th:if="${#fields.hasGlobalErrors()}">-->
+<!--            <span class="error" th:text="${#fields.globalErrors().get(0)}"></span>-->
+<!--        </div>-->
+<!--        <p style="color: red" th:text="${errorMessage}"></p>-->
         <div class="remember">
             <input type="checkbox" name="remember" id="remember">
             <label for="remember"> Remember me </label>
