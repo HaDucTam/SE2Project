@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Page | Cloud Store</title>
+    <title>Cart Page | Cloud Store</title>
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -49,6 +49,7 @@
                 <div> <input name="quantity" th:value="${cartProduct.quantity}" type="number" /></div>
 
                 <div class="price"><span>[[${product.price}]]</span></div>
+                <div class="price"><span>[${total}]</span></div>
             </div>
         </div>
             </th:block>
@@ -126,10 +127,8 @@
         <h3> subtotal : <span>$1400.00</span> </h3>
         <a th:href="@{/payment}" class="btn">Proceed to checkout</a>
     </div>
-<<<<<<< HEAD
-=======
+
     </div>
->>>>>>> update_authen
 </section>
 
 <!-- footer section starts  -->

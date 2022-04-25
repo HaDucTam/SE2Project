@@ -43,6 +43,13 @@ public class UserController {
             model.addAttribute("user", user);
             return "accountPages/profileUpdate";
     }
+    @GetMapping("/order")
+    public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
+//        String email = loggedUser.getUsername();
+//        User user = userService.getUserByEmail(email);
+//        model.addAttribute("user", user);
+        return "accountPages/orderPage";
+    }
 
     @PostMapping("/updateProfileByUser")
     public String updateProfile(User user, RedirectAttributes redirectAttributes,

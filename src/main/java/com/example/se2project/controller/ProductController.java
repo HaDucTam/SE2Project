@@ -1,4 +1,5 @@
 package com.example.se2project.controller;
+import com.example.se2project.controller.user.MyUserDetails;
 import com.example.se2project.entity.CartProduct;
 import com.example.se2project.entity.Category;
 import com.example.se2project.entity.Product;
@@ -8,6 +9,8 @@ import com.example.se2project.service.CategoryService;
 import com.example.se2project.service.ProductService;
 import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -61,7 +64,11 @@ public class ProductController {
                             HttpServletRequest servletRequest, HttpSession session) {
 
 //        User u = (User) model.getAttribute("userId");
-        Long ids = (Long) servletRequest.getSession().getAttribute("userId");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
+        String username = user1.getUsername();
+        User user = userService.getUserByEmail(username);
+        Long ids = user.getUserId();
         System.out.println(getUser(ids));
         if(session.getAttribute("cart") == null) {
             List<CartProduct> cartProductList = new ArrayList<CartProduct>();
@@ -80,7 +87,7 @@ public class ProductController {
             }
             session.setAttribute("cart", cartProducts);
         }
-        return "redirect:/cartProductList";
+        return "redirect:/cart";
     }
     //    @GetMapping("/")
 //    public String viewProduct(Model model) {
