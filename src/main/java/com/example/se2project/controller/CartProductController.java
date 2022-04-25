@@ -1,11 +1,15 @@
 package com.example.se2project.controller;
 
+import com.example.se2project.controller.user.MyUserDetails;
 import com.example.se2project.entity.CartProduct;
+import com.example.se2project.entity.User;
 import com.example.se2project.repository.CartProductRepository;
 import com.example.se2project.service.CartProductService;
 import com.example.se2project.service.ProductService;
 import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -33,9 +37,14 @@ public class CartProductController {
 
     @GetMapping("/cart")
     public String cartProductList(Model model, HttpServletRequest servletRequest) {
-        Long ids = (Long) servletRequest.getSession().getAttribute("userId");
-        List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
-        model.addAttribute("cartProducts", cartProducts);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
+//        String username = user1.getUsername();
+//        User user = userService.getUserByEmail(username);
+////        Long ids = (Long) servletRequest.getSession().getAttribute("userId");
+//        Long ids = user.getUserId();
+//        List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
+//        model.addAttribute("cartProducts", cartProducts);
 
         return "cartPage";
     }

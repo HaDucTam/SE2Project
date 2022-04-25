@@ -45,7 +45,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 //                .antMatchers("/product/**", "/addProduct/**", "/addCategory/**").hasAnyAuthority("Admin")
 //                .antMatchers("/users/**").hasAnyAuthority("User")
-                .antMatchers("/product/addToCart/**").hasAnyAuthority("User")
+                .antMatchers("/product/addToCart/**", "/cart/**").hasAnyAuthority("User")
                 .antMatchers("/admin/**").hasAnyAuthority("Admin")
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()

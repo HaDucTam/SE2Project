@@ -44,24 +44,24 @@ public class LoginController {
     @PostMapping
     public String checkLogin(@RequestParam("email") String email,
                              @RequestParam("password") String password,
-                             ModelMap model) {
+                             Model model) {
         User user = userService.findUserByEmailAndPassword(email, password);
-        System.out.println(user);
-        if(Objects.isNull(user)){
+        System.out.println(user.toString());
+        if (Objects.isNull(user)) {
 //            ObjectError objectError = new ObjectError("error", "Invalid email or password!");
 //            bindingResult.addError(objectError);
             model.addAttribute("errorMessage", "Username or password is incorrect!!!");
             return "loginPage";
+        } else {
+
+            model.addAttribute("userId", user.getUserId());
+            model.addAttribute("email", user.getEmail());
+
+            LOGGER.info("Logged successfully!");
+
+            return "redirect:/";
         }
-
-        model.addAttribute("userId", user.getUserId());
-        model.addAttribute("email", user.getEmail());
-
-        LOGGER.info("Logged successfully!");
-
-        return "redirect:/";
     }
-
 //    @PostMapping
 //    public String checkLogin(@ModelAttribute @Valid LoginRequestDto loginRequestDto,
 //                             BindingResult bindingResult,
@@ -69,10 +69,6 @@ public class LoginController {
 //        if(bindingResult.hasErrors()){
 //            return "loginPage";
 //        }
-////        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-////        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-////            return "loginPage";
-////        }
 //
 //        User user = authService.existedUser(loginRequestDto.getEmail(), loginRequestDto.getPassword());
 //        if(Objects.isNull(user)){

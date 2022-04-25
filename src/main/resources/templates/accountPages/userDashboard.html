@@ -34,7 +34,7 @@
 <div class="dashboard-container">
     <ul class="menu">
         <li class="active"><a th:href="@{/user}"> Dashboard </a></li>
-        <li><a th:href="@{/updateProfile}"> My Profile </a></li>
+        <li><a th:href="@{/user/updatePage}"> My Profile </a></li>
         <li><a th:href="@{/order}"> My Order </a></li>
     </ul>
 
@@ -48,15 +48,17 @@
             </section>
         </div>
 
-        <div class="profile gid-col">
+        <div class="profile gid-col" th:each="userDetail : ${userDetail}">
             <img th:src="@{/images/users/user-1.jpg}" alt="">
-            <p>
-                Name: Do Minh Vuong<br>
-                Email: Minhvuong250101@gmail.com<br>
-                Phone: 0383398867<br>
-                Address: Thanh Lam, Me Linh, Ha Noi
-            </p>
-            <a th:href="@{/updateProfile}" class="btn">Update profile</a>
+            <p th:text="${userDetail.getFullName()}"></p>
+            <br>
+            <p th:text="${userDetail.getEmail()}"></p>
+            <br>
+            <p th:text="${userDetail.getPhoneNumber()}"></p>
+            <br>
+            <p th:text="${userDetail.getAddress()}"></p>
+
+            <a th:href="@{/user/updatePage}" class="btn">Update profile</a>
         </div>
     </div>
 </div>
