@@ -28,11 +28,11 @@ public class RegisterRequestDto {
     @Length(max = 30)
     private String lastName;
 
-    @NotBlank
-    @Length(min = 9, max = 12)
-    private String phoneNumber;
-
-    @NotBlank
-    @Length(min = 2)
-    private String address;
+//    @NotBlank
+//    @Length(min = 9, max = 12)
+//    private String phoneNumber;
+//
+//    @NotBlank
+//    @Length(min = 2)
+//    private String address;
 }

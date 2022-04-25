@@ -45,15 +45,6 @@
             <span class="firstName-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         </div>
 
-        <input type="text" name="phoneNumber" placeholder="Enter your phone number" id="phoneNumber" th:field = "*{phoneNumber}" class="box">
-        <div class="err-msg">
-            <span class="firstName-msg" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
-        </div>
-
-        <input type="text" name="address" placeholder="Enter your address" id="address" th:field = "*{address}" class="box">
-        <div class="err-msg">
-            <span class="firstName-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
-        </div>
 
         <input type="email" name="email" placeholder="Enter your email" id="email" class="box">
         <div class="err-msg">
@@ -65,10 +56,10 @@
             <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         </div>
 
-        <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">
-        <div class="err-msg">
-            <span class="re-password-msg"></span>
-        </div>
+<!--        <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">-->
+<!--        <div class="err-msg">-->
+<!--            <span class="re-password-msg"></span>-->
+<!--        </div>-->
 
         <input type="submit" value="register now" class="btn">
         <p>Already have an account?</p>

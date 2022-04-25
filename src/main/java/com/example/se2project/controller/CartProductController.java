@@ -37,14 +37,14 @@ public class CartProductController {
 
     @GetMapping("/cart")
     public String cartProductList(Model model, HttpServletRequest servletRequest) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
-//        String username = user1.getUsername();
-//        User user = userService.getUserByEmail(username);
-////        Long ids = (Long) servletRequest.getSession().getAttribute("userId");
-//        Long ids = user.getUserId();
-//        List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
-//        model.addAttribute("cartProducts", cartProducts);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
+        String username = user1.getUsername();
+        User user = userService.getUserByEmail(username);
+//        Long ids = (Long) servletRequest.getSession().getAttribute("userId");
+        Long ids = user.getUserId();
+        List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
+        model.addAttribute("cartProducts", cartProducts);
 
         return "cartPage";
     }

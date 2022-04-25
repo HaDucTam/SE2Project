@@ -32,10 +32,10 @@ public class User {
     @Column(length = 30, nullable = false, name = "last_name")
     private String lastName;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30, nullable = true)
     private String phoneNumber;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = true)
     private String address;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
