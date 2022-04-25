@@ -71,12 +71,10 @@
             <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </div>
 
-        <input type="password" name="password" placeholder="Re-Enter your password" id="password" class="box">
+        <input type="password" name="password" placeholder="Enter your password" id="password" class="box">
         <div class="err-msg">
             <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         </div>
-<!--        <input type="hidden" class="form-control" id="role" name="role"-->
-<!--               th:value="User">-->
 
         <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">
         <div class="err-msg">
@@ -117,5 +115,6 @@
 <!-- js link -->
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
+<script th:src="@{/js/register.js}"></script>
 </body>
 </html>

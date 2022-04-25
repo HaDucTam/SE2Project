@@ -61,7 +61,19 @@ public class MyUserDetails implements UserDetails {
     public boolean hasRole(String rolename) {
         return user.hasRole(rolename);
     }
-//    public String getFullname() {
-//        return user.getFullName();
-//    }
+    public String getFullname() {
+        return user.getFullName();
+    }
+    public void setFirstName(String firstName) {
+        this.user.setFirstName(firstName);
+    }
+    public void setLastName(String lastName) {
+        this.user.setLastName(lastName);
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.user.setPhoneNumber(phoneNumber);
+    }
+    public void setAddress(String address) {
+        this.user.setAddress(address);
+    }
 }

@@ -24,4 +24,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
         return userRepository.findUserByEmailAndPassword(email, password);
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
 }
