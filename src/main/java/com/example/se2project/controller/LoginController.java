@@ -32,7 +32,7 @@ public class LoginController {
     private final Logger LOGGER = LogFactory.getLogger();
 
     @GetMapping
-    public String login(Model model){
+    public String login(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "loginPage";

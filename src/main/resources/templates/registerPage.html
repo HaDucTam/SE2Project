@@ -34,33 +34,23 @@
 
 <!-- register form section starts  -->
 <section class="register">
-
     <form class="register-form" id="register-form" th:action="@{/register}" th:object="${registerRequestDto}" method="POST">
         <input type="text" name="firstName" placeholder="Enter your first name" id="firstName" th:field = "*{firstName}" class="box">
-        <div class="err-msg">
-            <span class="firstName-msg" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-        </div>
+
 
         <input type="text" name="lastName" placeholder="Enter your last name" id="lastName" th:field = "*{lastName}" class="box">
-        <div class="err-msg">
-            <span class="firstName-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-        </div>
 
 
         <input type="email" name="email" placeholder="Enter your email" id="email" class="box">
-        <div class="err-msg">
-            <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-        </div>
+
 
         <input type="password" name="password" placeholder="Enter your password" id="password" class="box">
-        <div class="err-msg">
-            <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        </div>
 
-        <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">
-        <div class="err-msg">
-            <span class="re-password-msg"></span>
-        </div>
+
+        <!--        <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">-->
+        <!--        <div class="err-msg">-->
+        <!--            <span class="re-password-msg"></span>-->
+        <!--        </div>-->
 
         <input type="submit" value="register now" class="btn">
         <p>Already have an account?</p>
@@ -68,6 +58,7 @@
     </form>
 </section>
 
+<!-- footer section starts  -->
 <section class="quick-links">
     <a th:href="@{/}" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
@@ -94,6 +85,6 @@
 <!-- js link -->
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
-<script th:src="@{/js/register.js}"></script>
+<script th:src="@{/js/account/register.js}"></script>
 </body>
 </html>
