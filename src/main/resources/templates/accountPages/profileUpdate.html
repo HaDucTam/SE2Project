@@ -74,15 +74,6 @@
                         <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                     </div>
 
-                    <input type="password" name="password" placeholder="Enter your password" id="password" th:field = "*{password}" class="box">
-                    <div class="err-msg">
-                        <span class="password-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                    </div>
-
-                    <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">
-                    <div class="err-msg">
-                        <span class="re-password-msg"></span>
-                    </div>
                     <input type="submit" value="Update profile" class="btn">
                 </form>
             </section>
