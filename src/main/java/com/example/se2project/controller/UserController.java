@@ -57,7 +57,9 @@ public class UserController {
 //        String rawPassword = user.getPassword();
 //        String encode = encoder.encode(rawPassword);
 //        user.setPassword(encode);
+        user.setPassword(logedUser.getPassword());
         userRepository.save(user);
+
 
         logedUser.setFirstName(user.getFirstName());
         logedUser.setLastName(user.getLastName());

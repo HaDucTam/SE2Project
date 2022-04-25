@@ -46,7 +46,6 @@ public class LoginController {
                              @RequestParam("password") String password,
                              Model model) {
         User user = userService.findUserByEmailAndPassword(email, password);
-        System.out.println(user.toString());
         if (Objects.isNull(user)) {
 //            ObjectError objectError = new ObjectError("error", "Invalid email or password!");
 //            bindingResult.addError(objectError);
