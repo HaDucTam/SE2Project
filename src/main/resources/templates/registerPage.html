@@ -34,17 +34,7 @@
 
 <!-- register form section starts  -->
 <section class="register">
-<<<<<<< HEAD
-    <form action="">
-        <h3> Register now </h3>
-        <input type="text" name="" placeholder="Enter your name" id="name-info" class="box">
-        <input type="email" name="" placeholder="Enter your email" id="email-info" class="box">
-        <input type="password" name="" placeholder="Enter your password" id="pass-info" class="box">
-        <input type="password" name="" placeholder="Re-enter your password" id="repass-info" class="box">
-        <input type="submit" value="register now" class="btn">
-        <p> Already have an account? </p>
-        <a th:href="@{/login}" class="btn link"> Login now </a>
-=======
+
     <form class="register-form" id="register-form" th:action="@{/register}" th:object="${registerRequestDto}" method="POST">
         <input type="text" name="firstName" placeholder="Enter your first name" id="firstName" th:field = "*{firstName}" class="box">
         <div class="err-msg">
@@ -56,15 +46,6 @@
             <span class="firstName-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         </div>
 
-        <input type="text" name="phoneNumber" placeholder="Enter your phone number" id="phoneNumber" th:field = "*{phoneNumber}" class="box">
-        <div class="err-msg">
-            <span class="firstName-msg" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
-        </div>
-
-        <input type="text" name="address" placeholder="Enter your address" id="address" th:field = "*{address}" class="box">
-        <div class="err-msg">
-            <span class="firstName-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
-        </div>
 
         <input type="email" name="email" placeholder="Enter your email" id="email" class="box">
         <div class="err-msg">
@@ -84,11 +65,9 @@
         <input type="submit" value="register now" class="btn">
         <p>Already have an account?</p>
         <a th:href="@{/login}" class="btn link">Login now</a>
->>>>>>> update_authen
     </form>
 </section>
 
-<!-- footer section starts  -->
 <section class="quick-links">
     <a th:href="@{/}" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
