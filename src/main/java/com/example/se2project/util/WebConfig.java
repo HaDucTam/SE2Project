@@ -18,6 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         exposeDirectory("product-image", registry);
         exposeDirectory("category-image", registry);
+        exposeDirectory("user-image", registry);
     }
 
     @Override

@@ -45,7 +45,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 //                .antMatchers("/product/**", "/addProduct/**", "/addCategory/**").hasAnyAuthority("Admin")
 //                .antMatchers("/users/**").hasAnyAuthority("User")
-                .antMatchers("/product/addToCart/**", "/cart/**").hasAnyAuthority("User")
+                .antMatchers("/product/addToCart/**", "/cart/**").hasAnyAuthority("User", "Admin")
                 .antMatchers("/admin/**").hasAnyAuthority("Admin")
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()
@@ -60,9 +60,6 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
                 .and().logout().permitAll()
         ;
     }
-//    @Override
-//    public void configure(WebSecurity webSecurity) throws Exception {
-//        webSecurity.ignoring().antMatchers("/images/**","/js/**","/category-image/**","/product-image/**");
-//    }
+
 
 }

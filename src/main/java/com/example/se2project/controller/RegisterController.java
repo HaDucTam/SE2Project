@@ -54,12 +54,13 @@ public class RegisterController {
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setEmail(registerRequestDto.getEmail());
         Role role = roleService.findRoleByName("User");
-        newUser.addRole(role);
+        newUser.setRole(role);
         userService.insert(newUser);
 
         LoginRequestDto loginRequestDto = LoginRequestDto.builder()
                 .email(newUser.getEmail())
                 .password(newUser.getPassword())
+                .role(newUser.getRole())
                 .build();
         model.addAttribute("loginRequestDto", loginRequestDto);
         return "loginPage";

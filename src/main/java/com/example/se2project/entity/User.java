@@ -38,28 +38,34 @@ public class User {
     @Column(length = 50, nullable = true)
     private String address;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @Column(length = Integer.MAX_VALUE, nullable = true)
+    private String image;
+
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Role role;
     public boolean hasRole(String roleName) {
-        Iterator<Role> iterator = this.roles.iterator();
-        while (iterator.hasNext()) {
-            Role role = iterator.next();
+
             if (role.getName().equals(roleName)) {
                 return true;
             }
-        }
 
         return false;
     }
-    public void addRole(Role role) {
-        this.roles.add(role);
-    }
+
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    @Transient
+    public String getImagePath() {
+        if(image == null || userId == 0) {
+            return null;
+        }
+        return "/user-image/" + userId + "/" + image;
     }
 }

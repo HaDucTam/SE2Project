@@ -1,4 +1,4 @@
-package com.example.se2project.controller.admin;
+package com.example.se2project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

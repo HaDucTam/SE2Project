@@ -18,6 +18,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
 import java.util.List;
 
 @SpringBootTest
@@ -31,17 +35,17 @@ class Se2ProjectApplicationTests {
     CartProductRepository cartProductRepository;
 @Autowired
     UserRepository userRepository;
-    @Test
-    void contextLoads() {
-        Product product = productRepository.getById(1L);
-        User user = userRepository.getById(1L);
-        CartProduct cartProduct = new CartProduct();
-        cartProduct.setProduct(product);
-        cartProduct.setUser(user);
-        cartProduct.setQuantity(2);
-        CartProduct saveCartProduct = cartProductRepository.save(cartProduct);
-        Assertions.assertTrue(saveCartProduct.getId() > 0);
-    }
+//    @Test
+//    void contextLoads() {
+//        Product product = productRepository.getById(1L);
+//        User user = userRepository.getById(1L);
+//        CartProduct cartProduct = new CartProduct();
+//        cartProduct.setProduct(product);
+//        cartProduct.setUser(user);
+//        cartProduct.setQuantity(2);
+//        CartProduct saveCartProduct = cartProductRepository.save(cartProduct);
+//        Assertions.assertTrue(saveCartProduct.getId() > 0);
+//    }
     @Test
     public void getCartProductByUser() {
 //        User user = userRepository.findById(1L).get();
@@ -71,6 +75,17 @@ class Se2ProjectApplicationTests {
         User u = userRepository.findUserByEmailAndPassword("hatam@gmail.com", encode);
         System.out.println(u);
     }
+    @Test
+    public void testDate() {
+        Period dayPlus = Period.ofDays(7);
+        LocalDate date = LocalDate.now();
+        LocalDate delivery = date.plus(dayPlus);
+        java.sql.Date orderDate = Date.valueOf(date);
+        java.sql.Date deliveryDate = Date.valueOf(delivery);
+        System.out.println(orderDate);
+        System.out.println(deliveryDate);
+    }
+
 
 
 }

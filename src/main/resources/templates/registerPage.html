@@ -35,6 +35,7 @@
 <!-- register form section starts  -->
 <section class="register">
     <form class="register-form" id="register-form" th:action="@{/register}" th:object="${registerRequestDto}" method="POST">
+
         <input type="text" name="firstName" placeholder="Enter your first name" id="firstName" th:field = "*{firstName}" class="box">
 
 

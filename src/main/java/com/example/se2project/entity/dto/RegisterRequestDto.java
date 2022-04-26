@@ -1,5 +1,6 @@
 package com.example.se2project.entity.dto;
 
+import com.example.se2project.entity.Role;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -28,5 +29,5 @@ public class RegisterRequestDto {
     @Length(max = 30)
     private String lastName;
 
-
+    private Role role;
 }

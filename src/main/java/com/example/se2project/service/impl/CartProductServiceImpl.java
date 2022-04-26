@@ -10,7 +10,9 @@ import com.example.se2project.service.CartProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CartProductServiceImpl extends BaseServiceImpl<CartProduct, Long, CartProductRepository> implements CartProductService {
@@ -35,6 +37,7 @@ public class CartProductServiceImpl extends BaseServiceImpl<CartProduct, Long, C
 //            cartProductRepository.deleteById(productId);
 //        }
 //    }
+    Map<Long, CartProduct> maps = new HashMap<>();
 
     @Override
     public List<CartProduct> getCartProduct(Long userId) {
@@ -58,6 +61,7 @@ public class CartProductServiceImpl extends BaseServiceImpl<CartProduct, Long, C
         cartProductRepository.save(cartProduct);
         return addedQuant;
     }
+
 
 //    @Override
 //    public double getTotalPrice() {

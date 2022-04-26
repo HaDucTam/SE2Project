@@ -5,6 +5,7 @@ import com.example.se2project.entity.Category;
 import com.example.se2project.entity.Product;
 import com.example.se2project.entity.User;
 import com.example.se2project.entity.dto.ProductDto;
+import com.example.se2project.service.CartProductService;
 import com.example.se2project.service.CategoryService;
 import com.example.se2project.service.ProductService;
 import com.example.se2project.service.UserService;
@@ -38,6 +39,8 @@ public class ProductController {
     CategoryService categoryService;
     @Autowired
     UserService userService;
+    @Autowired
+    CartProductService cartProductService;
 
 
 
@@ -61,7 +64,8 @@ public class ProductController {
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable("id") Long id,
-                            HttpServletRequest servletRequest, HttpSession session) {
+                            HttpServletRequest servletRequest, HttpSession session,
+                            Model model) {
 
 //        User u = (User) model.getAttribute("userId");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -70,14 +74,20 @@ public class ProductController {
         User user = userService.getUserByEmail(username);
         Long ids = user.getUserId();
         System.out.println(getUser(ids));
-        if(session.getAttribute("cart") == null) {
+        List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
+        if(cartProducts == null) {
             List<CartProduct> cartProductList = new ArrayList<CartProduct>();
             cartProductList.add(new CartProduct(productService.findById(id).get(), getUser(ids), 1));
             System.out.println(cartProductList);
-            session.setAttribute("cart", cartProductList);
+            for (CartProduct cartProduct : cartProductList) {
+                cartProductService.insert(cartProduct);
+            }
+//            cartProductService.insert(new CartProduct(productService.findById(id).get(), getUser(ids), 1));
+            model.addAttribute("cart", cartProductList);
 //
         }else {
-            List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
+//            List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
+//            List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
             int index = isExisted(id, cartProducts);
             if(index == -1) {
                 cartProducts.add(new CartProduct(productService.findById(id).get(), getUser(ids),1));
@@ -85,25 +95,15 @@ public class ProductController {
                 int quantity = cartProducts.get(index).getQuantity() + 1;
                 cartProducts.get(index).setQuantity(quantity);
             }
-            session.setAttribute("cart", cartProducts);
+            for (CartProduct cartProduct : cartProducts) {
+                cartProductService.insert(cartProduct);
+            }
+            model.addAttribute("cart", cartProducts);
+
         }
         return "redirect:/cart";
     }
-    //    @GetMapping("/")
-//    public String viewProduct(Model model) {
-//        List<Product> products = productService.findAll();
-//        if(!products.isEmpty()){
-//            model.addAttribute("products", products);
-//            model.addAttribute("allCategory", categoryService.findAll());
-//        }
-//        return "homePage";
-//    }
-//    @GetMapping(value = "/product/{id}")
-//    public String getProductById(@PathVariable(value = "id") Long id, Model model) {
-////        Employee employee = employeeRepository.getById(id);
-////        model.addAttribute("employee", employee);
-//        return "employeeDetail";
-//    }
+
     public User getUser(@SessionAttribute("userId") Long userId) {
         return userService.findById(userId).get();
     }

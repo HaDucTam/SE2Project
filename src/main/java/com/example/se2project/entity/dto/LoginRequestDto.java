@@ -1,5 +1,6 @@
 package com.example.se2project.entity.dto;
 
+import com.example.se2project.entity.Role;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -20,4 +21,6 @@ public class LoginRequestDto {
     @NotBlank
     @Length(min = 5, max = 30, message = "Password must be <5 and >30")
     private String password;
+
+    private Role role;
 }

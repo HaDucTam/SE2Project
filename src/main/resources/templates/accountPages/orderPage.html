@@ -45,42 +45,42 @@
 
         <div class="order grid-col">
             <h1 class="heading"> My <span>order</span> </h1>
-            <section class="section-container">
+            <section class="section-container" th:each="order : ${order}">
                 <table>
                     <tr>
                         <th style="width:10%">ID</th>
-                        <th style="width:45%">Products</th>
-                        <th style="width:15%">Date</th>
-                        <th style="width:15%">Price</th>
+                        <th style="width:45%">Order Date</th>
+                        <th style="width:45%">Delivery Date</th>
+                        <th style="width:15%">User</th>
+                        <th style="width:15%">Delivery Address</th>
                         <th style="width:15%">Status</th>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>Smartphone</td>
-                        <td>02/04/2022</td>
-                        <td>$249.99</td>
+                        <td th:text="${order.orderDate}"></td>
+                        <td th:text="${order.deliveryDate}"></td>
+                        <td th:text="${order.user.getFullName()}"></td>
+                        <td th:text="${order.deliveryAddress}"></td>
                         <td>Paid</td>
+<!--                        <td></td>-->
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Smartphone, Camera, Television,...</td>
-                        <td>12/04/2022</td>
-                        <td>$1400.00</td>
-                        <td>Pending payment</td>
-                    </tr>
+
                 </table>
             </section>
         </div>
 
-        <div class="profile grid-col">
+
+        <div class="profile gid-col" th:each="userDetail : ${userDetail}">
             <img th:src="@{/images/users/user-1.jpg}" alt="">
-            <p>
-                Name: Do Minh Vuong<br>
-                Email: Minhvuong250101@gmail.com<br>
-                Phone: 0383398867<br>
-                Address: Thanh Lam, Me Linh, Ha Noi
-            </p>
-            <a th:href="@{/updateProfile}" class="btn">Update profile</a>
+            <p th:text="${userDetail.getFullName()}"></p>
+            <br>
+            <p th:text="${userDetail.getEmail()}"></p>
+            <br>
+            <p th:text="${userDetail.getPhoneNumber()}"></p>
+            <br>
+            <p th:text="${userDetail.getAddress()}"></p>
+
+            <a th:href="@{/user/updatePage}" class="btn">Update profile</a>
         </div>
     </div>
 </div>

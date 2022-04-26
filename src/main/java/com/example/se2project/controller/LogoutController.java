@@ -14,7 +14,7 @@ public class LogoutController {
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("userId");
         request.getSession().removeAttribute("email");
-        return "redirect:/login";
+        return "redirect:/loginPage";
     }
 
 }
