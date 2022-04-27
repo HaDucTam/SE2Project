@@ -1,5 +1,43 @@
+.image {
+    margin: auto;
+    width: 30rem;
+    border-radius: .5rem;
+    border: 0.2rem solid #333;
+    padding: 2rem;
+    -webkit-box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%);
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+}
+
+.image img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
 .grid {
     display: grid;
     grid-template-columns: calc(50% - (30px * 1/2)) calc(50% - (30px * 1/2));
     grid-column-gap: 30px;
+}
+
+span {
+    font-size: 2rem;
+    color: #0984e3;
+}
+
+h3 {
+    padding-top: .5rem;
+    color: #333;
+    font-size: 3rem;
 }

@@ -3,6 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" th:href="@{/images/favicon.png}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloud Store | The amazing electronic website</title>
@@ -29,7 +30,7 @@
     <div class="icons">
         <div id="search-btn" class="fas fa-search"></div>
         <a th:href="@{/cart}" class="fas fa-shopping-cart"></a>
-        <a th:href="@{/login}" class="fas fa-user"></a>
+        <a sec:authorize = "!isAuthenticated()" th:href="@{/login}" class="fas fa-user"></a>
         <a sec:authorize = "isAuthenticated()" sec:authentication="name" th:href="@{/user}"></a>
     </div>
 </header>
@@ -46,7 +47,7 @@
                 <div class="content">
                     <span>upto 50% off</span>
                     <h3>smartphones</h3>
-                    <a href="#" class="btn">shop now</a>
+                    <a th:href="@{/shop/category/2}" class="btn">shop now</a>
                 </div>
             </div>
 
@@ -58,7 +59,7 @@
                 <div class="content">
                     <span>upto 50% off</span>
                     <h3>smartwatch</h3>
-                    <a href="#" class="btn">shop now</a>
+                    <a th:href="@{/shop/category/4}" class="btn">shop now</a>
                 </div>
             </div>
 
@@ -70,7 +71,7 @@
                 <div class="content">
                     <span>upto 50% off</span>
                     <h3>headphones</h3>
-                    <a href="#" class="btn">shop now</a>
+                    <a th:href="@{/shop/category/3}" class="btn">shop now</a>
                 </div>
             </div>
         </div>
@@ -82,7 +83,7 @@
 <!-- banner section starts  -->
 <section class="banner">
     <div class="box-container">
-        <a href="#" class="box">
+        <a th:href="@{/shop/category/3}" class="box">
             <img th:src="@{/images/banners/banner-1.jpg}" alt="">
             <div class="content">
                 <span>Special offer</span>
@@ -90,7 +91,7 @@
             </div>
         </a>
 
-        <a href="#" class="box">
+        <a th:href="@{/shop/category/4}" class="box">
             <img th:src="@{/images/banners/banner-2.jpg}" alt="">
             <div class="content">
                 <span>special offer</span>
@@ -98,7 +99,7 @@
             </div>
         </a>
 
-        <a href="#" class="box">
+        <a th:href="@{/shop/category/2}" class="box">
             <img th:src="@{/images/banners/banner-3.jpg}" alt="">
             <div class="content">
                 <span>special offer</span>
@@ -245,7 +246,7 @@
 
     <form action="">
         <input type="email" name="" placeholder="Enter your email..." id="" class="email">
-        <input type="submit" value="subscribe" class="btn">
+        <input type="submit" onclick="submitContact()" value="subscribe" class="btn">
     </form>
 </section>
 
@@ -278,5 +279,6 @@
 <script th:src="@{/js/base/search.js}"></script>
 <script th:src="@{/js/base/swiper.js}"></script>
 <script th:src="@{/js/base/accordion.js}"></script>
+<script th:src="@{/js/base/submitContact.js}"></script>
 </body>
 </html>

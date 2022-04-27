@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard | Cloud Store</title>
+    <title>View Order | Cloud Store</title>
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/dashboard.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/order.css}">
 </head>
 <body>
 
@@ -30,22 +32,40 @@
     </div>
 </header>
 
-<!-- dashboard starts  -->
+<!-- order starts  -->
 <div class="dashboard-container">
     <ul class="menu">
-        <li class="active"><a th:href="@{/user}"> Dashboard </a></li>
+        <li><a th:href="@{/user}"> Dashboard </a></li>
         <li><a th:href="@{/user/update-profile}"> My Profile </a></li>
-        <li><a th:href="@{/user/my-order}"> My Order </a></li>
+        <li class="active"><a th:href="@{/user/my-order}"> My Order </a></li>
         <li><a th:href="@{/user/logout}"> Logout </a></li>
     </ul>
 
     <div class="grid">
         <div></div>
 
-        <div class="statistics grid-col">
-            <h1 class="heading"> My <span>dashboard</span> </h1>
-            <section class="section-container">
-                <p>Welcome to Cloud Store. Here is where you can manage your info and orders.</p>
+        <div class="order grid-col">
+            <h1 class="heading"> My <span>order</span> </h1>
+            <section class="section-container" th:each="order : ${order}">
+                <table>
+                    <tr>
+                        <th style="width:10%">ID</th>
+                        <th style="width:45%">Order Date</th>
+                        <th style="width:45%">Delivery Date</th>
+                        <th style="width:15%">User</th>
+                        <th style="width:15%">Delivery Address</th>
+                        <th style="width:15%">Status</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td th:text="${order.orderDate}"></td>
+                        <td th:text="${order.deliveryDate}"></td>
+                        <td th:text="${order.user.getFullName()}"></td>
+                        <td th:text="${order.deliveryAddress}"></td>
+                        <td>Paid</td>
+                        <!--                        <td></td>-->
+                    </tr>
+                </table>
             </section>
         </div>
 

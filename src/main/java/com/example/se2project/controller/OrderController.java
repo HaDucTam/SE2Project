@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping({"/order"})
+@RequestMapping({"/my-order"})
 public class OrderController {
     @GetMapping
     public String orderPage() {
-        return "/accountPages/orderPage";
+        return "accountPages/orderList";
     }
 }

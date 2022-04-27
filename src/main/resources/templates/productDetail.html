@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta th:each="product : ${productById}">
     <title>SmartPhone | Cloud Store</title>
 
     <!-- css link  -->
@@ -29,31 +30,27 @@
     <div class="icons">
         <div id="search-btn" class="fas fa-search"></div>
         <a th:href="@{/cart}" class="fas fa-shopping-cart"></a>
-        <a th:href="@{/login}" class="fas fa-user"></a>
+        <a th:href="@{/user}" class="fas fa-user"></a>
     </div>
 </header>
 
 <!-- product detail section starts  -->
-<section class="product-detail grid">
+<section class="product-detail grid" th:each="product : ${productById}">
+    <div class="image">
+        <img th:src="@{${product.getImagePath()}}" class="img" th:alt="${product.name}">
+    </div>
 
     <div class="content">
-
-    <div class="image" th:each="product : ${productById}">
-        <img th:src="@{${product.getImagePath()}}" class="" th:alt="${product.name}">
-        <div class="content">
-            <h3 th:text="${product.name}"></h3>
-            <div><span th:text="${product.price}"></span> </div>
-            <a th:href="@{/product/addToCart/{id}(id=${product.productId})}">Add to cart</a>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-
+        <h3 th:text="${product.name}"></h3>
+        <div>$ <span th:text="${product.price}"></span> </div>
+        <a th:href="@{/product/addToCart/{id}(id=${product.productId})}" class="btn">Add to cart</a>
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
         </div>
-    </div>
     </div>
 </section>
 
@@ -69,17 +66,10 @@
     </div>
 
     <div class="share">
-
         <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
         <a href="https://twitter.com/" class="fab fa-twitter"></a>
         <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
         <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
-
-        <a href="#" class="fab fa-facebook-f"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-instagram"></a>
-        <a href="#" class="fab fa-linkedin"></a>
-
     </div>
 </section>
 

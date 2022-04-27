@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-<title>ADD CATEGORY</title>
-=======
-<title>UPDATE ORDER</title>
->>>>>>> update_authen
+<title>Add Category</title>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/prototype/cat-add.css}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <style>
-
-    </style>
 </head>
 <body>
 <article class="wraper"><form th:action="@{/admin/addCategory/save}" method="post" th:object="${category}" enctype="multipart/form-data"
@@ -43,12 +36,7 @@
                     </fieldset>
                         <button type="submit" class="btn btn-primary m-2">Save</button>
                         <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
-
-
             </section>
-
-
-
         </div>
     </div>
 </form>
@@ -59,8 +47,4 @@
     }
 </script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> update_authen

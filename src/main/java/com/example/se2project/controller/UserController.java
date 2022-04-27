@@ -1,7 +1,6 @@
 package com.example.se2project.controller;
 
 import com.example.se2project.controller.user.MyUserDetails;
-import com.example.se2project.entity.Category;
 import com.example.se2project.entity.Order;
 import com.example.se2project.entity.User;
 import com.example.se2project.repository.UserRepository;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -19,11 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping({"/user"})
@@ -44,7 +39,7 @@ public class UserController {
         model.addAttribute("userDetail", user);
         return "accountPages/userDashboard";
     }
-    @GetMapping("/uploadImage")
+    @GetMapping("/upload-image")
     public String uploadImage(@RequestParam(value = "userImage", required = false) MultipartFile userImage) {
         String fileName = StringUtils.cleanPath(userImage.getOriginalFilename());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,14 +49,14 @@ public class UserController {
         user.setImage(fileName);
         return "/adminPages/categories/categoryAdd";
     }
-    @GetMapping("/updatePage")
+    @GetMapping("/update-profile")
     public String viewUpdatePage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
             String email = loggedUser.getUsername();
             User user = userService.getUserByEmail(email);
             model.addAttribute("user", user);
             return "accountPages/profileUpdate";
     }
-    @GetMapping("/order")
+    @GetMapping("/my-order")
     public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
@@ -71,8 +66,8 @@ public class UserController {
         User user = getUserFromSession();
         List<Order> order = (List<Order>) orderService.getOrderByUser(user);
 
-        model.addAttribute("order", order);
-        return "accountPages/orderPage";
+        model.addAttribute("my-order", order);
+        return "accountPages/orderList";
     }
     public User getUserFromSession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -65,8 +65,8 @@ public class CartProductController {
         }
         Order order = Order.builder().orderDate(orderDate).orderDate(orderDate).deliveryDate(deliveryDate).deliveryAddress(user.getAddress()).user(user).build();
         orderService.insert(order);
-        model.addAttribute("order", order);
-        return "accountPages/orderPage";
+        model.addAttribute("my-order", order);
+        return "accountPages/orderList";
     }
     public User getUserFromSession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

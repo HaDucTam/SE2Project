@@ -8,7 +8,6 @@
     padding-top: 1rem;
 }
 
-
 .menu {
     margin: 0;
     padding: 0;
@@ -27,16 +26,19 @@ li a {
     display: block;
     padding: 8px 16px;
     text-decoration: none;
+    color: white;
 }
 
 li a:hover {
     background-color: #555;
-    color: white;
 }
 
 .active {
     background-color: #ffd700;
-    color: white;
+}
+
+.active a {
+    color: black;
 }
 
 .grid {
@@ -61,6 +63,10 @@ section {
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%);
     border-radius: .5rem;
     background: #fff;
+}
+
+.profile {
+    margin-top: 20px;
 }
 
 .profile img {
