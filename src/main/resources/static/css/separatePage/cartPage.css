@@ -71,26 +71,24 @@
 }
 
 .shopping-cart .box-container .box .content .price {
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: #0984e3;
 }
 
 .shopping-cart .box-container .box .content .price span {
-    font-size: 1.5rem;
     color: #666;
-    text-decoration: line-through;
 }
 
-/*.shopping-cart .cart-total {*/
-/*    margin-top: 2rem;*/
-/*    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);*/
-/*    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);*/
-/*    border: 0.2rem solid #333;*/
-/*    border-radius: .5rem;*/
-/*    background: #fff;*/
-/*    padding: 2rem;*/
-/*    padding-top: 1rem;*/
-/*}*/
+.shopping-cart .cart-total {
+    margin-top: 2rem;
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    border: 0.2rem solid #333;
+    border-radius: .5rem;
+    background: #fff;
+    padding: 2rem;
+    padding-top: 1rem;
+}
 
 .shopping-cart .cart-total h3 {
     padding-top: 1rem;

@@ -151,13 +151,13 @@
 .arrivals .box-container .box .content .price {
     padding-top: .5rem;
     font-size: 2rem;
-    color: #0984e3;
+    color: #666666;
     padding-bottom: .7rem;
 }
 
 .arrivals .box-container .box .content .price span {
     font-size: 1.7rem;
-    color: #666;
+    color: #0984e3;
 }
 
 .arrivals .box-container .box .content .stars i {
