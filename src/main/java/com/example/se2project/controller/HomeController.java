@@ -5,6 +5,7 @@ import com.example.se2project.entity.User;
 import com.example.se2project.service.ProductService;
 import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +26,20 @@ public class HomeController {
     @Autowired
     UserService userService;
     @GetMapping
-    public String listProducts(Model model){
+    public String listProducts(Model model, @Param("keyword") String keyword){
+        List<Product> productList = productService.findProductByName(keyword);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("productList", productList);
         System.out.println("vao viewProduct() method");
 
         List<Product> newArrival = productService.getProductsByProductIdBetween(Long.valueOf(productService.findAll().size() - 5), Long.valueOf(productService.findAll().size()));
         model.addAttribute("newArrival", newArrival);
         return "homePage";
     }
+//    public List<Product> listAllProductBySearching(String keyword, Model model) {
+//        if(keyword != null) {
+//            return productService.findProductByName(keyword);
+//        }
+//        return productService.findAll();
+//    }
 }

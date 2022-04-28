@@ -9,5 +9,6 @@ import java.util.List;
 public interface ProductRepository extends BaseRepository<Product, Long> {
     List<Product>findAllByCategoryCategoriesId(Long id);
     List<Product>findProductsByProductIdBetween(Long productId, Long productId2);
+    List<Product> findProductsByNameContains(String name);
 
 }

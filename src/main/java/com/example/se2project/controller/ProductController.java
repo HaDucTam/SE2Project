@@ -44,23 +44,7 @@ public class ProductController {
 
 
 
-    //    @GetMapping("/shop/category/{id}")
-//    public String productByCategory(@PathVariable Long id, Model model) {
-////        model.addAttribute("cartCount")?
-//
-////        model.addAttribute("allCategory", categoryService.findAll());
-//        model.addAttribute("products", productService.getProductByCategoryId(id));
-//        return "shopPage";
-//    }
-//    @GetMapping("/shop")
-//    public String viewShop(Model model) {
-//        List<Product> products = productService.findAll();
-////        if(!products.isEmpty()){
-//            model.addAttribute("products", products);
-//            model.addAttribute("allCategory", categoryService.findAll());
-////        }
-//        return "shopPage";
-//    }
+
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable("id") Long id,
