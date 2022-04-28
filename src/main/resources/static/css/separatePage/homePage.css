@@ -116,8 +116,10 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    text-align: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
     background: #fff;
@@ -154,9 +156,8 @@
 }
 
 .arrivals .box-container .box .content .price span {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: #666;
-    text-decoration: line-through;
 }
 
 .arrivals .box-container .box .content .stars i {

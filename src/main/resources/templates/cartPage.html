@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/footer.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/separatePage/contactPage.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/separatePage/cartPage.css}">
 </head>
 <body>
 
@@ -36,37 +36,26 @@
 <section class="shopping-cart">
     <h1 class="heading">Your <span>products</span></h1>
     <div class="box-container">
-
         <form th:action="@{/update}" method="post">
             <th:block th:each="cartProduct : ${cartProducts}">
-        <div class="box" th:with="product = ${cartProduct.product}">
-            <i class="fas fa-times"></i>
-            <img th:src="@{${product.getImagePath}}">
-            <div class="content">
-                <h3 th:title="${product.name}">
-                    <b>[[${product.name}]]</b>
-                </h3>
-                <div> <input name="quantity" th:value="${cartProduct.quantity}" type="number" /></div>
-
-                <div th:text="${product.price * cartProduct.quantity}"></div>
-            </div>
-        </div>
+                <div class="box" th:with="product = ${cartProduct.product}">
+                    <i class="fas fa-times"></i>
+                    <img th:src="@{${product.getImagePath}}">
+                    <div class="content">
+                        <h3 th:title="${product.name}">
+                            <b>[[${product.name}]]</b>
+                        </h3>
+                        <div> <input name="quantity" th:value="${cartProduct.quantity}" type="number" /></div>
+                        <div th:text="${product.price * cartProduct.quantity}"></div>
+                    </div>
+                </div>
             </th:block>
-
-
-
         </form>
-        <a th:href="@{/checkout}" class="btn">Check out</a>
 
-
-
-<!--    <div class="cart-total">-->
-<!--        <h3> subtotal : <span>$1499.94</span> </h3>-->
-<!--        <h3> discount : <span>-$99.94</span> </h3>-->
-<!--        <h3> subtotal : <span>$1400.00</span> </h3>-->
-<!--        <a th:href="@{/payment}" class="btn">Proceed to checkout</a>-->
-<!--    </div>-->
-
+        <div class="cart-total">
+            <h3> Total : $ <span></span> </h3>
+            <a th:href="@{/checkout}" class="btn">Checkout</a>
+        </div>
     </div>
 </section>
 

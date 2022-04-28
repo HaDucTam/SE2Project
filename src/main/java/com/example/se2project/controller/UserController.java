@@ -99,8 +99,7 @@ public class UserController {
         logedUser.setAddress(user.getAddress());
 //        userRepository.save(user);
         redirectAttributes.addFlashAttribute("message", "Your account have been updated !!!");
-
-        return "redirect:/user/updatePage";
+        return "redirect:/user/update-profile";
     }
 
 }
