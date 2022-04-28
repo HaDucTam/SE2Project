@@ -103,6 +103,7 @@ public class ProductController {
     public String getProductById(@PathVariable(value = "id") Long id, Model model) {
         Product product = productService.findById(id).get();
         model.addAttribute("productById", product);
+        model.addAttribute("product", product);
         return "productDetail";
     }
 

@@ -117,10 +117,10 @@
             <div class="box" th:each="product : ${newArrival}">
                 <a th:href="@{/product/{id}(id=${product.productId})}">
                     <div class="image">
-                        <img th:src="@{${product.getImagePath()}}" class="" th:alt="${product.name}">
+                        <img th:src="@{${product.getImagePath()}}" class="img" th:alt="${product.name}">
                         <div class="content">
                             <h3 th:text="${product.name}"></h3>
-                            <div><span th:text="${product.price}"></span> </div>
+                            <div class="price">$ <span th:text="${product.price}"></span> </div>
                             <div class="stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -262,10 +262,10 @@
     </div>
 
     <div class="share">
-        <a href="#" class="fab fa-facebook-f"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-instagram"></a>
-        <a href="#" class="fab fa-linkedin"></a>
+        <a href="https://www.facebook.com/" class="fab fa-facebook-f"></a>
+        <a href="https://twitter.com/" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+        <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
     </div>
 </section>
 

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" th:href="@{/images/favicon.png}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Page | Cloud Store</title>
@@ -30,7 +32,8 @@
     <div class="icons">
         <div id="search-btn" class="fas fa-search"></div>
         <a th:href="@{/cart}" class="fas fa-shopping-cart"></a>
-        <a th:href="@{/login}" class="fas fa-user"></a>
+        <a sec:authorize = "!isAuthenticated()" th:href="@{/login}" class="fas fa-user"></a>
+        <a sec:authorize = "isAuthenticated()" sec:authentication="name" th:href="@{/user}"></a>
     </div>
 </header>
 
@@ -63,7 +66,7 @@
 
             <div class="content">
                 <h3 th:text="${product.name}"></h3>
-                <div><span th:text="${product.price}"></span></div>
+                <div class="price">$ <span th:text="${product.price}"></span> </div>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>

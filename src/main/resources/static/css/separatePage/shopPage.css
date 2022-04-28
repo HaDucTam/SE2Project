@@ -40,13 +40,13 @@
     transform: translateY(-50%);
 }
 
-.product-banner .box-container .box .content span {
-    font-size: 1.7rem;
-    color: #0984e3;
-}
-
 .product-banner .box-container .box .content h3 {
     padding-top: .5rem;
     font-size: 2rem;
     color: #333;
+}
+
+.product-banner .box-container .box .content span {
+    padding-top: .5rem;
+    font-size: 1.7rem;
 }

@@ -3,7 +3,6 @@ package com.example.se2project.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -33,13 +32,18 @@ public class CartProduct {
     @JoinColumn(name = "user_id")
     private User user;
 
-
     private int quantity;
+    public double total = 0;
 
     public CartProduct(Product product, User user, int quantity) {
         this.product = product;
         this.user = user;
         this.quantity = quantity;
+        Total(product, quantity);
+    }
+
+    public void Total(Product product, int quantity) {
+        total += product.getPrice() * quantity;
     }
 
 //    public CartProduct(Product product, User user, int i) {

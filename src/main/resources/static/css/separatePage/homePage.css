@@ -116,8 +116,10 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    text-align: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
     background: #fff;
@@ -149,14 +151,13 @@
 .arrivals .box-container .box .content .price {
     padding-top: .5rem;
     font-size: 2rem;
-    color: #0984e3;
+    color: #666666;
     padding-bottom: .7rem;
 }
 
 .arrivals .box-container .box .content .price span {
-    font-size: 1.5rem;
-    color: #666;
-    text-decoration: line-through;
+    font-size: 1.7rem;
+    color: #0984e3;
 }
 
 .arrivals .box-container .box .content .stars i {

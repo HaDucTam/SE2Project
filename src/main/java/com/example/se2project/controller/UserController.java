@@ -51,10 +51,10 @@ public class UserController {
     }
     @GetMapping("/update-profile")
     public String viewUpdatePage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
-            String email = loggedUser.getUsername();
-            User user = userService.getUserByEmail(email);
-            model.addAttribute("user", user);
-            return "accountPages/profileUpdate";
+        String email = loggedUser.getUsername();
+        User user = userService.getUserByEmail(email);
+        model.addAttribute("user", user);
+        return "accountPages/profileUpdate";
     }
     @GetMapping("/my-order")
     public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
@@ -75,7 +75,7 @@ public class UserController {
     @PostMapping("/updateProfileByUser")
     public String updateProfile(User user, RedirectAttributes redirectAttributes,
                                 @AuthenticationPrincipal MyUserDetails logedUser
-                                ) throws IOException {
+    ) throws IOException {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
 //        String username = user1.getUsername();

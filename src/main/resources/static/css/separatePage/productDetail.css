@@ -1,6 +1,12 @@
-.image {
+.grid {
+    display: grid;
+    grid-template-columns: calc(50% - (30px * 1/2)) calc(50% - (30px * 1/2));
+    grid-column-gap: 30px;
+}
+
+.product-detail .image {
     margin: auto;
-    width: 30rem;
+    width: 40rem;
     border-radius: .5rem;
     border: 0.2rem solid #333;
     padding: 2rem;
@@ -16,7 +22,7 @@
     background: #fff;
 }
 
-.image img {
+.product-detail .image img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     height: 100%;
@@ -25,18 +31,40 @@
     object-fit: cover;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: calc(50% - (30px * 1/2)) calc(50% - (30px * 1/2));
-    grid-column-gap: 30px;
+.product-detail .detail {
+    font-size: 1.7rem;
+    text-transform: none;
 }
 
-span {
-    font-size: 2rem;
+.product-detail .price, .quantity {
+    border-radius: .5rem;
+    border: .2rem solid #333;
+    padding: .8rem .2rem;
+    width: 10rem;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%);
+    font-size: 1.7rem;
+    text-align: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+}
+
+.product-detail .stars i {
+    font-size: 1.5rem;
+    color: gold;
+}
+
+.product-detail div {
+    margin: 15px 0;
+}
+
+.product-detail span {
     color: #0984e3;
 }
 
-h3 {
+.product-detail h3 {
     padding-top: .5rem;
     color: #333;
     font-size: 3rem;

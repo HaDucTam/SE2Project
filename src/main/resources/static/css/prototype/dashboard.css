@@ -1,21 +1,5 @@
-.dashboard-container {
-    text-align: center;
-}
-
-.dashboard-container a, p {
-    font-size: 1.5rem;
-    line-height: 2;
-    padding-top: 1rem;
-}
-
-.menu {
-    margin: 0;
-    padding: 0;
-    width: 10%;
-    background-color: #0984e3;
-    height: 100%;
-    position: fixed;
-    overflow: auto;
+section {
+    margin-bottom: 30px;
 }
 
 ul {
@@ -33,6 +17,27 @@ li a:hover {
     background-color: #555;
 }
 
+.dashboard-container {
+    height: 100vh;
+    text-align: center;
+}
+
+.dashboard-container a, p {
+    font-size: 1.5rem;
+    line-height: 2;
+    padding-top: 1rem;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    background-color: #0984e3;
+    height: 100vh;
+    position: fixed;
+    overflow: auto;
+}
+
 .active {
     background-color: #ffd700;
 }
@@ -43,16 +48,12 @@ li a:hover {
 
 .grid {
     display: grid;
-    grid-template-columns: calc(10% - (30px * 1/2)) calc(60% - (30px * 1/2)) calc(30% - (30px * 1/2));
+    grid-template-columns: calc(10% - (30px * 1/2)) calc(65% - (30px * 1/2)) calc(25% - (30px * 1/2));
     grid-column-gap: 30px;
 }
 
 .grid-col {
     padding: 30px;
-}
-
-section {
-    margin-bottom: 30px;
 }
 
 .section-container {
@@ -66,7 +67,16 @@ section {
 }
 
 .profile {
-    margin-top: 20px;
+    height: 87vh;
+    margin: 20px;
+    width: 20%;
+    position: fixed;
+    right: 0;
+    padding-top: 20px;
+    border: 0.2rem solid #333;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%);
+    border-radius: .5rem;
+    background: #fff;
 }
 
 .profile img {
