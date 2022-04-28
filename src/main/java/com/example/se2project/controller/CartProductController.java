@@ -65,7 +65,7 @@ public class CartProductController {
         }
         Order order = Order.builder().orderDate(orderDate).orderDate(orderDate).deliveryDate(deliveryDate).deliveryAddress(user.getAddress()).user(user).build();
         orderService.insert(order);
-        model.addAttribute("my-order", order);
+        model.addAttribute("myOrder", order);
         return "accountPages/orderList";
     }
     public User getUserFromSession() {
@@ -104,33 +104,6 @@ public class CartProductController {
         return "cartPage";
     }
 
-//    @GetMapping("/product/cartProduct/add/{productId}")
-////    @SessionAttributes("userId")
-//    public String addCartProduct(@PathVariable("productId") Long productId,
-//                                 @SessionAttribute("userId") Long userId
-//
-//    ) {
-//        Optional<Product> product = productService.findById(productId);
-//        User u = userService.findById(userId).get();
-//
-//        if (product.isPresent()) {
-//            CartProduct cartProduct = CartProduct.builder()
-////                    .name(product.get().getName())
-////                    .detail(product.get().getDetail())
-////                    .image(product.get().getImagePath())
-////                    .price(product.get().getPrice())
-////                    .user(u)
-//
-//                    .build();
-//
-//
-//
-//            cartProduct.setQuantity(1);
-//            cartProductRepository.save(cartProduct);
-//
-//        }
-//        return "redirect:/cartProductList";
-//    }
 
 
 

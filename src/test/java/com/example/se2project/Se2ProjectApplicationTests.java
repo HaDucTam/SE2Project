@@ -72,8 +72,10 @@ class Se2ProjectApplicationTests {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String rawPassword = "codejava";
         String encode = encoder.encode(rawPassword);
-        User u = userRepository.findUserByEmailAndPassword("hatam@gmail.com", encode);
-        System.out.println(u);
+//        $2a$10$EICH51WfC7.hzLbVarIJhuyeeHhEn7C6bUZu3Qy3ti.5I9WIiDdTG
+//        $2a$10$RQjYebfkXvrXVnvf4SVdVudxwmvduQwJ/3dM7ODCAwwMw3JMCvODi
+//        User u = userRepository.findUserByEmailAndPassword("hatam@gmail.com", encode);
+        System.out.println(encode);
     }
     @Test
     public void testDate() {

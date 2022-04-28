@@ -64,9 +64,9 @@ public class UserController {
 //        User user = userService.getUserByEmail(username);
 //        model.addAttribute("userDetail", user);
         User user = getUserFromSession();
-        List<Order> order = (List<Order>) orderService.getOrderByUser(user);
+        List<Order> order = orderService.getOrderByUser(user);
 
-        model.addAttribute("my-order", order);
+        model.addAttribute("myOrder", order);
         return "accountPages/orderList";
     }
     public User getUserFromSession() {
@@ -100,7 +100,7 @@ public class UserController {
 //        userRepository.save(user);
         redirectAttributes.addFlashAttribute("message", "Your account have been updated !!!");
 
-        return "redirect:/user/updatePage";
+        return "redirect:/user/update-profile";
     }
 
 }
