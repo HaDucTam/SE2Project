@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping({"/user"})
@@ -42,7 +41,7 @@ public class UserController {
     }
     @GetMapping("/upload-image")
     public String uploadImage(@RequestParam(value = "userImage", required = false) MultipartFile userImage) {
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(userImage.getOriginalFilename()));
+        String fileName = StringUtils.cleanPath(userImage.getOriginalFilename());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
         String username = user1.getUsername();
@@ -52,22 +51,17 @@ public class UserController {
     }
     @GetMapping("/update-profile")
     public String viewUpdatePage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
-            String email = loggedUser.getUsername();
-            User user = userService.getUserByEmail(email);
-            model.addAttribute("user", user);
-            return "accountPages/profileUpdate";
+        String email = loggedUser.getUsername();
+        User user = userService.getUserByEmail(email);
+        model.addAttribute("user", user);
+        return "accountPages/profileUpdate";
     }
     @GetMapping("/my-order")
     public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
-//        String username = user1.getUsername();
-//        User user = userService.getUserByEmail(username);
-//        model.addAttribute("userDetail", user);
         User user = getUserFromSession();
-        List<Order> order = (List<Order>) orderService.getOrderByUser(user);
-        model.addAttribute("userDetail", user);
-        model.addAttribute("order", order);
+        List<Order> order = orderService.getOrderByUser(user);
+
+        model.addAttribute("myOrder", order);
         return "accountPages/orderList";
     }
     public User getUserFromSession() {
@@ -81,7 +75,7 @@ public class UserController {
     @PostMapping("/updateProfileByUser")
     public String updateProfile(User user, RedirectAttributes redirectAttributes,
                                 @AuthenticationPrincipal MyUserDetails logedUser
-                                ) throws IOException {
+    ) throws IOException {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
 //        String username = user1.getUsername();
@@ -100,6 +94,7 @@ public class UserController {
         logedUser.setAddress(user.getAddress());
 //        userRepository.save(user);
         redirectAttributes.addFlashAttribute("message", "Your account have been updated !!!");
+
         return "redirect:/user/update-profile";
     }
 
