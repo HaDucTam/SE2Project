@@ -49,24 +49,21 @@
 
         <div class="order grid-col">
             <h1 class="heading"> My <span>order</span> </h1>
-            <section class="section-container" th:each="order : ${order}">
+            <section class="section-container">
                 <table>
                     <tr>
                         <th style="width:10%">ID</th>
-                        <th style="width:45%">Order Date</th>
-                        <th style="width:45%">Delivery Date</th>
-                        <th style="width:15%">User</th>
-                        <th style="width:15%">Delivery Address</th>
-                        <th style="width:15%">Status</th>
+                        <th style="width:30%">Order Date</th>
+                        <th style="width:30%">Delivery Date</th>
+                        <th style="width:20%">Delivery Address</th>
+                        <th style="width:10%">Status</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
+                    <tr th:each="order : ${order}">
+                        <td th:text="${order.id}"></td>
                         <td th:text="${order.orderDate}"></td>
                         <td th:text="${order.deliveryDate}"></td>
-                        <td th:text="${order.user.getFullName()}"></td>
                         <td th:text="${order.deliveryAddress}"></td>
                         <td>Paid</td>
-<!--                        <td></td>-->
                     </tr>
                 </table>
             </section>

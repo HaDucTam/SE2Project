@@ -47,11 +47,14 @@
                         <h3 th:title="${product.name}">
                             <b>[[${product.name}]]</b>
                         </h3>
-                        <div> <input name="quantity" th:value="${cartProduct.quantity}" type="number" /></div>
-                        <div th:text="${product.price * cartProduct.quantity}"></div>
+                        <input name="quantity" type="number" class="quantity" th:value="${cartProduct.quantity}" >
+                        <div class="sub-total"> Subtotal : $ <span th:text="${product.price * cartProduct.quantity}"></span></div>
                     </div>
                 </div>
             </th:block>
+            <div>
+                <a th:href="@{/cart/update}" class="btn">Update</a>
+            </div>
         </form>
 
         <div class="cart-total">

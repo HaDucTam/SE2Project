@@ -51,10 +51,6 @@
     background: #fff;
 }
 
-.product-detail .quantity {
-    text-align: center;
-}
-
 .product-detail .stars i {
     font-size: 1.5rem;
     color: gold;
