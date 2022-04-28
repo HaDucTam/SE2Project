@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping({"/user"})
@@ -41,7 +42,7 @@ public class UserController {
     }
     @GetMapping("/upload-image")
     public String uploadImage(@RequestParam(value = "userImage", required = false) MultipartFile userImage) {
-        String fileName = StringUtils.cleanPath(userImage.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(userImage.getOriginalFilename()));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
         String username = user1.getUsername();
@@ -65,8 +66,8 @@ public class UserController {
 //        model.addAttribute("userDetail", user);
         User user = getUserFromSession();
         List<Order> order = (List<Order>) orderService.getOrderByUser(user);
-
-        model.addAttribute("my-order", order);
+        model.addAttribute("userDetail", user);
+        model.addAttribute("order", order);
         return "accountPages/orderList";
     }
     public User getUserFromSession() {
