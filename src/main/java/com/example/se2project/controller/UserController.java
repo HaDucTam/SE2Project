@@ -58,11 +58,6 @@ public class UserController {
     }
     @GetMapping("/my-order")
     public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
-//        String username = user1.getUsername();
-//        User user = userService.getUserByEmail(username);
-//        model.addAttribute("userDetail", user);
         User user = getUserFromSession();
         List<Order> order = orderService.getOrderByUser(user);
 
