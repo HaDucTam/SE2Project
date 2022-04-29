@@ -1,4 +1,4 @@
-package com.example.se2project.controller;
+package com.example.se2project.controller.user;
 
 import com.example.se2project.controller.user.MyUserDetails;
 import com.example.se2project.entity.Order;
@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping({"/user"})
@@ -41,7 +42,7 @@ public class UserController {
     }
     @GetMapping("/upload-image")
     public String uploadImage(@RequestParam(value = "userImage", required = false) MultipartFile userImage) {
-        String fileName = StringUtils.cleanPath(userImage.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(userImage.getOriginalFilename()));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
         String username = user1.getUsername();
@@ -58,10 +59,15 @@ public class UserController {
     }
     @GetMapping("/my-order")
     public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
+//        String username = user1.getUsername();
+//        User user = userService.getUserByEmail(username);
+//        model.addAttribute("userDetail", user);
         User user = getUserFromSession();
-        List<Order> order = orderService.getOrderByUser(user);
-
-        model.addAttribute("myOrder", order);
+        List<Order> order = (List<Order>) orderService.getOrderByUser(user);
+        model.addAttribute("userDetail", user);
+        model.addAttribute("order", order);
         return "accountPages/orderList";
     }
     public User getUserFromSession() {
@@ -94,7 +100,6 @@ public class UserController {
         logedUser.setAddress(user.getAddress());
 //        userRepository.save(user);
         redirectAttributes.addFlashAttribute("message", "Your account have been updated !!!");
-
         return "redirect:/user/update-profile";
     }
 

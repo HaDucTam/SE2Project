@@ -31,7 +31,7 @@ li a:hover {
 .menu {
     margin: 0;
     padding: 0;
-    width: 10%;
+    width: 12%;
     background-color: #0984e3;
     height: 100vh;
     position: fixed;
@@ -48,12 +48,18 @@ li a:hover {
 
 .grid {
     display: grid;
-    grid-template-columns: calc(10% - (30px * 1/2)) calc(65% - (30px * 1/2)) calc(25% - (30px * 1/2));
+    grid-template-columns: calc(12% - (30px * 1/2)) calc(63% - (30px * 1/2)) calc(25% - (30px * 1/2));
     grid-column-gap: 30px;
 }
 
 .grid-col {
     padding: 30px;
+}
+
+.grid-col-2 {
+    padding: 30px;
+    width: 88%;
+    margin-left: 12%;
 }
 
 .section-container {

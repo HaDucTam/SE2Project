@@ -29,6 +29,8 @@ public class AdminController {
     @Autowired
     ProductService productService;
     @Autowired
+    ProductService userService;
+    @Autowired
     private CategoryService categoryService;
 
 //    @RequestMapping("/admin/users")
@@ -38,7 +40,7 @@ public class AdminController {
 //        return "userList";
 //    }
 
-    @GetMapping("/addProduct")
+    @GetMapping("/add-product")
     public String addProductForm(Model model) {
         model.addAttribute("products",new ProductDto());
         model.addAttribute("categories",categoryService.findAll());
@@ -75,7 +77,7 @@ public class AdminController {
 
         return "redirect:/";
     }
-    @PostMapping("/addProduct/save")
+    @PostMapping("/product/add/save")
     public String saveProduct(@ModelAttribute("products") ProductDto productDto,
                               @RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
 
