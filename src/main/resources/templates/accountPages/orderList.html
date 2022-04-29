@@ -38,6 +38,7 @@
         <li><a th:href="@{/user}"> Dashboard </a></li>
         <li><a th:href="@{/user/update-profile}"> My Profile </a></li>
         <li class="active"><a th:href="@{/user/my-order}"> My Order </a></li>
+        <li><a th:href="@{/user/addPayment}"> Payment </a></li>
         <li><a th:href="@{/user/logout}"> Logout </a></li>
     </ul>
 
@@ -49,12 +50,12 @@
             <section class="section-container" th:each="order : ${myOrder}">
                 <table>
                     <tr>
-                        <th style="width:10%">ID</th>
-                        <th style="width:45%">Order Date</th>
-                        <th style="width:45%">Delivery Date</th>
-                        <th style="width:15%">User</th>
-                        <th style="width:15%">Delivery Address</th>
-                        <th style="width:15%">Status</th>
+                        <th>ID</th>
+                        <th>Order Date</th>
+                        <th>Delivery Date</th>
+                        <th>User</th>
+                        <th>Delivery Address</th>
+                        <th >Status</th>
                     </tr>
                     <tr>
                         <td>1</td>

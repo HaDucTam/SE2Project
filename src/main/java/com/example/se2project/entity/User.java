@@ -41,13 +41,17 @@ public class User {
     @Column(length = Integer.MAX_VALUE, nullable = true)
     private String image;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Role role;
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
     public boolean hasRole(String roleName) {
 
             if (role.getName().equals(roleName)) {
@@ -68,4 +72,5 @@ public class User {
         }
         return "/user-image/" + userId + "/" + image;
     }
+
 }

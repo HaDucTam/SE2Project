@@ -62,12 +62,13 @@ public class ProductController {
         if(cartProducts == null) {
             List<CartProduct> cartProductList = new ArrayList<CartProduct>();
             cartProductList.add(new CartProduct(productService.findById(id).get(), getUser(ids), 1));
-            System.out.println(cartProductList);
+//            System.out.println(cartProductList);
             for (CartProduct cartProduct : cartProductList) {
                 cartProductService.insert(cartProduct);
             }
 //            cartProductService.insert(new CartProduct(productService.findById(id).get(), getUser(ids), 1));
             model.addAttribute("cart", cartProductList);
+//            session.setAttribute("cart", cartProductList);
 //
         }else {
 //            List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
@@ -83,6 +84,7 @@ public class ProductController {
                 cartProductService.insert(cartProduct);
             }
             model.addAttribute("cart", cartProducts);
+//            session.setAttribute("cart", cartProducts);
 
         }
         return "redirect:/cart";

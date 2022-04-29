@@ -51,4 +51,16 @@ public class Product {
         }
         return "/product-image/" + productId + "/" + image;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                ", detail='" + detail + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                '}';
+    }
 }

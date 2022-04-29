@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,21 +26,30 @@ public class HomeController {
     ProductService productService;
     @Autowired
     UserService userService;
+
     @GetMapping
-    public String listProducts(Model model, @Param("keyword") String keyword){
-        List<Product> productList = productService.findProductByName(keyword);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("productList", productList);
-        System.out.println("vao viewProduct() method");
+    public String listProducts(Model model){
+//        List<Product> productListBySearching = productService.findProductByName(keyword);
+//        if(!productListBySearching.isEmpty()) {
+//            model.addAttribute("productListBySearching", productListBySearching);
+//            return "searchPage";
+//        }
+//        productList.stream().forEach(System.out::println);
 
         List<Product> newArrival = productService.getProductsByProductIdBetween(Long.valueOf(productService.findAll().size() - 5), Long.valueOf(productService.findAll().size()));
         model.addAttribute("newArrival", newArrival);
         return "homePage";
     }
-//    public List<Product> listAllProductBySearching(String keyword, Model model) {
-//        if(keyword != null) {
-//            return productService.findProductByName(keyword);
-//        }
-//        return productService.findAll();
-//    }
+        @GetMapping("/search")
+        public String listProductsBySeaching(Model model, @Param("keyword") String keyword){
+            List<Product> productListBySearching = productService.findProductByName(keyword);
+            if(productListBySearching.isEmpty()) {
+                productListBySearching = Collections.emptyList();
+                model.addAttribute("productListBySearching", productListBySearching);
+                return "searchPage";
+            }
+            model.addAttribute("productListBySearching", productListBySearching);
+            return "searchPage";
+        }
+
 }

@@ -53,7 +53,7 @@ public class RegisterController {
         String password = registerRequestDto.getPassword();
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setEmail(registerRequestDto.getEmail());
-        Role role = roleService.findRoleByName("User");
+        Role role = roleService.findRoleByName("USER");
         newUser.setRole(role);
         userService.insert(newUser);
 

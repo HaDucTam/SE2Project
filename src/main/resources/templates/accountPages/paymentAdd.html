@@ -49,51 +49,25 @@
         <div></div>
 
         <div class="information grid-col">
-            <h1 class="heading"> My <span>profile</span> </h1>
+            <h1 class="heading"> Add <span>Payment Method</span> </h1>
             <section class="section-container">
-                <form class="update-form" id="update-form" th:action="@{/user/updateProfileByUser}" th:object="${user}" method="post" enctype="multipart/form-data">
-                    <div th:if="${message != null}" class="alert alert-success text-center">[[${message}]]</div>
-                    <input type="hidden" th:field="*{userId}">
-                    <input type="text" name="firstName" placeholder="Enter your first name" id="firstName" th:field = "*{firstName}" class="box">
-                    <div class="err-msg">
-                        <span class="firstName-msg" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-                    </div>
-
-                    <input type="text" name="lastName" placeholder="Enter your last name" id="lastName" th:field = "*{lastName}" class="box">
-                    <div class="err-msg">
-                        <span class="firstName-msg" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-                    </div>
-
-                    <input type="text" name="phoneNumber" placeholder="Enter your phone number" id="phoneNumber" th:field = "*{phoneNumber}" class="box">
-                    <div class="err-msg">
-                        <span class="firstName-msg" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
-                    </div>
-
-                    <input type="text" name="address" placeholder="Enter your address" id="address" th:field = "*{address}" class="box">
-                    <div class="err-msg">
-                        <span class="firstName-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
-                    </div>
-
-                    <input name="userImage"  type="file" accept="image/png, imgage/jpeg">
-
-
-                    <input type="email" name="email" readonly="readonly" id="email" th:field = "*{email}" class="box">
-                    <div class="err-msg">
-                        <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                    </div>
-
-                    <input type="submit" value="Update profile" class="btn">
+                <form class="update-form" id="update-form" th:action="@{/user/addPayment/save}" method="post" th:object="${payment}">
+                    <input type="text" name="bank" placeholder="Enter your bank name" id="firstName" class="box">
+                    <input type="text" name="cardNumber" placeholder="Enter your cardNumber" id="cardNumber"  class="box">
+                    <input type="text" name="userName" placeholder="Enter your card user name" id="userName"  class="box">
+                    <button type="submit" class="btn btn-primary m-2">Save</button>
+                    <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
                 </form>
             </section>
 
-<!--            <h1 class="heading"> Update <span>password</span> </h1>-->
-<!--            <section class="section-container">-->
-<!--                <form action="">-->
-<!--                    <input type="password" name="" placeholder="Enter your password" id="pass-info" class="box">-->
-<!--                    <input type="password" name="" placeholder="Re-enter your password" id="repass-info" class="box">-->
-<!--                    <input type="submit" value="Update password" class="btn">-->
-<!--                </form>-->
-<!--            </section>-->
+            <!--            <h1 class="heading"> Update <span>password</span> </h1>-->
+            <!--            <section class="section-container">-->
+            <!--                <form action="">-->
+            <!--                    <input type="password" name="" placeholder="Enter your password" id="pass-info" class="box">-->
+            <!--                    <input type="password" name="" placeholder="Re-enter your password" id="repass-info" class="box">-->
+            <!--                    <input type="submit" value="Update password" class="btn">-->
+            <!--                </form>-->
+            <!--            </section>-->
         </div>
 
         <div class="profile gid-col" th:each="userDetail : ${user}">

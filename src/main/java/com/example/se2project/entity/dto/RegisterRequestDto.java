@@ -4,6 +4,8 @@ import com.example.se2project.entity.Role;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 

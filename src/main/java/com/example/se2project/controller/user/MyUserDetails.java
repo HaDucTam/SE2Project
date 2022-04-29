@@ -5,14 +5,19 @@ import com.example.se2project.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+@Component
 public class MyUserDetails implements UserDetails {
     private User user;
+
+    public MyUserDetails() {
+    }
 
     public MyUserDetails(User user) {
         this.user = user;

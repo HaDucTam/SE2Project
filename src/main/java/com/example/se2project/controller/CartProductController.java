@@ -15,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +27,8 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.sql.Date;
 import java.time.Period;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -43,12 +47,18 @@ public class CartProductController {
     OrderService orderService;
 
     @GetMapping("/cart")
-    public String cartProductList(Model model, HttpServletRequest servletRequest) {
+    public String cartProductList(Model model) {
 
         User user = getUserFromSession();
         Long ids = user.getUserId();
         List<CartProduct> cartProducts = cartProductService.getCartProduct(ids);
+        if(cartProducts.isEmpty()) {
+            cartProducts = Collections.emptyList();
+            model.addAttribute("cartProducts", cartProducts);
+            return "cartPage";
+        }
         model.addAttribute("cartProducts", cartProducts);
+        model.addAttribute("total", toTal());
 
         return "cartPage";
     }
@@ -79,30 +89,33 @@ public class CartProductController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateCart(HttpServletRequest request,
-                             HttpSession session) {
+                             HttpSession session, Model model) {
         String[] quantities = request.getParameterValues("quantity");
-        List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
+//        List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
+        List<CartProduct> cartProducts = cartProductService.getCartProduct(getUserFromSession().getUserId());
         for(int i = 0; i < cartProducts.size();i++) {
             cartProducts.get(i).setQuantity(Integer.parseInt(quantities[i]));
         }
-        session.setAttribute("cartProducts", cartProducts);
-
+        for (CartProduct cartProduct : cartProducts) {
+            cartProductService.insert(cartProduct);
+        }
+        model.addAttribute("cartProducts", cartProducts);
         return "redirect:/cart";
     }
 
-    private double toTal(HttpSession session) {
-        List<CartProduct> cartProductList = (List<CartProduct>) session.getAttribute("cartProducts");
+    public double toTal() {
+        List<CartProduct> cartProductList = cartProductService.getCartProduct(getUserFromSession().getUserId());
         double total = 0;
         for(CartProduct cartProduct: cartProductList) {
             total += cartProduct.getQuantity() * cartProduct.getProduct().getPrice();
         }
         return total;
     }
-    @GetMapping()
-    public String cart(ModelMap modelMap, HttpSession session) {
-        modelMap.put("total", toTal(session));
-        return "cartPage";
-    }
+//    @GetMapping()
+//    public String cart(Model model) {
+//        model.addAttribute("total", toTal());
+//        return "cartPage";
+//    }
 
 
 
