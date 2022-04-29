@@ -54,9 +54,9 @@ public class User {
 
     public boolean hasRole(String roleName) {
 
-            if (role.getName().equals(roleName)) {
-                return true;
-            }
+        if (role.getName().equals(roleName)) {
+            return true;
+        }
 
         return false;
     }
@@ -72,5 +72,4 @@ public class User {
         }
         return "/user-image/" + userId + "/" + image;
     }
-
 }

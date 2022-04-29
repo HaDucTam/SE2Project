@@ -21,6 +21,13 @@ public class WebConfig implements WebMvcConfigurer {
         exposeDirectory("user-image", registry);
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("homePage");
+        registry.addViewController("/login").setViewName("loginPage");
+        registry.addViewController("/adminHome").setViewName("adminPages/adminDashboard");
+    }
+
     private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
         Path uploadDir = Paths.get(dirName);
         String uploadPath = uploadDir.toFile().getAbsolutePath();
@@ -29,8 +36,6 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
     }
-
-
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

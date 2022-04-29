@@ -111,14 +111,9 @@ public class CartProductController {
         }
         return total;
     }
+}
 //    @GetMapping()
 //    public String cart(Model model) {
 //        model.addAttribute("total", toTal());
 //        return "cartPage";
 //    }
-
-
-
-
-
-}

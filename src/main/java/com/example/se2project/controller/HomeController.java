@@ -40,16 +40,16 @@ public class HomeController {
         model.addAttribute("newArrival", newArrival);
         return "homePage";
     }
-        @GetMapping("/search")
-        public String listProductsBySeaching(Model model, @Param("keyword") String keyword){
-            List<Product> productListBySearching = productService.findProductByName(keyword);
-            if(productListBySearching.isEmpty()) {
-                productListBySearching = Collections.emptyList();
-                model.addAttribute("productListBySearching", productListBySearching);
-                return "searchPage";
-            }
+  
+    @GetMapping("/search")
+    public String listProductsBySeaching(Model model, @Param("keyword") String keyword){
+        List<Product> productListBySearching = productService.findProductByName(keyword);
+        if(productListBySearching.isEmpty()) {
+            productListBySearching = Collections.emptyList();
             model.addAttribute("productListBySearching", productListBySearching);
             return "searchPage";
         }
-
+        model.addAttribute("productListBySearching", productListBySearching);
+        return "searchPage";
+    }
 }
