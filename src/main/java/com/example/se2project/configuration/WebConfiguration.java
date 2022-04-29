@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,7 +47,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/product/**", "/addProduct/**", "/addCategory/**").hasAnyAuthority("Admin")
 //                .antMatchers("/users/**").hasAnyAuthority("User")
                 .antMatchers("/product/addToCart/**", "/cart/**").hasAnyAuthority("User", "Admin")
-                .antMatchers("/admin/**").hasAnyAuthority("Admin")
+                .antMatchers("/admin/**").hasRole("Admin")
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 .and()
@@ -57,7 +58,8 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
 //                .successHandler(logInterceptor)
                 .permitAll()
-                .and().logout().permitAll()
+                .and().logout().logoutUrl("/doLogout").logoutSuccessUrl("/login").permitAll()
+                .and().csrf().disable()
         ;
     }
 

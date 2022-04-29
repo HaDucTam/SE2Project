@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping({"/admin"})
+@RequestMapping({"/adminHome"})
 public class AdminController {
 
     @Autowired
@@ -32,14 +32,20 @@ public class AdminController {
     ProductService userService;
     @Autowired
     private CategoryService categoryService;
-
+//    @GetMapping
+//    public String viewPage(){
+//        return "adminPages/adminDashboard";
+//    }
 //    @RequestMapping("/admin/users")
 //    public String showUserList(Model model) {
 //        List<User> userList = userService.listAllUser();
 //        model.addAttribute("userList", userList);
 //        return "userList";
 //    }
-
+@GetMapping("/category")
+public String viewPage(){
+    return "adminPages/categories/categoryList";
+}
     @GetMapping("/add-product")
     public String addProductForm(Model model) {
         model.addAttribute("products",new ProductDto());

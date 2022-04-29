@@ -5,6 +5,7 @@ import com.example.se2project.repository.ProductRepository;
 import com.example.se2project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -33,6 +34,19 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long, ProductRe
         return productList;
     }
 
+    @Override
+    public List<Product> findProductByName(String keyword) {
+        if(keyword != null) {
+            return productRepository.findProductsByNameContains(keyword);
+        }
+        return getProductsByProductIdBetween(Long.valueOf(productRepository.findAll().size() - 5), Long.valueOf(productRepository.findAll().size()));
+    }
+//    public List<Product> listAllProductBySearching(String keyword, Model model) {
+//        if(keyword != null) {
+//            return productService.findProductByName(keyword);
+//        }
+//        return productService.findAll();
+//    }
 
     @Override
     public void update(Product product) {

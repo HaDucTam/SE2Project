@@ -1,5 +1,6 @@
 package com.example.se2project.controller;
 
+import com.example.se2project.controller.user.MyUserDetails;
 import com.example.se2project.entity.User;
 import com.example.se2project.entity.dto.LoginRequestDto;
 import com.example.se2project.service.AuthService;
@@ -24,9 +25,12 @@ import java.util.Objects;
 @RequestMapping({"/login"})
 @SessionAttributes({"email", "userId"})
 public class LoginController {
-//    private final TokenProvider tokenProvider;
+    //    private final TokenProvider tokenProvider;
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private MyUserDetails myUserDetails;
     @Autowired
     UserService userService;
     private final Logger LOGGER = LogFactory.getLogger();
@@ -46,7 +50,8 @@ public class LoginController {
                              @RequestParam("password") String password,
                              Model model) {
         User user = userService.findUserByEmailAndPassword(email, password);
-        System.out.println(user.toString());
+        System.out.println("============================================================");
+        System.out.println("author = " + myUserDetails.getAuthorities());
         if (Objects.isNull(user)) {
 //            ObjectError objectError = new ObjectError("error", "Invalid email or password!");
 //            bindingResult.addError(objectError);
