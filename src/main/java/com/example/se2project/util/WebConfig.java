@@ -36,6 +36,14 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
     }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("homePage");
+        registry.addViewController("/login").setViewName("loginPage");
+        registry.addViewController("/admin_home").setViewName("adminPages/adminDashboard");
+    }
+
     @GetMapping("/login")
     public String showLoginPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

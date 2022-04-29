@@ -6,6 +6,7 @@ import com.example.se2project.entity.User;
 import com.example.se2project.repository.CartProductRepository;
 import com.example.se2project.repository.ProductRepository;
 import com.example.se2project.repository.UserRepository;
+import com.example.se2project.service.CartProductService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,6 +36,8 @@ class Se2ProjectApplicationTests {
     CartProductRepository cartProductRepository;
 @Autowired
     UserRepository userRepository;
+@Autowired
+    CartProductService cartProductService;
 //    @Test
 //    void contextLoads() {
 //        Product product = productRepository.getById(1L);
@@ -72,19 +75,21 @@ class Se2ProjectApplicationTests {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String rawPassword = "codejava";
         String encode = encoder.encode(rawPassword);
-        User u = userRepository.findUserByEmailAndPassword("hatam@gmail.com", encode);
-        System.out.println(u);
+//        $2a$10$EICH51WfC7.hzLbVarIJhuyeeHhEn7C6bUZu3Qy3ti.5I9WIiDdTG
+//        $2a$10$RQjYebfkXvrXVnvf4SVdVudxwmvduQwJ/3dM7ODCAwwMw3JMCvODi
+//        User u = userRepository.findUserByEmailAndPassword("hatam@gmail.com", encode);
+        System.out.println(encode);
     }
     @Test
     public void testDate() {
-        Period dayPlus = Period.ofDays(7);
-        LocalDate date = LocalDate.now();
-        LocalDate delivery = date.plus(dayPlus);
-        java.sql.Date orderDate = Date.valueOf(date);
-        java.sql.Date deliveryDate = Date.valueOf(delivery);
-        System.out.println(orderDate);
-        System.out.println(deliveryDate);
+        List<CartProduct> cartProductList = cartProductService.getCartProduct(4L);
+        double total = 0;
+        for(CartProduct cartProduct: cartProductList) {
+            total += cartProduct.getQuantity() * cartProduct.getProduct().getPrice();
+        }
+        System.out.println(total);
     }
+
 
 
 

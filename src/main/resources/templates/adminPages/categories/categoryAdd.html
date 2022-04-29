@@ -16,8 +16,8 @@
     <div class="formcontainer">
         <div class="container">
             <section class="user-sec">
-<!--                <form th:action="@{/addCategory/save}" method="post" th:object="${category}" enctype="multipart/form-data"-->
-<!--                      style="max-width: 500px; margin:0 auto;">-->
+                <form th:action="@{/addCategory/save}" method="post" th:object="${category}" enctype="multipart/form-data"
+                      style="max-width: 500px; margin:0 auto;">
                     <fieldset class="form-group">
                         <label>Name</label>
                         <label>
@@ -36,6 +36,7 @@
                     </fieldset>
                         <button type="submit" class="btn btn-primary m-2">Save</button>
                         <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+                </form>
             </section>
         </div>
     </div>

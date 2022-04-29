@@ -22,9 +22,9 @@
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
-    <form action="" class="search-form">
-        <input type="search" id="search-box" placeholder="What are you looking for...">
-        <label for="search-box" class="fas fa-search"></label>
+    <form th:action="@{/search}" class="search-form">
+        <input type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required placeholder="What are you looking for...">
+        <button type="submit" for="keyword" class="fas fa-search" value="Search"></button>
     </form>
 
     <div class="icons">
@@ -38,6 +38,10 @@
 <!-- shopping cart section starts  -->
 <section class="shopping-cart">
     <h1 class="heading">Your <span>products</span></h1>
+<!--    <div th:if="${#fields.hasErrors('global')}">-->
+<!--        <h3>Global errors:</h3>-->
+<!--        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />-->
+<!--    </div>-->
     <div class="box-container">
         <form th:action="@{/update}" method="post">
             <th:block th:each="cartProduct : ${cartProducts}">
@@ -53,13 +57,11 @@
                     </div>
                 </div>
             </th:block>
-            <div>
-                <a th:href="@{/cart/update}" class="btn">Update</a>
-            </div>
+            <input type="submit" value="Update" class="btn">
         </form>
 
         <div class="cart-total">
-            <h3> Total : $ <span></span> </h3>
+            <h3> Total : $ <span th:text="${total}"></span> </h3>
             <a th:href="@{/checkout}" class="btn">Checkout</a>
         </div>
     </div>

@@ -19,5 +19,4 @@ public class Payment {
     private String bank;
     private String cardNumber;
     private String userName;
-
 }

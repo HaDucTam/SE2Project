@@ -81,7 +81,6 @@ public class UserController {
     public String savePaymentMethod(@RequestParam(value = "bank", defaultValue = "empty bank") String bank,
                                     @RequestParam(value = "cardNumber", defaultValue = "empty cardNumber") String cardNumber,
                                     @RequestParam(value = "userName", defaultValue = "empty userName") String userName
-    ) {
         Payment payment = Payment.builder().bank(bank).cardNumber(cardNumber).userName(userName).build();
         Payment savedPayment = paymentRepository.save(payment);
         User u = getUserFromSession();

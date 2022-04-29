@@ -39,7 +39,8 @@
         <li class="active"><a th:href="@{/user}"> Dashboard </a></li>
         <li><a th:href="@{/user/update-profile}"> My Profile </a></li>
         <li><a th:href="@{/user/my-order}"> My Order </a></li>
-        <li><a th:href="@{/user/logout}"> Logout </a></li>
+        <li><a th:href="@{/user/addPayment}"> Payment </a></li>
+        <li><a th:href="@{/doLogout}"> Logout </a></li>
     </ul>
 
     <div class="grid">
@@ -53,7 +54,7 @@
         </div>
 
         <div class="profile gid-col" th:each="userDetail : ${userDetail}">
-            <img th:src="@{/images/users/user-1.jpg}" alt="">
+            <img th:src="${userDetail.getImagePath()}">
             <p th:text="${userDetail.getFullName()}"></p>
             <p th:text="${userDetail.getEmail()}"></p>
             <p th:text="${userDetail.getPhoneNumber()}"></p>

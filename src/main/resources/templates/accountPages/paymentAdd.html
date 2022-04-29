@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" th:href="@{/images/favicon.png}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Order | Cloud Store</title>
+    <title>My Profile | Cloud Store</title>
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/dashboard.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/order.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/separatePage/profileUpdate.css}">
 </head>
 <body>
 
@@ -35,12 +35,12 @@
     </div>
 </header>
 
-<!-- order starts  -->
+<!-- profile starts  -->
 <div class="dashboard-container">
     <ul class="menu">
         <li><a th:href="@{/user}"> Dashboard </a></li>
-        <li><a th:href="@{/user/update-profile}"> My Profile </a></li>
-        <li class="active"><a th:href="@{/user/my-order}"> My Order </a></li>
+        <li class="active"><a th:href="@{/user/update-profile}"> My Profile </a></li>
+        <li><a th:href="@{/user/my-order}"> My Order </a></li>
         <li><a th:href="@{/user/addPayment}"> Payment </a></li>
         <li><a th:href="@{/user/logout}"> Logout </a></li>
     </ul>
@@ -48,42 +48,34 @@
     <div class="grid">
         <div></div>
 
-        <div class="order grid-col">
-            <h1 class="heading"> My <span>order</span> </h1>
-            <section class="section-container" th:each="order : ${order}">
-                <table>
-                    <tr>
-                        <th style="width:10%">ID</th>
-                        <th style="width:45%">Order Date</th>
-                        <th style="width:45%">Delivery Date</th>
-                        <th style="width:15%">User</th>
-                        <th style="width:15%">Delivery Address</th>
-                        <th style="width:15%">Status</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td th:text="${order.orderDate}"></td>
-                        <td th:text="${order.deliveryDate}"></td>
-                        <td th:text="${order.user.getFullName()}"></td>
-                        <td th:text="${order.deliveryAddress}"></td>
-                        <td>Paid</td>
-                        <!--                        <td></td>-->
-                    </tr>
-                </table>
+        <div class="information grid-col">
+            <h1 class="heading"> Add <span>Payment Method</span> </h1>
+            <section class="section-container">
+                <form class="update-form" id="update-form" th:action="@{/user/addPayment/save}" method="post" th:object="${payment}">
+                    <input type="text" name="bank" placeholder="Enter your bank name" id="firstName" class="box">
+                    <input type="text" name="cardNumber" placeholder="Enter your cardNumber" id="cardNumber"  class="box">
+                    <input type="text" name="userName" placeholder="Enter your card user name" id="userName"  class="box">
+                    <button type="submit" class="btn btn-primary m-2">Save</button>
+                    <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+                </form>
             </section>
+
+            <!--            <h1 class="heading"> Update <span>password</span> </h1>-->
+            <!--            <section class="section-container">-->
+            <!--                <form action="">-->
+            <!--                    <input type="password" name="" placeholder="Enter your password" id="pass-info" class="box">-->
+            <!--                    <input type="password" name="" placeholder="Re-enter your password" id="repass-info" class="box">-->
+            <!--                    <input type="submit" value="Update password" class="btn">-->
+            <!--                </form>-->
+            <!--            </section>-->
         </div>
 
-        <div class="profile gid-col" th:each="userDetail : ${userDetail}">
-            <img th:src="@{/images/users/user-1.jpg}" alt="">
+        <div class="profile gid-col" th:each="userDetail : ${user}">
+            <img th:src="${userDetail.getImagePath()}">
             <p th:text="${userDetail.getFullName()}"></p>
-            <br>
             <p th:text="${userDetail.getEmail()}"></p>
-            <br>
             <p th:text="${userDetail.getPhoneNumber()}"></p>
-            <br>
             <p th:text="${userDetail.getAddress()}"></p>
-
-            <a th:href="@{/user/update-profile}" class="btn">Update profile</a>
         </div>
     </div>
 </div>
@@ -91,5 +83,7 @@
 <!-- js link -->
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
+<script th:src="@{/js/account/updateProfile.js}"></script>
+
 </body>
 </html>
