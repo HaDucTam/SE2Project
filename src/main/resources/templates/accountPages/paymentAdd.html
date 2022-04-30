@@ -52,7 +52,7 @@
             <h1 class="heading"> Add <span>Payment Method</span> </h1>
             <section class="section-container">
                 <form class="update-form" id="update-form" th:action="@{/user/my-payment/add/save}" method="post" th:object="${payment}">
-                    <input type="text" name="bank" placeholder="Enter your bank name" id="firstName" class="box">
+                    <input type="text" name="bank" placeholder="Enter your bank name" id="bank" class="box">
                     <input type="text" name="cardNumber" placeholder="Enter your card number" id="cardNumber"  class="box">
                     <input type="text" name="userName" placeholder="Enter your card user name" id="userName"  class="box">
                     <button type="submit" class="btn btn-primary m-2">Save</button>

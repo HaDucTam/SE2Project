@@ -74,12 +74,12 @@ public class UserController {
         User user = userService.getUserByEmail(username);
         return user;
     }
-    @GetMapping("/addPayment")
+    @GetMapping("/my-payment")
     public String addPaymentMethod(Model model) {
         model.addAttribute("payment", new Payment());
         return "accountPages/paymentAdd";
     }
-    @PostMapping("/addPayment/save")
+    @PostMapping("/my-payment/add/save")
     public String savePaymentMethod(@RequestParam(value = "bank", defaultValue = "empty bank") String bank,
                                     @RequestParam(value = "cardNumber", defaultValue = "empty cardNumber") String cardNumber,
                                     @RequestParam(value = "userName", defaultValue = "empty userName") String userName){
