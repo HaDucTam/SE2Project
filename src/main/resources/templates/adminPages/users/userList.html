@@ -48,12 +48,27 @@
     <div class="user-list grid-col-2">
         <h1 class="heading"> User <span>list</span> </h1>
         <section class="section-container">
-'
-
+            <a th:href="@{/admin/users/add}" class="btn">Add new</a>
             <table>
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Vuong Pro</td>
+                    <td>Xoaichuacola@gmail.com</td>
+                    <td>0383398867</td>
+                    <td>Ha Noi</td>
+                    <td><a th:href="@{/admin/users/update}" class="btn">Update</a>
+                        <a th:href="@{/admin/users/delete}" class="btn">Delete</a>
+                    </td>
+                </tr>
                     <th>Email</th>
                     <th>Full Name</th>
                     <th>Phone Number</th>
@@ -78,7 +93,6 @@
 </div>
 
 <!-- js link -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
 </body>
 </html>

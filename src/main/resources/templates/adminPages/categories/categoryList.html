@@ -47,6 +47,24 @@
         <h1 class="heading"> Category <span>list</span> </h1>
         <a th:href="@{/admin/categories/add}" class="btn">Add New</a>
         <section class="section-container">
+            <a th:href="@{/admin/categories/add}" class="btn">Add new</a>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Smartphone</td>
+                    <td>This is smartphone</td>
+                    <td>image here</td>
+                    <td><a th:href="@{/admin/categories/update}" class="btn">Update</a>
+                        <a th:href="@{/admin/categories/delete}" class="btn">Delete</a>
+                    </td>
+                </tr>
 
             <table>
                 <thead>
@@ -77,7 +95,6 @@
 </div>
 
 <!-- js link -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
 </body>
 </html>

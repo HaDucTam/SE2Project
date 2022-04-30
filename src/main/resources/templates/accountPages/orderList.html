@@ -51,8 +51,17 @@
                 <table>
                     <tr>
                         <th>ID</th>
+                        <th>Delivery Address</th>
                         <th>Order Date</th>
                         <th>Delivery Date</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="order : ${myOrder}">
+                        <td th:text="${order.id}"></td>
+                        <td th:text="${order.deliveryAddress}"></td>
+                        <td th:text="${order.orderDate}"></td>
+                        <td th:text="${order.deliveryDate}"></td>
+                        <td><a th:href="@{/user/my-order/view}" class="btn">Detail</a></td>
                         <th>Delivery Address</th>
                         <th >Status</th>
                     </tr>
@@ -62,7 +71,7 @@
                         <td th:text="${order.deliveryDate}"></td>
                         <td th:text="${order.deliveryAddress}"></td>
                         <td>Paid</td>
-                        <!--                        <td></td>-->
+
                     </tr>
                 </table>
             </section>

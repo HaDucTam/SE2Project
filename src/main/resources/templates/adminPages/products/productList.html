@@ -49,11 +49,29 @@
     <h1 class="heading"> Product <span>list</span> </h1>
     <section class="section-container">
 
+      <a th:href="@{/admin/products/add}" class="btn">Add new</a>
       <table>
         <thead>
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Oppo Reno6</td>
+          <td>Smartphone</td>
+          <td>This is Oppo Reno6</td>
+          <td>20.2</td>
+          <td>image here</td>
+          <td><a th:href="@{/admin/products/update}" class="btn">Update</a>
+            <a th:href="@{/admin/products/delete}" class="btn">Delete</a>
+          </td>
+        </tr>
           <th>Detail</th>
           <th>Image</th>
           <th>Price</th>
@@ -79,7 +97,6 @@
 </div>
 
 <!-- js link -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
 </body>
 </html>
