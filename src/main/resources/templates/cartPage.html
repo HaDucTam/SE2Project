@@ -42,6 +42,7 @@
 <!--        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />-->
 <!--    </div>-->
     <div class="box-container">
+        <div th:if="${message != null}" class="alert alert-success text-center">[[${message}]]</div>
         <form th:action="@{/update}" method="post">
             <th:block th:each="cartProduct : ${cartProducts}">
                 <div class="box" th:with="product = ${cartProduct.product}">

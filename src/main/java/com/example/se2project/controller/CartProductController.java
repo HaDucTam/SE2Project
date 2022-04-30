@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -51,7 +52,7 @@ public class CartProductController {
         return "cartPage";
     }
     @GetMapping("/checkout")
-    public String checkOut(Model model) {
+    public String checkOut(Model model, RedirectAttributes redirectAttributes) {
         User user = getUserFromSession();
         Period dayPlus = Period.ofDays(7);
         LocalDate date = LocalDate.now();
@@ -59,7 +60,7 @@ public class CartProductController {
         Date orderDate = Date.valueOf(date);
         Date deliveryDate = Date.valueOf(delivery);
         if(user.getAddress() == null) {
-            model.addAttribute("message", "You need address first");
+            redirectAttributes.addFlashAttribute("message", "You need address first");
             return "redirect:/cart";
         }
         Order order = Order.builder().orderDate(orderDate).deliveryDate(deliveryDate).user(getUserFromSession()).deliveryAddress(user.getAddress()).build();
