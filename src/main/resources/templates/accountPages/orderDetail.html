@@ -6,7 +6,7 @@
     <link rel="icon" th:href="@{/images/favicon.png}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Order | Cloud Store</title>
+    <title>View Order | Cloud Store</title>
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -21,9 +21,9 @@
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
-    <form action="" class="search-form">
-        <input type="search" id="search-box" placeholder="What are you looking for...">
-        <label for="search-box" class="fas fa-search"></label>
+    <form th:action="@{/search}" class="search-form">
+        <input type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required placeholder="What are you looking for...">
+        <button type="submit" for="keyword" class="fas fa-search" value="Search"></button>
     </form>
 
     <div class="icons">
@@ -40,7 +40,8 @@
         <li><a th:href="@{/user}"> Dashboard </a></li>
         <li><a th:href="@{/user/update-profile}"> My Profile </a></li>
         <li class="active"><a th:href="@{/user/my-order}"> My Order </a></li>
-        <li><a th:href="@{/user/my-payment}"> My Payment </a></li>
+        <li><a th:href="@{/user/addPayment}"> Payment </a></li>
+        <li><a th:href="@{/user/order-detail}">Order Detail</a></li>
         <li><a th:href="@{/logout}"> Logout </a></li>
     </ul>
 
@@ -48,38 +49,27 @@
         <div></div>
 
         <div class="order grid-col">
-            <h1 class="heading"> My <span>order</span> </h1>
-            <section class="section-container" th:each="order : ${myOrder}">
+            <h1 class="heading"> My <span>Order Detail</span> </h1>
+            <section class="section-container" th:each="orderDetails : ${orderDetail}">
                 <table>
                     <tr>
                         <th style="width:10%">ID</th>
-                        <th style="width:45%">Order Date</th>
-                        <th style="width:45%">Delivery Date</th>
-                        <th style="width:15%">User</th>
-                        <th style="width:15%">Delivery Address</th>
-                        <th style="width:15%">Status</th>
+                        <th style="width:45%">Product</th>
+                        <th style="width:45%">User</th>
+                        <th style="width:15%">Quantity</th>
+                        <th style="width:15%">Price</th>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td th:text="${order.orderDate}"></td>
-                        <td th:text="${order.deliveryDate}"></td>
-                        <td th:text="${order.user.getFullName()}"></td>
-                        <td th:text="${order.deliveryAddress}"></td>
-                        <td>Paid</td>
-                        <!--                        <td></td>-->
+                        <td th:text="${orderDetails.getId()}"></td>
+                        <td th:text="${orderDetails.getProduct().getName()}"></td>
+                        <td th:text="${orderDetails.getOrder().getUser().getFullName()}"></td>
+                        <td th:text="${orderDetails.getQuantity()}"></td>
+                        <td th:text="${orderDetails.getPrice()}"></td>
                     </tr>
                 </table>
             </section>
         </div>
 
-        <div class="profile gid-col" th:each="userDetail : ${userDetail}">
-            <img th:src="${userDetail.getImagePath()}">
-            <p th:text="${userDetail.getFullName()}"></p>
-            <p th:text="${userDetail.getEmail()}"></p>
-            <p th:text="${userDetail.getPhoneNumber()}"></p>
-            <p th:text="${userDetail.getAddress()}"></p>
-            <a th:href="@{/user/update-profile}" class="btn">Update profile</a>
-        </div>
     </div>
 </div>
 

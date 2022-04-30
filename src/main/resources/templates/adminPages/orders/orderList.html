@@ -48,21 +48,29 @@
     <div class="order-list grid-col-2">
         <h1 class="heading"> Order <span>list</span> </h1>
         <section class="section-container">
+
             <table>
+                <thead>
                 <tr>
-                    <th style="width:10%">ID</th>
-                    <th style="width:30%">Order Date</th>
-                    <th style="width:30%">Delivery Date</th>
-                    <th style="width:20%">Delivery Address</th>
-                    <th style="width:10%">Status</th>
+                    <th>ID</th>
+                    <th>Order Date</th>
+                    <th>Delivery Date</th>
+                    <th>User</th>
+                    <th>Delivery Address</th>
                 </tr>
-                <!--                <tr th:each="order : ${order}">-->
-                <!--                    <td th:text="${order.id}"></td>-->
-                <!--                    <td th:text="${order.orderDate}"></td>-->
-                <!--                    <td th:text="${order.deliveryDate}"></td>-->
-                <!--                    <td th:text="${order.deliveryAddress}"></td>-->
-                <!--                    <td>Paid</td>-->
-                <!--                </tr>-->
+                </thead>
+                <tbody>
+                <tr th:if="${orderLists.isEmpty()}">
+                    <td>No Order</td>
+                </tr>
+                <tr th:each="orderlist : ${orderLists}">
+                    <th style="width:10%" th:text="${orderlist.getId()}"></th>
+                    <th style="width:20%" th:text="${orderlist.getOrderDate()}"></th>
+                    <th style="width:20%" th:text="${orderlist.getDeliveryDate()}"></th>
+                    <th style="width:20%" th:text="${orderlist.getUser().getFullName()}"></th>
+                    <th style="width:30%" th:text="${orderlist.getDeliveryAddress()}"></th>
+                </tr>
+                </tbody>
             </table>
         </section>
     </div>

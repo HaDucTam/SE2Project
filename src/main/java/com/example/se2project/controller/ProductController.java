@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes("userId")
 @RequestMapping({"/product"})
 public class ProductController {
     @Autowired
@@ -50,8 +49,6 @@ public class ProductController {
     public String addToCart(@PathVariable("id") Long id,
                             HttpServletRequest servletRequest, HttpSession session,
                             Model model) {
-
-//        User u = (User) model.getAttribute("userId");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
         String username = user1.getUsername();
@@ -84,7 +81,6 @@ public class ProductController {
                 cartProductService.insert(cartProduct);
             }
             model.addAttribute("cart", cartProducts);
-//            session.setAttribute("cart", cartProducts);
 
         }
         return "redirect:/cart";

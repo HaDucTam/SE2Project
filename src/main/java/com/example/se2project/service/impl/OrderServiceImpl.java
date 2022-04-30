@@ -18,7 +18,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long, OrderReposito
     OrderRepository orderRepository;
     @Override
     public List<Order> getOrderByUser(User user) {
-        List<Order> orderList = orderRepository.getOrderByUser(user);
-        return orderList;
+        List<Order> order = orderRepository.getOrderByUser(user);
+        return order;
     }
 }

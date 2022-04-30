@@ -3,6 +3,9 @@ package com.example.se2project.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,20 +15,22 @@ import javax.persistence.*;
 @Entity
 public class OrderDetail {
     @Id
-    @Column(name = "id")
+    @Column(name = "orderDetail_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false,
-    foreignKey = @ForeignKey(name = "orderDetail_Order"))
+    foreignKey = @ForeignKey(name = "order_detail_ORD_FK"))
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false,
-    foreignKey = @ForeignKey(name = "orderDetail_Product"))
+    foreignKey = @ForeignKey(name = "order_detail_FORD_FK"))
     private Product product;
 
     private int quantity;
     private double price;
+
+
 }
