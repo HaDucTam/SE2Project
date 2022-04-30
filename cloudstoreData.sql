@@ -242,7 +242,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,NULL,'hatam@gmail.com','ha',NULL,'tam','$2a$10$CqpmRYxWA5poKbggyB9KZOdXskz/aBWx3.jDk1Yfaq/aKQgfsr/5G',NULL,NULL),(2,NULL,'tamha@gmail.com','ha',NULL,'tam','$2a$10$xGRPsJdBf/05AugNc/B8d.H4d621B0L/lfEciP/XSWW4aAe1a5pgi',NULL,NULL),(3,NULL,'admin@gmail.com','admin',NULL,'host','$2a$10$ily6bRitOQMjy7I6T7wrXeJorOoqVVLM79OfP4pI.PWnZU9FUhzy.',NULL,NULL),(4,'hanoi','user@gmail.com','user','user-1.jpg','test user','$2a$10$N06nxNqzDWAha/aUwQIK6.uxxlhXYaNJIgoXXXkGb61xv4EhnaToi','0328351824',NULL);
+INSERT INTO `user` VALUES (1,NULL,'hatam@gmail.com','ha',NULL,'tam','$2a$10$CqpmRYxWA5poKbggyB9KZOdXskz/aBWx3.jDk1Yfaq/aKQgfsr/5G',NULL,NULL),(2,NULL,'tamha@gmail.com','ha',NULL,'tam','$2a$10$xGRPsJdBf/05AugNc/B8d.H4d621B0L/lfEciP/XSWW4aAe1a5pgi',NULL,NULL),(3,'hanoi','admin@gmail.com','admin','user-1.jpg','host','$2a$10$ily6bRitOQMjy7I6T7wrXeJorOoqVVLM79OfP4pI.PWnZU9FUhzy.','0328351824',NULL),(4,'hanoi','user@gmail.com','user','user-1.jpg','test user','$2a$10$N06nxNqzDWAha/aUwQIK6.uxxlhXYaNJIgoXXXkGb61xv4EhnaToi','0328351824',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (2,3);
+INSERT INTO `users_roles` VALUES (1,4);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -282,4 +282,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-30 21:42:11
+-- Dump completed on 2022-04-30 22:53:39
