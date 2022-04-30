@@ -48,28 +48,34 @@
   <div class="product-list grid-col-2">
     <h1 class="heading"> Product <span>list</span> </h1>
     <section class="section-container">
+      <a th:href="@{/admin/products/add}" class="btn">Add new</a>
       <table>
         <tr>
-          <th style="width:10%">ID</th>
-          <th style="width:30%">Order Date</th>
-          <th style="width:30%">Delivery Date</th>
-          <th style="width:20%">Delivery Address</th>
-          <th style="width:10%">Status</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Action</th>
         </tr>
-        <!--                <tr th:each="order : ${order}">-->
-        <!--                    <td th:text="${order.id}"></td>-->
-        <!--                    <td th:text="${order.orderDate}"></td>-->
-        <!--                    <td th:text="${order.deliveryDate}"></td>-->
-        <!--                    <td th:text="${order.deliveryAddress}"></td>-->
-        <!--                    <td>Paid</td>-->
-        <!--                </tr>-->
+        <tr>
+          <td>1</td>
+          <td>Oppo Reno6</td>
+          <td>Smartphone</td>
+          <td>This is Oppo Reno6</td>
+          <td>20.2</td>
+          <td>image here</td>
+          <td><a th:href="@{/admin/products/update}" class="btn">Update</a>
+            <a th:href="@{/admin/products/delete}" class="btn">Delete</a>
+          </td>
+        </tr>
       </table>
     </section>
   </div>
 </div>
 
 <!-- js link -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
 </body>
 </html>

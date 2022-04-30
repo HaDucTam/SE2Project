@@ -51,23 +51,6 @@
             <h1 class="heading"> My <span>order</span> </h1>
             <section class="section-container" th:each="order : ${myOrder}">
                 <table>
-                    <tr>
-                        <th style="width:10%">ID</th>
-                        <th style="width:45%">Order Date</th>
-                        <th style="width:45%">Delivery Date</th>
-                        <th style="width:15%">User</th>
-                        <th style="width:15%">Delivery Address</th>
-                        <th style="width:15%">Status</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td th:text="${order.orderDate}"></td>
-                        <td th:text="${order.deliveryDate}"></td>
-                        <td th:text="${order.user.getFullName()}"></td>
-                        <td th:text="${order.deliveryAddress}"></td>
-                        <td>Paid</td>
-                        <!--                        <td></td>-->
-                    </tr>
                 </table>
             </section>
         </div>
