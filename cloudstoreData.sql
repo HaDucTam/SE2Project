@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MariaDB dump 10.19  Distrib 10.6.5-MariaDB, for Win64 (AMD64)
 --
--- Host: 127.0.0.1    Database: cloudstore
+-- Host: localhost    Database: cloudstore
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	10.6.5-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,18 +21,19 @@
 
 DROP TABLE IF EXISTS `cart_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cart_product` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `quantity` int NOT NULL,
-  `product_id` bigint DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `quantity` int(11) NOT NULL,
+  `total` double NOT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK2kdlr8hs2bwl14u8oop49vrxi` (`product_id`),
   KEY `FK66bvly2ku8gmnq4ajawmls531` (`user_id`),
   CONSTRAINT `FK2kdlr8hs2bwl14u8oop49vrxi` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
   CONSTRAINT `FK66bvly2ku8gmnq4ajawmls531` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +42,7 @@ CREATE TABLE `cart_product` (
 
 LOCK TABLES `cart_product` WRITE;
 /*!40000 ALTER TABLE `cart_product` DISABLE KEYS */;
-INSERT INTO `cart_product` VALUES (1,1,7,1),(2,1,5,1);
+INSERT INTO `cart_product` VALUES (1,1,199,4,2),(2,1,249,5,2),(3,1,199,4,4),(4,2,169,6,4);
 /*!40000 ALTER TABLE `cart_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,14 +52,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
-  `category_id` bigint NOT NULL AUTO_INCREMENT,
+  `category_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) DEFAULT NULL,
   `image` longtext NOT NULL,
   `name` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,19 +78,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `order_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_detail` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `order_detail_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `price` double NOT NULL,
-  `quantity` int NOT NULL,
-  `order_id` bigint NOT NULL,
-  `product_id` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `orderDetail_Order` (`order_id`),
-  KEY `orderDetail_Product` (`product_id`),
-  CONSTRAINT `orderDetail_Order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  CONSTRAINT `orderDetail_Product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `quantity` int(11) NOT NULL,
+  `order_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`order_detail_id`),
+  KEY `order_detail_ORD_FK` (`order_id`),
+  KEY `order_detail_FORD_FK` (`product_id`),
+  CONSTRAINT `order_detail_FORD_FK` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  CONSTRAINT `order_detail_ORD_FK` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +99,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
+INSERT INTO `order_detail` VALUES (1,199,1,1,4),(2,169,2,1,6);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,17 +109,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `delivery_address` varchar(255) NOT NULL,
   `delivery_date` datetime NOT NULL,
   `order_date` datetime NOT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  `user_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
   KEY `FKel9kyl84ego2otj2accfd8mr7` (`user_id`),
+  CONSTRAINT `FKdsjgis4ns5a84npiodp6m8aiw` FOREIGN KEY (`order_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKel9kyl84ego2otj2accfd8mr7` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,8 +129,33 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1),(2,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1),(3,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1),(4,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1),(5,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1),(6,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1),(7,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1),(8,'Ha Noi','2022-05-04 00:00:00','2022-04-27 00:00:00',1);
+INSERT INTO `orders` VALUES (1,'hanoi','2022-05-07 00:00:00','2022-04-30 00:00:00',4);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `payment`
+--
+
+DROP TABLE IF EXISTS `payment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `bank` varchar(255) DEFAULT NULL,
+  `card_number` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment`
+--
+
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -136,18 +164,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
-  `product_id` bigint NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `detail` varchar(50) NOT NULL,
   `image` longtext NOT NULL,
   `name` varchar(30) NOT NULL,
   `price` double NOT NULL,
-  `categories_id` bigint DEFAULT NULL,
+  `categories_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   KEY `FK8eiawhls68ys8h44815j4kxwq` (`categories_id`),
   CONSTRAINT `FK8eiawhls68ys8h44815j4kxwq` FOREIGN KEY (`categories_id`) REFERENCES `category` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,12 +194,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role` (
-  `role_id` bigint NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,19 +218,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `user_id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `address` varchar(50) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `first_name` varchar(30) NOT NULL,
-  `image` longtext,
+  `image` longtext DEFAULT NULL,
   `last_name` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
   `phone_number` varchar(30) DEFAULT NULL,
+  `payment_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `UK_ob8kqyqqgmefl0aco34akdtpe` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `UK_ob8kqyqqgmefl0aco34akdtpe` (`email`),
+  KEY `FK9ono19s1lx8t3lwo2n6wgb4t9` (`payment_id`),
+  CONSTRAINT `FK9ono19s1lx8t3lwo2n6wgb4t9` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +242,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Ha Noi','xoaic@xcc.one','Xoai',NULL,'C','$2a$10$5c7jC28WGF4OoQxJRop6IetuOHreR3Lxj2jsbQ25m3CcV.RAtO.Hm','0383398867');
+INSERT INTO `user` VALUES (1,NULL,'hatam@gmail.com','ha',NULL,'tam','$2a$10$CqpmRYxWA5poKbggyB9KZOdXskz/aBWx3.jDk1Yfaq/aKQgfsr/5G',NULL,NULL),(2,NULL,'tamha@gmail.com','ha',NULL,'tam','$2a$10$xGRPsJdBf/05AugNc/B8d.H4d621B0L/lfEciP/XSWW4aAe1a5pgi',NULL,NULL),(3,NULL,'admin@gmail.com','admin',NULL,'host','$2a$10$ily6bRitOQMjy7I6T7wrXeJorOoqVVLM79OfP4pI.PWnZU9FUhzy.',NULL,NULL),(4,'hanoi','user@gmail.com','user','user-1.jpg','test user','$2a$10$N06nxNqzDWAha/aUwQIK6.uxxlhXYaNJIgoXXXkGb61xv4EhnaToi','0328351824',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,15 +252,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users_roles` (
-  `role_id` bigint DEFAULT NULL,
-  `user_id` bigint NOT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`user_id`),
   KEY `FKt4v0rrweyk393bdgt107vdx0x` (`role_id`),
   CONSTRAINT `FKgd3iendaoyh04b95ykqise6qh` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKt4v0rrweyk393bdgt107vdx0x` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,6 +269,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
+INSERT INTO `users_roles` VALUES (2,3);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -250,4 +282,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-27 21:59:21
+-- Dump completed on 2022-04-30 21:42:11
