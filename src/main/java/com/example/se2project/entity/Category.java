@@ -42,4 +42,15 @@ public class Category {
         }
         return "/category-image/" + categoriesId + "/" + image;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoriesId=" + categoriesId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", products=" + products +
+                '}';
+    }
 }

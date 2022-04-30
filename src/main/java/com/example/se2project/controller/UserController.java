@@ -1,18 +1,14 @@
 package com.example.se2project.controller;
 
 import com.example.se2project.controller.user.MyUserDetails;
-import com.example.se2project.entity.Order;
-import com.example.se2project.entity.Payment;
-import com.example.se2project.entity.User;
+import com.example.se2project.entity.*;
 import com.example.se2project.repository.PaymentRepository;
-import com.example.se2project.repository.UserRepository;
-import com.example.se2project.service.OrderService;
-import com.example.se2project.service.PaymentService;
-import com.example.se2project.service.UserService;
+import com.example.se2project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -20,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,74 +31,68 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @Autowired
-    UserRepository userRepository;
+//    @Autowired
+//    UserRepository userRepository;
     @Autowired
     OrderService orderService;
     @Autowired
     PaymentRepository paymentRepository;
-
+    @Autowired
+    UserDetailsService userDetailsService;
+    @Autowired
+    CartProductService cartProductService;
+    @Autowired
+    OrderDetailService orderDetailService;
     @GetMapping
     public String viewPage(Model model){
-        User user = getUserFromSession();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
+        String username = user1.getUsername();
+        User user = userService.getUserByEmail(username);
         model.addAttribute("userDetail", user);
         return "accountPages/userDashboard";
     }
-
     @GetMapping("/update-profile")
-    public String viewUpdatePage(Model model) {
-        User user = getUserFromSession();
-        model.addAttribute("userDetail", user);
+    public String viewUpdatePage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
+        String email = loggedUser.getUsername();
+        User user = userService.getUserByEmail(email);
+        model.addAttribute("user", user);
         return "accountPages/profileUpdate";
     }
-
     @GetMapping("/my-order")
-    public String viewOrderPage(Model model) {
+    public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
         User user = getUserFromSession();
         List<Order> order = orderService.getOrderByUser(user);
-        model.addAttribute("userDetail", user);
+
         model.addAttribute("myOrder", order);
         return "accountPages/orderList";
     }
-
-    @GetMapping("/my-order/view")
-    public String viewOrderDetail(Model model) {
-        User user = getUserFromSession();
-        List<Order> order = orderService.getOrderByUser(user);
-        model.addAttribute("userDetail", user);
-        model.addAttribute("myOrder", order);
-        return "accountPages/orderDetail";
+    public User getUserFromSession() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
+        String username = user1.getUsername();
+        User user = userService.getUserByEmail(username);
+        return user;
     }
-
-    @GetMapping("/my-payment")
-    public String viewPaymentMethod(Model model) {
-        User user = getUserFromSession();
-        model.addAttribute("userDetail", user);
-//        model.addAttribute("payment", payment);
-        return "accountPages/paymentList";
-    }
-
-    @GetMapping("/my-payment/add")
+    @GetMapping("/addPayment")
     public String addPaymentMethod(Model model) {
-        User user = getUserFromSession();
-        model.addAttribute("userDetail", user);
         model.addAttribute("payment", new Payment());
         return "accountPages/paymentAdd";
     }
-
-    @PostMapping("/my-payment/add/save")
+    @PostMapping("/addPayment/save")
     public String savePaymentMethod(@RequestParam(value = "bank", defaultValue = "empty bank") String bank,
                                     @RequestParam(value = "cardNumber", defaultValue = "empty cardNumber") String cardNumber,
-                                    @RequestParam(value = "userName", defaultValue = "empty userName") String userName) {
+                                    @RequestParam(value = "userName", defaultValue = "empty userName") String userName){
         Payment payment = Payment.builder().bank(bank).cardNumber(cardNumber).userName(userName).build();
         Payment savedPayment = paymentRepository.save(payment);
         User u = getUserFromSession();
         u.setPayment(savedPayment);
-        userRepository.save(u);
+        userService.insert(u);
         return "redirect:/user";
     }
 
-    @PostMapping("/update-profile/save")
+
+    @PostMapping("/updateProfileByUser")
     public String updateProfile(User user, RedirectAttributes redirectAttributes,
                                 @AuthenticationPrincipal MyUserDetails logedUser,
                                 @RequestParam(value = "userImage", required = false) MultipartFile userImage
@@ -123,7 +113,7 @@ public class UserController {
         }catch (IOException e) {
             throw new IOException("could not save uploaded file: " + fileName);
         }
-        userRepository.save(user);
+        userService.insert(user);
 
         logedUser.setFirstName(user.getFirstName());
         logedUser.setLastName(user.getLastName());
@@ -135,10 +125,31 @@ public class UserController {
         return "redirect:/user/update-profile";
     }
 
-    public User getUserFromSession() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
-        String username = user1.getUsername();
-        return userService.getUserByEmail(username);
+    @GetMapping("/order-detail")
+    public String getOrderDetail(Model model) {
+        User u = getUserFromSession();
+        u.getOrders();
+        List<Order> orders = orderService.getOrderByUser(getUserFromSession());
+        for(Order order : orders) {
+            List<OrderDetail> orderDetail = orderDetailService.findOrderDetailByOrder(order);
+            if (orderDetail == null) {
+                orderDetail = new ArrayList<>();
+                model.addAttribute("orderDetail", orderDetail);
+                return "accountPages/orderDetail";
+            }
+
+            model.addAttribute("orderDetail", orderDetail);
+        }
+        model.addAttribute("total", toTal());
+        return "accountPages/orderDetail";
     }
+    public double toTal() {
+        List<CartProduct> cartProductList = cartProductService.getCartProduct(getUserFromSession().getUserId());
+        double total = 0;
+        for(CartProduct cartProduct: cartProductList) {
+            total += cartProduct.getQuantity() * cartProduct.getProduct().getPrice();
+        }
+        return total;
+    }
+
 }

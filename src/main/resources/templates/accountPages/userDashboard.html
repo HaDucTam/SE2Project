@@ -20,9 +20,9 @@
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
-    <form action="" class="search-form">
-        <input type="search" id="search-box" placeholder="What are you looking for...">
-        <label for="search-box" class="fas fa-search"></label>
+    <form th:action="@{/search}" class="search-form">
+        <input type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required placeholder="What are you looking for...">
+        <button type="submit" for="keyword" class="fas fa-search" value="Search"></button>
     </form>
 
     <div class="icons">
@@ -39,7 +39,8 @@
         <li class="active"><a th:href="@{/user}"> Dashboard </a></li>
         <li><a th:href="@{/user/update-profile}"> My Profile </a></li>
         <li><a th:href="@{/user/my-order}"> My Order </a></li>
-        <li><a th:href="@{/user/my-payment}"> My Payment </a></li>
+        <li><a th:href="@{/user/addPayment}"> Payment </a></li>
+        <li><a th:href="@{/user/order-detail}">Order Detail</a></li>
         <li><a th:href="@{/logout}"> Logout </a></li>
     </ul>
 
@@ -59,6 +60,7 @@
             <p th:text="${userDetail.getEmail()}"></p>
             <p th:text="${userDetail.getPhoneNumber()}"></p>
             <p th:text="${userDetail.getAddress()}"></p>
+
             <a th:href="@{/user/update-profile}" class="btn">Update profile</a>
         </div>
     </div>

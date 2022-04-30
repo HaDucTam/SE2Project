@@ -1,10 +1,12 @@
 package com.example.se2project.controller;
 
 import com.example.se2project.entity.Category;
+import com.example.se2project.entity.Order;
 import com.example.se2project.entity.Product;
 import com.example.se2project.entity.User;
 import com.example.se2project.entity.dto.ProductDto;
 import com.example.se2project.service.CategoryService;
+import com.example.se2project.service.OrderService;
 import com.example.se2project.service.ProductService;
 import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,37 +35,38 @@ public class AdminController {
     UserService userService;
     @Autowired
     CategoryService categoryService;
-
+    @Autowired
+    OrderService orderService;
     @GetMapping
     public String viewAdminPage(){
         return "adminPages/adminDashboard";
     }
 
-    @RequestMapping("/categories")
+    @GetMapping("/categories")
     public String showCategoryList(Model model) {
-        List<User> userList = userService.listAllUser();
-        model.addAttribute("userList", userList);
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categoryLists", categoryList);
         return "adminPages/categories/categoryList";
     }
 
-    @RequestMapping("/products")
+    @GetMapping("/products")
     public String showProductList(Model model) {
-        List<User> userList = userService.listAllUser();
-        model.addAttribute("userList", userList);
+        List<Product> productList = productService.findAll();
+        model.addAttribute("productLists", productList);
         return "adminPages/products/productList";
     }
 
-    @RequestMapping("/orders")
+    @GetMapping("/orders")
     public String showOrderList(Model model) {
-        List<User> userList = userService.listAllUser();
-        model.addAttribute("userList", userList);
+        List<Order> orderList = orderService.findAll();
+        model.addAttribute("orderLists", orderList);
         return "adminPages/orders/orderList";
     }
 
-    @RequestMapping("/users")
+    @GetMapping("/users")
     public String showUserList(Model model) {
-        List<User> userList = userService.listAllUser();
-        model.addAttribute("userList", userList);
+        List<User> userList = userService.findAll();
+        model.addAttribute("userLists", userList);
         return "adminPages/users/userList";
     }
 
@@ -143,22 +146,6 @@ public class AdminController {
         return "redirect:/";
 
     }
-
-
-//    @RequestMapping("/register")
-//    public String showRegisterForm(Model model) {
-//        model.addAttribute("user", new User());
-////        model.addAttribute("pageTitle", "REGISTER");
-//        return "registerUser";
-//    }
-
-//    @RequestMapping("/saveUser")
-//    public String saveUser(@RequestParam(value = "id", required = false) Long id,
-//                           User user) {
-//        user.setId(id);
-//        userRepository.save(user);
-//        return "redirect:/";
-//    }
 
 
 

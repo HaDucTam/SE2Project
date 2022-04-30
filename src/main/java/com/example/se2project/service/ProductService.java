@@ -1,5 +1,6 @@
 package com.example.se2project.service;
 
+import com.example.se2project.entity.OrderDetail;
 import com.example.se2project.entity.Product;
 
 import java.util.List;

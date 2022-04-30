@@ -36,6 +36,7 @@ public class Product {
     @JoinColumn(name = "categories_id")
     private Category category;
 
+
     public Product(Product product) {
         this.productId = product.getProductId();
         this.name = product.getName();
@@ -52,15 +53,4 @@ public class Product {
         return "/product-image/" + productId + "/" + image;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId=" + productId +
-                ", name='" + name + '\'' +
-                ", detail='" + detail + '\'' +
-                ", image='" + image + '\'' +
-                ", price=" + price +
-                ", category=" + category +
-                '}';
-    }
 }

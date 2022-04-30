@@ -50,6 +50,7 @@
         <section class="section-container">
             <a th:href="@{/admin/users/add}" class="btn">Add new</a>
             <table>
+                <thead>
                 <tr>
                     <th>ID</th>
                     <th>Full Name</th>
@@ -68,6 +69,24 @@
                         <a th:href="@{/admin/users/delete}" class="btn">Delete</a>
                     </td>
                 </tr>
+                    <th>Email</th>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${userLists.isEmpty()}">
+                    <td>No Product</td>
+                </tr>
+                <tr th:each="userList : ${userLists}">
+                    <th style="width:10%" th:text="${userList.getUserId()}"></th>
+                    <th style="width:30%" th:text="${userList.getEmail()}"></th>
+                    <th style="width:30%" th:text="${userList.getFullName()}"></th>
+                    <th style="width:10%" th:text="${userList.getPhoneNumber()}"></th>
+                    <th style="width:20%" th:text="${userList.getAddress()}"></th>
+                </tr>
+                </tbody>
             </table>
         </section>
     </div>

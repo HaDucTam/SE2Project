@@ -52,6 +52,10 @@ public class User {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Set<Order> orders = new HashSet<>();
+
     public boolean hasRole(String roleName) {
 
         if (role.getName().equals(roleName)) {

@@ -1,22 +1,14 @@
 package com.example.se2project.controller;
 
 import com.example.se2project.controller.user.MyUserDetails;
-import com.example.se2project.entity.CartProduct;
-import com.example.se2project.entity.Order;
-import com.example.se2project.entity.User;
+import com.example.se2project.entity.*;
 import com.example.se2project.repository.CartProductRepository;
-import com.example.se2project.service.CartProductService;
-import com.example.se2project.service.OrderService;
-import com.example.se2project.service.ProductService;
-import com.example.se2project.service.UserService;
+import com.example.se2project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,9 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.sql.Date;
 import java.time.Period;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @SessionAttributes("userId")
@@ -45,7 +35,8 @@ public class CartProductController {
     UserService userService;
     @Autowired
     OrderService orderService;
-
+    @Autowired
+    OrderDetailService orderDetailService;
     @GetMapping("/cart")
     public String cartProductList(Model model) {
 
@@ -70,10 +61,23 @@ public class CartProductController {
         LocalDate delivery = date.plus(dayPlus);
         Date orderDate = Date.valueOf(date);
         Date deliveryDate = Date.valueOf(delivery);
+
+        Order order = Order.builder().orderDate(orderDate).deliveryDate(deliveryDate).user(getUserFromSession()).deliveryAddress(user.getAddress()).build();
+        orderService.insert(order);
+        List<CartProduct> cartProductList = cartProductService.getCartProduct(getUserFromSession().getUserId());
+        for (CartProduct cartProduct : cartProductList) {
+            OrderDetail orderDetail = OrderDetail.builder()
+                    .order(order).quantity(cartProduct.getQuantity()).price(cartProduct.total).build();
+            Long id = cartProduct.getProduct().getProductId();
+            Product product = productService.findById(id).get();
+            orderDetail.setProduct(product);
+            orderDetailService.insert(orderDetail);
+        }
         if(user.getAddress() == null) {
             return "redirect:/cart";
         }
-        Order order = Order.builder().orderDate(orderDate).orderDate(orderDate).deliveryDate(deliveryDate).deliveryAddress(user.getAddress()).user(user).build();
+//        Order order = Order.builder().orderDetail(orderDetail).orderDate(orderDate).deliveryDate(deliveryDate).deliveryAddress(user.getAddress()).user(user).build();
+
         orderService.insert(order);
         model.addAttribute("myOrder", order);
         return "accountPages/orderList";
@@ -91,7 +95,6 @@ public class CartProductController {
     public String updateCart(HttpServletRequest request,
                              HttpSession session, Model model) {
         String[] quantities = request.getParameterValues("quantity");
-//        List<CartProduct> cartProducts = (List<CartProduct>) session.getAttribute("cart");
         List<CartProduct> cartProducts = cartProductService.getCartProduct(getUserFromSession().getUserId());
         for(int i = 0; i < cartProducts.size();i++) {
             cartProducts.get(i).setQuantity(Integer.parseInt(quantities[i]));
@@ -112,8 +115,3 @@ public class CartProductController {
         return total;
     }
 }
-//    @GetMapping()
-//    public String cart(Model model) {
-//        model.addAttribute("total", toTal());
-//        return "cartPage";
-//    }

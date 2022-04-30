@@ -29,12 +29,6 @@ public class HomeController {
 
     @GetMapping
     public String listProducts(Model model){
-//        List<Product> productListBySearching = productService.findProductByName(keyword);
-//        if(!productListBySearching.isEmpty()) {
-//            model.addAttribute("productListBySearching", productListBySearching);
-//            return "searchPage";
-//        }
-//        productList.stream().forEach(System.out::println);
 
         List<Product> newArrival = productService.getProductsByProductIdBetween(Long.valueOf(productService.findAll().size() - 5), Long.valueOf(productService.findAll().size()));
         model.addAttribute("newArrival", newArrival);

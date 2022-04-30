@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,7 +16,7 @@ import java.util.Date;
 @Table(name = "orders")
 public class Order {
     @Id
-    @Column(name = "id")
+    @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -29,6 +31,5 @@ public class Order {
 
     @Column(nullable = false)
     private String deliveryAddress;
-
 
 }

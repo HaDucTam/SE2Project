@@ -1,5 +1,6 @@
 package com.example.se2project.service.impl;
 
+import com.example.se2project.entity.OrderDetail;
 import com.example.se2project.entity.Product;
 import com.example.se2project.repository.ProductRepository;
 import com.example.se2project.service.ProductService;
@@ -41,6 +42,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long, ProductRe
         }
         return getProductsByProductIdBetween(Long.valueOf(productRepository.findAll().size() - 5), Long.valueOf(productRepository.findAll().size()));
     }
+
 //    public List<Product> listAllProductBySearching(String keyword, Model model) {
 //        if(keyword != null) {
 //            return productService.findProductByName(keyword);

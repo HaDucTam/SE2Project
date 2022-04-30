@@ -9,7 +9,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
 @Builder
 @Table(name = "cart_product")
 public class CartProduct {
@@ -24,11 +23,11 @@ public class CartProduct {
      * Cart cart = userRepo.findById(user.getCart())
      * CartProduct cartProduct = new CartProduct(1, cart, product, 5)
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 //
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -46,13 +45,4 @@ public class CartProduct {
         total += product.getPrice() * quantity;
     }
 
-//    public CartProduct(Product product, User user, int i) {
-//    }
-
-//    @Column(nullable = true)
-//    private double price;
-//    private Long productId;
-//    public double getTotalPrice() {
-//        return this.product.getPrice() * this.quantity;
-//    }
 }

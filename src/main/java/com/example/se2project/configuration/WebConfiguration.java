@@ -8,9 +8,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.dao.*;
 import org.springframework.security.config.annotation.authentication.builders.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,19 +42,14 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/product/**", "/addProduct/**", "/addCategory/**").hasAnyAuthority("Admin")
-//                .antMatchers("/users/**").hasAnyAuthority("User")
                 .antMatchers("/product/addToCart/**", "/cart/**").hasAnyAuthority("User", "Admin")
                 .antMatchers("/admin/**").hasAnyAuthority("Admin")
-//                .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-//                .defaultSuccessUrl("/")
                 .successHandler(logInterceptor)
                 .usernameParameter("email")
-//                .successHandler(logInterceptor)
                 .permitAll()
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()
                 .and().csrf().disable()
