@@ -41,7 +41,7 @@
         <li><a th:href="@{/user}"> Dashboard </a></li>
         <li class="active"><a th:href="@{/user/update-profile}"> My Profile </a></li>
         <li><a th:href="@{/user/my-order}"> My Order </a></li>
-        <li><a th:href="@{/user/addPayment}"> Payment </a></li>
+        <li><a th:href="@{/user/my-payment}"> My Payment </a></li>
         <li><a th:href="@{/user/logout}"> Logout </a></li>
     </ul>
 
@@ -51,7 +51,7 @@
         <div class="information grid-col">
             <h1 class="heading"> My <span>profile</span> </h1>
             <section class="section-container">
-                <form class="update-form" id="update-form" th:action="@{/user/updateProfileByUser}" th:object="${user}" method="post" enctype="multipart/form-data">
+                <form class="update-form" id="update-form" th:action="@{/user/update-profile/save}" th:object="${userDetail}" method="post" enctype="multipart/form-data">
                     <div th:if="${message != null}" class="alert alert-success text-center">[[${message}]]</div>
                     <input type="hidden" th:field="*{userId}">
                     <input type="text" name="firstName" placeholder="Enter your first name" id="firstName" th:field = "*{firstName}" class="box">
@@ -74,13 +74,12 @@
                         <span class="firstName-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                     </div>
 
-                    <input name="userImage"  type="file" accept="image/png, imgage/jpeg">
-
-
                     <input type="email" name="email" readonly="readonly" id="email" th:field = "*{email}" class="box">
                     <div class="err-msg">
                         <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                     </div>
+
+                    <input name="userImage"  type="file" accept="image/png, imgage/jpeg">
 
                     <input type="submit" value="Update profile" class="btn">
                 </form>
@@ -96,7 +95,7 @@
 <!--            </section>-->
         </div>
 
-        <div class="profile gid-col" th:each="userDetail : ${user}">
+        <div class="profile gid-col" th:each="userDetail : ${userDetail}">
             <img th:src="${userDetail.getImagePath()}">
             <p th:text="${userDetail.getFullName()}"></p>
             <p th:text="${userDetail.getEmail()}"></p>

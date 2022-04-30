@@ -25,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("homePage");
         registry.addViewController("/login").setViewName("loginPage");
-        registry.addViewController("/adminHome").setViewName("adminPages/adminDashboard");
+        registry.addViewController("/admin").setViewName("adminPages/adminDashboard");
     }
 
     private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
@@ -35,13 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
         if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
 
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
-    }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("homePage");
-        registry.addViewController("/login").setViewName("loginPage");
-        registry.addViewController("/admin_home").setViewName("adminPages/adminDashboard");
     }
 
     @GetMapping("/login")

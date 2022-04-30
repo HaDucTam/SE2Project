@@ -6,7 +6,7 @@
     <link rel="icon" th:href="@{/images/favicon.png}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Order | Cloud Store</title>
+    <title>My Payment | Cloud Store</title>
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -40,8 +40,8 @@
     <ul class="menu">
         <li><a th:href="@{/user}"> Dashboard </a></li>
         <li><a th:href="@{/user/update-profile}"> My Profile </a></li>
-        <li class="active"><a th:href="@{/user/my-order}"> My Order </a></li>
-        <li><a th:href="@{/user/my-payment}"> My Payment </a></li>
+        <li><a th:href="@{/user/my-order}"> My Order </a></li>
+        <li class="active"><a th:href="@{/user/my-payment}"> My Payment </a></li>
         <li><a th:href="@{/user/logout}"> Logout </a></li>
     </ul>
 
@@ -49,26 +49,25 @@
         <div></div>
 
         <div class="order grid-col">
-            <h1 class="heading"> My <span>order</span> </h1>
-            <section class="section-container" th:each="order : ${myOrder}">
+            <h1 class="heading"> My <span>payment</span> </h1>
+            <section class="section-container">
+                <a th:href="@{/user/my-payment/add}" class="btn">Add new</a>
                 <table>
                     <tr>
-                        <th style="width:10%">ID</th>
-                        <th style="width:45%">Order Date</th>
-                        <th style="width:45%">Delivery Date</th>
-                        <th style="width:15%">User</th>
-                        <th style="width:15%">Delivery Address</th>
-                        <th style="width:15%">Status</th>
+                        <th>ID</th>
+                        <th>Bank Name</th>
+                        <th>Card Name</th>
+                        <th>User Name</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td th:text="${order.orderDate}"></td>
-                        <td th:text="${order.deliveryDate}"></td>
-                        <td th:text="${order.user.getFullName()}"></td>
-                        <td th:text="${order.deliveryAddress}"></td>
-                        <td>Paid</td>
-                        <!--                        <td></td>-->
-                    </tr>
+<!--                    <tr th:each="payment : ${myPayment}">-->
+<!--                        <td th:text="${order.id}"></td>-->
+<!--                        <td th:text="${order.orderDate}"></td>-->
+<!--                        <td th:text="${order.deliveryDate}"></td>-->
+<!--                        <td th:text="${order.user.getFullName()}"></td>-->
+<!--                        <td th:text="${order.deliveryAddress}"></td>-->
+<!--                        <td>Pending</td>-->
+<!--                        <td><a th:href="@{/user/my-order/view}" class="btn">Detail</a></td>-->
+<!--                    </tr>-->
                 </table>
             </section>
         </div>

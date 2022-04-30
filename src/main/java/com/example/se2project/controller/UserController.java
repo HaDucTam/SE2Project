@@ -41,46 +41,59 @@ public class UserController {
     OrderService orderService;
     @Autowired
     PaymentRepository paymentRepository;
+
     @GetMapping
     public String viewPage(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
-        String username = user1.getUsername();
-        User user = userService.getUserByEmail(username);
+        User user = getUserFromSession();
         model.addAttribute("userDetail", user);
         return "accountPages/userDashboard";
     }
+
     @GetMapping("/update-profile")
-    public String viewUpdatePage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
-        String email = loggedUser.getUsername();
-        User user = userService.getUserByEmail(email);
-        model.addAttribute("user", user);
+    public String viewUpdatePage(Model model) {
+        User user = getUserFromSession();
+        model.addAttribute("userDetail", user);
         return "accountPages/profileUpdate";
     }
+
     @GetMapping("/my-order")
-    public String viewOrderPage(@AuthenticationPrincipal MyUserDetails loggedUser, Model model) {
+    public String viewOrderPage(Model model) {
         User user = getUserFromSession();
         List<Order> order = orderService.getOrderByUser(user);
-
+        model.addAttribute("userDetail", user);
         model.addAttribute("myOrder", order);
         return "accountPages/orderList";
     }
-    public User getUserFromSession() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
-        String username = user1.getUsername();
-        User user = userService.getUserByEmail(username);
-        return user;
+
+    @GetMapping("/my-order/view")
+    public String viewOrderDetail(Model model) {
+        User user = getUserFromSession();
+        List<Order> order = orderService.getOrderByUser(user);
+        model.addAttribute("userDetail", user);
+        model.addAttribute("myOrder", order);
+        return "accountPages/orderDetail";
     }
-    @GetMapping("/addPayment")
+
+    @GetMapping("/my-payment")
+    public String viewPaymentMethod(Model model) {
+        User user = getUserFromSession();
+        model.addAttribute("userDetail", user);
+//        model.addAttribute("payment", payment);
+        return "accountPages/paymentList";
+    }
+
+    @GetMapping("/my-payment/add")
     public String addPaymentMethod(Model model) {
+        User user = getUserFromSession();
+        model.addAttribute("userDetail", user);
         model.addAttribute("payment", new Payment());
         return "accountPages/paymentAdd";
     }
-    @PostMapping("/addPayment/save")
+
+    @PostMapping("/my-payment/add/save")
     public String savePaymentMethod(@RequestParam(value = "bank", defaultValue = "empty bank") String bank,
                                     @RequestParam(value = "cardNumber", defaultValue = "empty cardNumber") String cardNumber,
-                                    @RequestParam(value = "userName", defaultValue = "empty userName") String userName
+                                    @RequestParam(value = "userName", defaultValue = "empty userName") String userName) {
         Payment payment = Payment.builder().bank(bank).cardNumber(cardNumber).userName(userName).build();
         Payment savedPayment = paymentRepository.save(payment);
         User u = getUserFromSession();
@@ -89,8 +102,7 @@ public class UserController {
         return "redirect:/user";
     }
 
-
-    @PostMapping("/updateProfileByUser")
+    @PostMapping("/update-profile/save")
     public String updateProfile(User user, RedirectAttributes redirectAttributes,
                                 @AuthenticationPrincipal MyUserDetails logedUser,
                                 @RequestParam(value = "userImage", required = false) MultipartFile userImage
@@ -123,4 +135,10 @@ public class UserController {
         return "redirect:/user/update-profile";
     }
 
+    public User getUserFromSession() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails user1 = (MyUserDetails) authentication.getPrincipal();
+        String username = user1.getUsername();
+        return userService.getUserByEmail(username);
+    }
 }

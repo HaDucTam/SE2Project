@@ -20,7 +20,7 @@ public class LogInterceptor extends SavedRequestAwareAuthenticationSuccessHandle
         MyUserDetails customUserDetails = (MyUserDetails) authentication.getPrincipal();
         String redirectURL = request.getContextPath();
         if (customUserDetails.hasRole("Admin")) {
-            redirectURL += "/adminHome";
+            redirectURL += "/admin";
         }
         response.sendRedirect(redirectURL);
     }

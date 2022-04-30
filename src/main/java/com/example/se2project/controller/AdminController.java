@@ -1,10 +1,12 @@
-package com.example.se2project.controller;//package com.onlineshopping.se2finalproject.Controller;
+package com.example.se2project.controller;
 
 import com.example.se2project.entity.Category;
 import com.example.se2project.entity.Product;
+import com.example.se2project.entity.User;
 import com.example.se2project.entity.dto.ProductDto;
 import com.example.se2project.service.CategoryService;
 import com.example.se2project.service.ProductService;
+import com.example.se2project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,44 +22,72 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping({"/adminHome"})
+@RequestMapping({"/admin"})
 public class AdminController {
 
     @Autowired
     ProductService productService;
     @Autowired
-    ProductService userService;
+    UserService userService;
     @Autowired
-    private CategoryService categoryService;
-//    @GetMapping
-//    public String viewPage(){
-//        return "adminPages/adminDashboard";
-//    }
-//    @RequestMapping("/admin/users")
-//    public String showUserList(Model model) {
-//        List<User> userList = userService.listAllUser();
-//        model.addAttribute("userList", userList);
-//        return "userList";
-//    }
-@GetMapping("/category")
-public String viewPage(){
-    return "adminPages/categories/categoryList";
-}
-    @GetMapping("/add-product")
+    CategoryService categoryService;
+
+    @GetMapping
+    public String viewAdminPage(){
+        return "adminPages/adminDashboard";
+    }
+
+    @RequestMapping("/categories")
+    public String showCategoryList(Model model) {
+        List<User> userList = userService.listAllUser();
+        model.addAttribute("userList", userList);
+        return "adminPages/categories/categoryList";
+    }
+
+    @RequestMapping("/products")
+    public String showProductList(Model model) {
+        List<User> userList = userService.listAllUser();
+        model.addAttribute("userList", userList);
+        return "adminPages/products/productList";
+    }
+
+    @RequestMapping("/orders")
+    public String showOrderList(Model model) {
+        List<User> userList = userService.listAllUser();
+        model.addAttribute("userList", userList);
+        return "adminPages/orders/orderList";
+    }
+
+    @RequestMapping("/users")
+    public String showUserList(Model model) {
+        List<User> userList = userService.listAllUser();
+        model.addAttribute("userList", userList);
+        return "adminPages/users/userList";
+    }
+
+    @GetMapping("/categories/add")
+    public String addCategoryForm(Model model) {
+        model.addAttribute("category",new Category());
+        return "/adminPages/categories/categoryAdd";
+    }
+
+    @GetMapping("/products/add")
     public String addProductForm(Model model) {
         model.addAttribute("products",new ProductDto());
         model.addAttribute("categories",categoryService.findAll());
         return "adminPages/products/productAdd";
     }
-    @GetMapping("/addCategory")
-    public String addCategoryForm(Model model) {
-        model.addAttribute("category",new Category());
-        return "/adminPages/categories/categoryAdd";
+
+    @GetMapping("/users/add")
+    public String addUserForm(Model model) {
+        model.addAttribute("products",new ProductDto());
+        model.addAttribute("categories",categoryService.findAll());
+        return "adminPages/users/userAdd";
     }
-    @PostMapping("/addCategory/save")
+
+    @PostMapping("/categories/add/save")
     public String saveCategory(@RequestParam(value = "name", required = false, defaultValue = "empty name") String name,
                                @RequestParam(value = "description", required = false, defaultValue = "empty description") String description,
                                @RequestParam(value = "categoryImage", required = false) MultipartFile categoryImage) throws IOException {
@@ -83,7 +113,8 @@ public String viewPage(){
 
         return "redirect:/";
     }
-    @PostMapping("/product/add/save")
+
+    @PostMapping("/products/add/save")
     public String saveProduct(@ModelAttribute("products") ProductDto productDto,
                               @RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
 

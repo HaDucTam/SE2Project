@@ -47,7 +47,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/product/**", "/addProduct/**", "/addCategory/**").hasAnyAuthority("Admin")
 //                .antMatchers("/users/**").hasAnyAuthority("User")
                 .antMatchers("/product/addToCart/**", "/cart/**").hasAnyAuthority("User", "Admin")
-                .antMatchers("/admin/**").hasRole("Admin")
+                .antMatchers("/admin/**").hasAnyAuthority("Admin")
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 .and()
@@ -58,7 +58,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
 //                .successHandler(logInterceptor)
                 .permitAll()
-                .and().logout().logoutUrl("/doLogout").logoutSuccessUrl("/login").permitAll()
+                .and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/login").permitAll()
                 .and().csrf().disable()
         ;
     }
