@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/dashboard.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/table.css}">
 </head>
 <body>
 
@@ -20,9 +21,9 @@
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
-    <form action="" class="search-form">
-        <input type="search" id="search-box" placeholder="What are you looking for...">
-        <label for="search-box" class="fas fa-search"></label>
+    <form th:action="@{/search}" class="search-form">
+        <input type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required placeholder="What are you looking for...">
+        <button type="submit" for="keyword" class="fas fa-search" value="Search"></button>
     </form>
 
     <div class="icons">
@@ -41,18 +42,18 @@
         <li><a th:href="@{/admin/products}"> Manage Products </a></li>
         <li><a th:href="@{/admin/orders}"> Manage Orders </a></li>
         <li><a th:href="@{/admin/users}"> Manage Users </a></li>
+        <li><a th:href="@{/logout}"> Logout </a></li>
     </ul>
 
     <div class="category-list grid-col-2">
-        <h1 class="heading"> User <span>list</span> </h1>
+        <h1 class="heading"> Category <span>list</span> </h1>
         <section class="section-container">
             <table>
+                <a th:href="@{/admin/categories/add}" class="btn">Add New</a>
                 <tr>
-                    <th style="width:10%">ID</th>
-                    <th style="width:30%">Order Date</th>
-                    <th style="width:30%">Delivery Date</th>
-                    <th style="width:20%">Delivery Address</th>
-                    <th style="width:10%">Status</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
                 </tr>
                 <!--                <tr th:each="order : ${order}">-->
                 <!--                    <td th:text="${order.id}"></td>-->

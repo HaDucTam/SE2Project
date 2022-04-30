@@ -58,7 +58,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
 //                .successHandler(logInterceptor)
                 .permitAll()
-                .and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/login").permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()
                 .and().csrf().disable()
         ;
     }

@@ -20,9 +20,9 @@
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
-    <form action="" class="search-form">
-        <input type="search" id="search-box" placeholder="What are you looking for...">
-        <label for="search-box" class="fas fa-search"></label>
+    <form th:action="@{/search}" class="search-form">
+        <input type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required placeholder="What are you looking for...">
+        <button type="submit" for="keyword" class="fas fa-search" value="Search"></button>
     </form>
 
     <div class="icons">
@@ -41,6 +41,7 @@
         <li><a th:href="@{/admin/products}"> Manage Products </a></li>
         <li><a th:href="@{/admin/orders}"> Manage Orders </a></li>
         <li><a th:href="@{/admin/users}"> Manage Users </a></li>
+        <li><a th:href="@{/logout}"> Logout </a></li>
     </ul>
 
     <div class="statistics grid-col-2">

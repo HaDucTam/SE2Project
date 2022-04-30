@@ -6,13 +6,14 @@
     <link rel="icon" th:href="@{/images/favicon.png}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Cloud Store</title>
+    <title>Order Management | Cloud Store</title>
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/dashboard.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/table.css}">
 </head>
 <body>
 
@@ -20,9 +21,9 @@
 <header class="header">
     <a th:href="@{/}" href="" class="logo"> <i class="fas fa-store"></i> Cloud Store </a>
 
-    <form action="" class="search-form">
-        <input type="search" id="search-box" placeholder="What are you looking for...">
-        <label for="search-box" class="fas fa-search"></label>
+    <form th:action="@{/search}" class="search-form">
+        <input type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required placeholder="What are you looking for...">
+        <button type="submit" for="keyword" class="fas fa-search" value="Search"></button>
     </form>
 
     <div class="icons">
@@ -41,10 +42,11 @@
         <li><a th:href="@{/admin/products}"> Manage Products </a></li>
         <li class="active"><a th:href="@{/admin/orders}"> Manage Orders </a></li>
         <li><a th:href="@{/admin/users}"> Manage Users </a></li>
+        <li><a th:href="@{/logout}"> Logout </a></li>
     </ul>
 
     <div class="order-list grid-col-2">
-        <h1 class="heading"> User <span>list</span> </h1>
+        <h1 class="heading"> Order <span>list</span> </h1>
         <section class="section-container">
             <table>
                 <tr>

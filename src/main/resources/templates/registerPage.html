@@ -10,11 +10,10 @@
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/footer.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/form.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/log-sigForm.css}">
 </head>
 <body>
 
@@ -38,24 +37,14 @@
 <!-- register form section starts  -->
 <section class="register">
     <form class="register-form" id="register-form" th:action="@{/register}" th:object="${registerRequestDto}" method="POST">
-
         <input type="text" name="firstName" placeholder="Enter your first name" id="firstName" th:field = "*{firstName}" class="box">
-
-
         <input type="text" name="lastName" placeholder="Enter your last name" id="lastName" th:field = "*{lastName}" class="box">
-
-
         <input type="email" name="email" placeholder="Enter your email" id="email" class="box">
-
-
         <input type="password" name="password" placeholder="Enter your password" id="password" class="box">
-
-
         <!--        <input type="password" name="rePassword" placeholder="Re-enter your password" id="rePassword" class="box">-->
         <!--        <div class="err-msg">-->
         <!--            <span class="re-password-msg"></span>-->
         <!--        </div>-->
-
         <input type="submit" value="register now" class="btn">
         <p>Already have an account?</p>
         <a th:href="@{/login}" class="btn link">Login now</a>
@@ -87,7 +76,6 @@
 </section>
 
 <!-- js link -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
 <script th:src="@{/js/account/register.js}"></script>
 </body>

@@ -10,11 +10,10 @@
 
     <!-- css link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/dashboard.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/separatePage/profileUpdate.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prototype/normalForm.css}">
 </head>
 <body>
 
@@ -42,7 +41,7 @@
         <li class="active"><a th:href="@{/user/update-profile}"> My Profile </a></li>
         <li><a th:href="@{/user/my-order}"> My Order </a></li>
         <li><a th:href="@{/user/my-payment}"> My Payment </a></li>
-        <li><a th:href="@{/user/logout}"> Logout </a></li>
+        <li><a th:href="@{/logout}"> Logout </a></li>
     </ul>
 
     <div class="grid">
@@ -79,7 +78,7 @@
                         <span class="email-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                     </div>
 
-                    <input name="userImage"  type="file" accept="image/png, imgage/jpeg">
+                    <input name="userImage" class="box" type="file" accept="image/png, imgage/jpeg">
 
                     <input type="submit" value="Update profile" class="btn">
                 </form>
@@ -106,7 +105,6 @@
 </div>
 
 <!-- js link -->
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <script th:src="@{/js/base/search.js}"></script>
 <script th:src="@{/js/account/updateProfile.js}"></script>
 
