@@ -64,27 +64,12 @@
 
       <form th:action="@{/admin/products/add/save}" method="post" th:object="${products}" enctype="multipart/form-data">
         <input type="hidden" name="id" th:field="*{id}">
-        <div class="box">
-          <label for="name"></label>
-          <input type="text" class="form-control" required th:field="*{name}" name="name" id="name"
+          <input type="text" class="box" required th:field="*{name}" name="name" id="name"
                  placeholder="Enter name">
-
-        </div>
-        <div class ="box">
-          <label for="detail"></label>
-          <input type="text" class="form-control" required th:field="*{detail}" name="detail" id="detail"
+          <input type="text" class="box" required th:field="*{detail}" name="detail" id="detail"
                  placeholder="Enter detail">
-
-        </div>
-        <div class ="box">
-          <label></label>
-          <input class="form-control" name="productImage" type="file" accept="image/png, imgage/jpeg"/>
-        </div>
-
-        <div class ="box">
-          <label for="price"></label>
-          <input class="form-control" type="number" name="price" id="price" th:field ="*{price}" min="0">
-        </div>
+          <input class="box" name="productImage" type="file" accept="image/png, imgage/jpeg"/>
+          <input class="box" type="number" name="price" id="price" th:field ="*{price}" min="0">
         <div class ="box">
           <label for="category">Select Category</label>
           <select class="form-control" th:field="*{categoryId}" id="category" name="category">
