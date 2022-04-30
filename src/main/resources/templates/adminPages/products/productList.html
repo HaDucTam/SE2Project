@@ -55,26 +55,10 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Image</th>
-          <th>Action</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Oppo Reno6</td>
-          <td>Smartphone</td>
-          <td>This is Oppo Reno6</td>
-          <td>20.2</td>
-          <td>image here</td>
-          <td><a th:href="@{/admin/products/update}" class="btn">Update</a>
-            <a th:href="@{/admin/products/delete}" class="btn">Delete</a>
-          </td>
-        </tr>
           <th>Detail</th>
           <th>Image</th>
           <th>Price</th>
+          <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -89,6 +73,9 @@
             <img th:src="@{${productList.getImagePath()}}" class="img">
           </th>
           <th style="width:10%" th:text="${productList.getPrice()}">Price</th>
+          <td><a th:href="@{/admin/products/update/{id}(id=${productList.getProductId()})}" class="btn">Update</a>
+            <a th:href="@{/admin/products/delete/{id}(id=${productList.getProductId()})}" class="btn">Delete</a>
+          </td>
         </tr>
         </tbody>
       </table>

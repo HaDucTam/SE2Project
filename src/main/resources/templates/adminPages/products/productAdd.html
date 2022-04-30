@@ -48,12 +48,57 @@
   <div class="product-list grid-col-2">
     <h1 class="heading"> Add <span>product</span> </h1>
     <section class="section-container">
-      <form th:action="@{/products/add/save}" method="post" th:object="${products}" enctype="multipart/form-data">
-<!--        <input type="text" name="name" placeholder="Enter name" id="firstName" class="box">-->
-<!--        <input type="text" name="description" placeholder="Enter description" id="cardNumber"  class="box">-->
-<!--        <input type="file" accept="image/png, imgage/jpeg" name="categoryImage" class="box">-->
-        <button type="submit" class="btn btn-primary m-2">Save</button>
-        <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+<!--      <form th:action="@{/admin/products/add/save}" method="post" th:object="${products}" enctype="multipart/form-data">-->
+<!--        <input type="hidden" name="id" th:field="*{id}">-->
+<!--        <input type="text" name="name" required placeholder="Enter name" id="name" class="box" th:field="*{name}">-->
+<!--        <input type="text" name="detail" placeholder="Enter detail" id="detail" th:field="*{detail}"  class="box">-->
+<!--        <input type="file" accept="image/png, imgage/jpeg" name="productImage" class="box">-->
+<!--        <input type="text" name="price" placeholder="Enter price" id="price" th:field="*{price}"  class="box">-->
+<!--        <select name="category" id="category" class="form-control">-->
+<!--          <option th:each="category : ${categories}" th:value="${category.categoriesId}" th:text="${category.name}">-->
+<!--          </option>-->
+<!--        </select>-->
+<!--        <button type="submit" class="btn btn-primary m-2">Save</button>-->
+<!--        <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>-->
+<!--      </form>-->
+
+      <form th:action="@{/admin/products/add/save}" method="post" th:object="${products}" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}">
+        <div class="box">
+          <label for="name"></label>
+          <input type="text" class="form-control" required th:field="*{name}" name="name" id="name"
+                 placeholder="Enter name">
+
+        </div>
+        <div class ="box">
+          <label for="detail"></label>
+          <input type="text" class="form-control" required th:field="*{detail}" name="detail" id="detail"
+                 placeholder="Enter detail">
+
+        </div>
+        <div class ="box">
+          <label></label>
+          <input class="form-control" name="productImage" type="file" accept="image/png, imgage/jpeg"/>
+        </div>
+
+        <div class ="box">
+          <label for="price"></label>
+          <input class="form-control" type="number" name="price" id="price" th:field ="*{price}" min="0">
+        </div>
+        <div class ="box">
+          <label for="category">Select Category</label>
+          <select class="form-control" th:field="*{categoryId}" id="category" name="category">
+            <option th:each="category :${categories}"
+                    th:value="${category.categoriesId}"
+                    th:text="${category.name}"
+            >
+          </select>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary m-2">Save</button>
+          <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+
       </form>
     </section>
   </div>

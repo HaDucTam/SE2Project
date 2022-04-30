@@ -48,13 +48,15 @@
     <div class="category-list grid-col-2">
         <h1 class="heading"> Update <span>category</span> </h1>
         <section class="section-container">
-<!--            <form th:action="@{/categories/update/save}" method="post" th:object="${category}" enctype="multipart/form-data">-->
-<!--                <input type="text" name="name" placeholder="Enter name" id="firstName" class="box">-->
-<!--                <input type="text" name="description" placeholder="Enter description" id="cardNumber"  class="box">-->
-<!--                <input type="file" accept="image/png, imgage/jpeg" name="categoryImage" class="box">-->
-<!--                <button type="submit" class="btn btn-primary m-2">Save</button>-->
-<!--                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>-->
-<!--            </form>-->
+            <form th:action="@{/admin/categories/update/save}" method="post" th:object="${category}" enctype="multipart/form-data">
+                <div th:if="${message != null}" class="alert alert-success text-center">[[${message}]]</div>
+                <input type="hidden" th:field="*{categoriesId}">
+                <input type="text" name="name" placeholder="Enter name" id="name" th:value="*{name}" class="box">
+                <input type="text" name="description" placeholder="Enter description" id="description" th:value="*{description}"  class="box">
+                <input type="file" accept="image/png, imgage/jpeg" name="categoryImage" class="box">
+                <button type="submit" class="btn btn-primary m-2">Save</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+            </form>
         </section>
     </div>
 </div>

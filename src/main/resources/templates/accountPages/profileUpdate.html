@@ -41,7 +41,6 @@
         <li class="active"><a th:href="@{/user/update-profile}"> My Profile </a></li>
         <li><a th:href="@{/user/my-order}"> My Order </a></li>
         <li><a th:href="@{/user/addPayment}"> Payment </a></li>
-        <li><a th:href="@{/user/order-detail}">Order Detail</a></li>
         <li><a th:href="@{/logout}"> Logout </a></li>
     </ul>
 
@@ -73,8 +72,6 @@
                     <div class="err-msg">
                         <span class="firstName-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                     </div>
-
-                    <input name="userImage"  type="file" accept="image/png, imgage/jpeg">
 
 
                     <input type="email" name="email" readonly="readonly" id="email" th:field = "*{email}" class="box">

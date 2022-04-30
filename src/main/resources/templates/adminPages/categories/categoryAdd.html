@@ -48,9 +48,9 @@
     <div class="category-list grid-col-2">
         <h1 class="heading"> Add <span>category</span> </h1>
         <section class="section-container">
-            <form th:action="@{/categories/add/save}" method="post" th:object="${category}" enctype="multipart/form-data">
-                <input type="text" name="name" placeholder="Enter name" id="firstName" class="box">
-                <input type="text" name="description" placeholder="Enter description" id="cardNumber"  class="box">
+            <form th:action="@{/admin/categories/add/save}" method="post" th:object="${category}" enctype="multipart/form-data">
+                <input type="text" name="name" placeholder="Enter name" id="name" class="box">
+                <input type="text" name="description" placeholder="Enter description" id="description"  class="box">
                 <input type="file" accept="image/png, imgage/jpeg" name="categoryImage" class="box">
                 <button type="submit" class="btn btn-primary m-2">Save</button>
                 <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>

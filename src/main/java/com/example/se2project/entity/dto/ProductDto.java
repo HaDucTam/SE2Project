@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-    private Long id;
+    public Long id;
     public String name;
     public String detail;
     public MultipartFile image;

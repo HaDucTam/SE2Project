@@ -9,10 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -61,7 +58,10 @@ public class CartProductController {
         LocalDate delivery = date.plus(dayPlus);
         Date orderDate = Date.valueOf(date);
         Date deliveryDate = Date.valueOf(delivery);
-
+        if(user.getAddress() == null) {
+            model.addAttribute("message", "You need address first");
+            return "redirect:/cart";
+        }
         Order order = Order.builder().orderDate(orderDate).deliveryDate(deliveryDate).user(getUserFromSession()).deliveryAddress(user.getAddress()).build();
         orderService.insert(order);
         List<CartProduct> cartProductList = cartProductService.getCartProduct(getUserFromSession().getUserId());
@@ -88,6 +88,11 @@ public class CartProductController {
         String username = user1.getUsername();
         User user = userService.getUserByEmail(username);
         return user;
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteCartProduct(@PathVariable Long id) {
+        cartProductService.deleteById(id);
+        return "redirect:/cart";
     }
 
 

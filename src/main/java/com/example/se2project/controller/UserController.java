@@ -125,7 +125,7 @@ public class UserController {
         return "redirect:/user/update-profile";
     }
 
-    @GetMapping("/order-detail")
+    @GetMapping("/my-order/view")
     public String getOrderDetail(Model model) {
         User u = getUserFromSession();
         u.getOrders();

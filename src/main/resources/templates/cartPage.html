@@ -45,7 +45,7 @@
         <form th:action="@{/update}" method="post">
             <th:block th:each="cartProduct : ${cartProducts}">
                 <div class="box" th:with="product = ${cartProduct.product}">
-                    <i class="fas fa-times"></i>
+                    <a class="fas fa-times" th:href="@{/delete/{id}(id=${cartProduct.getId()})}"></a>
                     <img th:src="@{${product.getImagePath}}">
                     <div class="content">
                         <h3 th:title="${product.name}">

@@ -47,24 +47,6 @@
         <h1 class="heading"> Category <span>list</span> </h1>
         <a th:href="@{/admin/categories/add}" class="btn">Add New</a>
         <section class="section-container">
-            <a th:href="@{/admin/categories/add}" class="btn">Add new</a>
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Smartphone</td>
-                    <td>This is smartphone</td>
-                    <td>image here</td>
-                    <td><a th:href="@{/admin/categories/update}" class="btn">Update</a>
-                        <a th:href="@{/admin/categories/delete}" class="btn">Delete</a>
-                    </td>
-                </tr>
 
             <table>
                 <thead>
@@ -73,6 +55,7 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Image</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,6 +69,9 @@
                     <th style="width:35%" >
                         <img th:src="@{${categoryList.getImagePath()}}" class="img">
                     </th>
+                    <td><a th:href="@{/admin/categories/update/{id}(id=${categoryList.getCategoriesId()})}" class="btn">Update</a>
+                        <a th:href="@{/admin/categories/delete/{id}(id=${categoryList.getCategoriesId()})}" class="btn">Delete</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
